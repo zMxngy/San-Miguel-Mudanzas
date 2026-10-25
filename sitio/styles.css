@@ -12,60 +12,68 @@
      8. Pie de página: Azul Noche (#0A192F)
    ========================================================================== */
 
-/* --- Importación de Fuentes Tipográficas (Sans + Space Mono) --- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap');
+/* --- Importación de Fuentes Tipográficas (Barlow Condensed 800 + Inter + Space Mono) --- */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
-/* --- Tokens de Diseño y Variables CSS (FASE 1: Neobrutalismo Suave e Identidad de Trasteos) --- */
+/* --- Tokens de Diseño y Variables CSS (FASE 1: Neobrutalismo Suave e Identidad de Trasteos v2) --- */
 :root {
   /* ==========================================================================
-     PALETA EXACTA FASE 1 (Contraste WCAG 2.2 AA Verificado)
+     PALETA A OFICIAL FASE 1 (Contraste WCAG 2.2 AA Verificado)
+     60% Cielo y Cielo Medio | 30% Cobalto y Tinta | 10% Amarillo
      ========================================================================== */
-  --azul-marca: #1F4E8C;
-  --azul-tinta: #0F2747;
-  --azul-cielo: #D6E6F7;
-  --azul-hielo: #EDF4FB;
-  --amarillo-marca: #FFC21A;
-  --crema-amarilla: #FFF0B8;
-  --carton: #D9A66B;
+  --cobalto: #1E4FD6;
+  --cobalto-oscuro: #123A9E;
+  --tinta: #0B1F3F;
+  --cielo: #E3ECFD;
+  --cielo-medio: #C9DAFB;
+  --hielo: #F2F6FE; /* solo dentro de campos y tarjetas pequeñas */
+  --amarillo: #FFC800;
+  --amarillo-claro: #FFF1B8;
+  --verde-wa: #25D366;
+  --carton: #D9A66B; /* decorativo: cinta y etiquetas, nunca fondo de sección */
   --carton-claro: #F2E0C2;
-  --rojo-sello: #D8452E;
-  --verde-wa: #178040;
+  --rojo-sello: #991B1B;
 
-  /* Mapeos Semánticos y de Compatibilidad */
-  --blue-brand: var(--azul-marca);
-  --blue-brand-hover: #163B6B;
+  /* Mapeos Semánticos y de Compatibilidad Retrospectiva */
+  --azul-marca: var(--cobalto);
+  --azul-tinta: var(--tinta);
+  --azul-cielo: var(--cielo);
+  --azul-hielo: var(--cielo);
+  --amarillo-marca: var(--amarillo);
+  --crema-amarilla: var(--amarillo-claro);
+  --blue-brand: var(--cobalto);
+  --blue-brand-hover: var(--cobalto-oscuro);
   --blue-brand-subtle: #2C64AC;
-  --blue-footer: var(--azul-tinta);
-  --navy-deep: var(--azul-tinta);
-  --navy-surface: #163B6B;
-  --navy-subtle: #2C64AC;
+  --blue-footer: var(--tinta);
+  --navy-deep: var(--tinta);
+  --navy-surface: var(--cobalto-oscuro);
+  --navy-subtle: var(--cobalto);
+  --yellow-brand: var(--amarillo);
+  --yellow-hover: #E5B200;
+  --yellow-subtle: var(--amarillo-claro);
+  --yellow-text: var(--tinta);
 
-  --yellow-brand: var(--amarillo-marca);
-  --yellow-hover: #E5AC0F;
-  --yellow-subtle: var(--crema-amarilla);
-  --yellow-text: var(--azul-tinta);
+  /* Fondos Alternos de Sección (CERO blanco en secciones completas) */
+  --bg-sky: var(--cielo);
+  --bg-cream: var(--cielo-medio);
+  --bg-card: var(--hielo);
+  --bg-pure: var(--cielo);
+  --bg-soft: var(--cielo-medio);
 
-  /* Fondos Alternos de Sección (Sin "Todo Blanco") */
-  --bg-sky: var(--azul-cielo);
-  --bg-cream: var(--crema-amarilla);
-  --bg-card: #FFFFFF;
-  --bg-pure: var(--azul-hielo);
-  --bg-soft: var(--azul-cielo);
-
-  --text-main: var(--azul-tinta);
-  --text-muted: #334E68;
-  --text-subtle: #486581;
+  --text-main: var(--tinta);
+  --text-muted: #243B53;
+  --text-subtle: #334E68;
   --text-light: #FFFFFF;
-  --text-light-muted: #D6E6F7;
+  --text-light-muted: var(--cielo);
 
-  --border-light: rgba(15, 39, 71, 0.2);
-  --border-focus: var(--amarillo-marca);
+  --border-light: rgba(11, 31, 63, 0.2);
+  --border-focus: var(--amarillo);
 
-  /* Verde exclusivo de WhatsApp */
+  /* Colores de Acción */
   --color-wa: var(--verde-wa);
-  --color-wa-hover: #136633;
-  --color-call: var(--azul-marca);
-  --color-call-hover: #163B6B;
+  --color-wa-hover: #1EB856;
+  --color-call: var(--cobalto);
+  --color-call-hover: var(--cobalto-oscuro);
 
   --color-error: #B91C1C;
   --color-error-bg: #FEF2F2;
@@ -73,16 +81,37 @@
   --color-success-bg: #F0FDF4;
 
   /* ==========================================================================
-     TOKENS NEOBRUTALISMO SUAVE (Ajustables)
+     TOKENS NEOBRUTALISMO MEDIDO (Borde 2px tinta + Sombra dura 4px)
      ========================================================================== */
-  --brut-borde: 2.5px solid var(--azul-tinta);
-  --brut-sombra: 4px 4px 0 var(--azul-tinta);
-  --brut-sombra-hover: 2px 2px 0 var(--azul-tinta);
-  --brut-sombra-active: 0 0 0 var(--azul-tinta);
-  --brut-radius: 4px;
-  --brut-radius-pill: 2px;
+  --brut-borde: 2px solid var(--tinta);
+  --brut-sombra: 4px 4px 0 var(--tinta);
+  --brut-sombra-hover: 6px 6px 0 var(--tinta);
+  --brut-sombra-active: 2px 2px 0 var(--tinta);
 
-  /* Cinta de embalar diagonal */
+  /* ==========================================================================
+     RADIOS EN TOKENS SUAVIZADOS (FASE 1)
+     ========================================================================== */
+  --radius-btn: 8px;
+  --radius-card: 16px;
+  --radius-input: 10px;
+  --radius-img: 18px;
+  --radius-circle: 50%;
+  --radius-pill: 9999px;
+
+  /* Tokens alias para compatibilidad */
+  --brut-radius: var(--radius-card);
+  --brut-radius-pill: var(--radius-btn);
+  --radius-sm: var(--radius-btn);
+  --radius-md: var(--radius-input);
+  --radius-lg: var(--radius-card);
+  --radius-full: var(--radius-pill);
+
+  /* Dimensiones de Componentes Clave */
+  --btn-height: 52px;
+  --service-icon-size: 52px;
+  --fab-size: 56px;
+
+  /* Cinta de embalar diagonal (solo decorativa) */
   --tape-pattern: repeating-linear-gradient(
     -45deg,
     #D9A66B,
@@ -92,11 +121,11 @@
   );
 
   /* Tipografía */
-  --font-headings: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-headings: 'Barlow Condensed', 'Plus Jakarta Sans', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'Space Mono', ui-monospace, SFMono-Regular, monospace;
 
-  /* Espaciado Modular */
+  /* Espaciado generoso */
   --space-2xs: 0.25rem;
   --space-xs: 0.5rem;
   --space-sm: 0.75rem;
@@ -104,22 +133,18 @@
   --space-lg: 1.5rem;
   --space-xl: 2rem;
   --space-2xl: 3.5rem;
-  --space-3xl: 4.5rem;
+  --space-3xl: 5.5rem; /* 88px en desktop */
 
-  /* Radios estrictos de 0 a 4 px (Neobrutalismo) */
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 4px;
-  --radius-full: 4px;
-
-  /* Sombras Neobrutalistas Duras */
-  --shadow-subtle: 2px 2px 0 var(--azul-tinta);
+  /* Sombras Neobrutalistas */
+  --shadow-subtle: 2px 2px 0 var(--tinta);
   --shadow-card: var(--brut-sombra);
-  --shadow-lift: 6px 6px 0 var(--azul-tinta);
+  --shadow-lift: 6px 6px 0 var(--tinta);
+  --shadow-soft-photo: 0 10px 24px rgba(11, 31, 63, 0.12);
 
   /* Animaciones Emil Kowalski */
   --duration-snap: 150ms;
   --duration-ui: 250ms;
+  --duration-reveal: 380ms;
   --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
@@ -207,12 +232,12 @@ h1 strong::after, h2 strong::after, .keyword-underline::after {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--azul-tinta);
-  background-color: var(--crema-amarilla);
-  border: var(--brut-borde);
-  border-radius: var(--brut-radius);
+  color: var(--tinta);
+  background-color: var(--amarillo-claro);
+  border: 1.5px solid var(--tinta);
+  border-radius: 8px; /* esquinas de 8 px y borde fino */
   padding: 0.35rem 0.85rem;
-  box-shadow: 2px 2px 0 var(--azul-tinta);
+  box-shadow: 2px 2px 0 var(--tinta);
   transform: rotate(-1.5deg);
   user-select: none;
 }
@@ -308,13 +333,20 @@ body:not(.show-pending) [data-pending] {
 }
 
 .section-padding {
-  padding-top: var(--space-2xl);
-  padding-bottom: var(--space-2xl);
+  padding-top: 5.5rem; /* 88px en desktop */
+  padding-bottom: 5.5rem;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding-top: 3.5rem; /* 56px en celular */
+    padding-bottom: 3.5rem;
+  }
 }
 
 .section-header {
   margin-bottom: var(--space-xl);
-  max-width: 700px;
+  max-width: 720px;
 }
 
 .section-header.text-center {
@@ -330,46 +362,50 @@ body:not(.show-pending) [data-pending] {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--azul-tinta);
-  background-color: var(--crema-amarilla);
+  color: var(--tinta);
+  background-color: var(--amarillo-claro);
   border: var(--brut-borde);
-  border-radius: var(--brut-radius);
+  border-radius: var(--radius-btn);
   padding: 0.25rem 0.75rem;
-  box-shadow: 2px 2px 0 var(--azul-tinta);
+  box-shadow: 2px 2px 0 var(--tinta);
   transform: rotate(-1.5deg);
   margin-bottom: 0.75rem;
 }
 
-/* En secciones oscuras (azul marca / azul tinta) */
+/* En secciones oscuras (cobalto / tinta) */
 .hero-section .section-eyebrow,
 .gallery-section .section-eyebrow,
-.site-footer .section-eyebrow {
-  color: var(--azul-tinta);
-  background-color: var(--amarillo-marca);
-  border-color: var(--amarillo-marca);
+.site-footer .section-eyebrow,
+.how-it-works-section .section-eyebrow {
+  color: var(--tinta);
+  background-color: var(--amarillo);
+  border-color: var(--amarillo);
 }
 
-/* Tipografía */
+/* Tipografía de Títulos: Barlow Condensed 800 en mayúsculas, escala 72-96px en PC */
 h1, h2, h3, h4 {
   font-family: var(--font-headings);
-  line-height: 1.2;
-  font-weight: 700;
-}
-
-h1 {
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  letter-spacing: 0.015em;
+  line-height: 1.02;
   font-weight: 800;
 }
 
+h1 {
+  font-size: clamp(2.35rem, 6.2vw, 5.25rem); /* 72px a 84-96px en monitores grandes, 38px en celular */
+  line-height: 0.94;
+  letter-spacing: 0.01em;
+}
+
 h2 {
-  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
-  letter-spacing: -0.02em;
+  font-size: clamp(1.85rem, 3.8vw, 3.2rem); /* 30px en celular a 51px en desktop */
+  line-height: 1.02;
+  letter-spacing: 0.015em;
 }
 
 h3 {
-  font-size: clamp(1.15rem, 1.8vw, 1.35rem);
-  letter-spacing: -0.01em;
+  font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+  line-height: 1.12;
 }
 
 p {
@@ -424,24 +460,26 @@ p {
 
 /* --- Botones con Animaciones Emil Kowalski --- */
 /* ==========================================================================
-   BOTONES NEOBRUTALISTAS SUAVES (FASE 2.1)
-   Rectangulares (radio 4px), 48px de alto, borde grueso y sombra dura.
-   Hover: desplaza -2px con sombra 2px 2px. Active: se hunde por completo (translate 2px, sombra 0).
-   Relleno que se desliza desde la izquierda. Flecha que se desplaza 4px.
+   BOTONES NEOBRUTALISTAS MEDIDOS (FASE 2.2)
+   Radio 8px (--radius-btn), 52px de alto, borde 2px tinta y sombra dura 4px.
+   Primario amarillo con texto tinta | WhatsApp verde #25D366 texto tinta | Llamar cobalto icono blanco | Secundario con borde
+   Animación: relleno deslizante, flecha activa, presión y estado de carga.
    ========================================================================== */
 .btn {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  height: 48px;
-  min-height: 48px;
-  padding: 0 1.5rem;
-  border-radius: var(--brut-radius);
+  gap: 0.65rem;
+  height: 52px;
+  min-height: 52px;
+  padding: 0 1.6rem;
+  border-radius: var(--radius-btn);
   font-family: var(--font-headings);
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
   cursor: pointer;
   white-space: nowrap;
   text-decoration: none;
@@ -489,7 +527,7 @@ p {
 
 /* Foco visible animado con anillo accesible */
 .btn:focus-visible {
-  outline: 3px solid var(--amarillo-marca);
+  outline: 3px solid var(--amarillo);
   outline-offset: 3px;
   transition: outline-offset 150ms ease-out;
 }
@@ -500,78 +538,88 @@ p {
   transition: transform 200ms var(--ease-out-strong);
 }
 
-/* 1. Primario Amarillo de Marca */
+/* 1. Primario Amarillo de Marca con Texto Tinta */
 .btn--primary,
 .btn--yellow {
-  background-color: var(--amarillo-marca);
-  color: var(--azul-tinta);
-  border-color: var(--azul-tinta);
+  background-color: var(--amarillo);
+  color: var(--tinta);
+  border-color: var(--tinta);
 }
 
 .btn--primary::before,
 .btn--yellow::before {
-  background-color: #E5AC0F;
+  background-color: #E5B200;
 }
 
-/* 2. Secundario con Borde Azul Tinta */
+/* 2. Secundario con Borde Tinta */
 .btn--secondary,
 .btn--outline {
-  background-color: var(--azul-hielo);
-  border-color: var(--azul-tinta);
-  color: var(--azul-tinta);
+  background-color: var(--cielo);
+  border-color: var(--tinta);
+  color: var(--tinta);
 }
 
 .btn--secondary::before,
 .btn--outline::before {
-  background-color: var(--azul-cielo);
+  background-color: var(--cielo-medio);
 }
 
-/* 3. WhatsApp Verde Oficial */
+/* 3. WhatsApp Verde Oficial #25D366 con Texto Tinta */
 .btn--wa {
   background-color: var(--verde-wa);
-  color: #FFFFFF;
-  border-color: var(--azul-tinta);
+  color: var(--tinta);
+  border-color: var(--tinta);
+}
+
+.btn--wa svg {
+  color: var(--tinta);
+  fill: currentColor;
 }
 
 .btn--wa::before {
-  background-color: #136633;
+  background-color: #1EB856;
 }
 
-/* Botón de Llamada Telefónica */
+/* 4. Botón de Llamada Telefónica Cobalto con Icono Blanco */
 .btn--call {
-  background-color: var(--amarillo-marca);
-  color: var(--azul-tinta);
-  border-color: var(--azul-tinta);
+  background-color: var(--cobalto);
+  color: #FFFFFF;
+  border-color: var(--tinta);
+}
+
+.btn--call svg {
+  color: #FFFFFF;
+  stroke: #FFFFFF;
 }
 
 .btn--call::before {
-  background-color: #E5AC0F;
+  background-color: var(--cobalto-oscuro);
 }
 
-/* Botón Outline Claro sobre Fondo Azul */
+/* Botón Outline Claro sobre Fondo Oscuro */
 .btn--outline-light {
-  background-color: var(--azul-hielo);
-  color: var(--azul-tinta);
-  border-color: var(--azul-tinta);
+  background-color: var(--cielo);
+  color: var(--tinta);
+  border-color: var(--tinta);
 }
 
 .btn--outline-light::before {
-  background-color: var(--azul-cielo);
+  background-color: var(--cielo-medio);
 }
 
-/* Altura Estandarizada en 48px en Todas las Variantes */
+/* Altura Estandarizada en 52px en Todas las Variantes (Los tres de igual alto) */
 .btn--sm {
-  height: 48px;
-  min-height: 48px;
-  padding: 0 1.15rem;
-  font-size: 0.9rem;
+  height: 52px;
+  min-height: 52px;
+  padding: 0 1.25rem;
+  font-size: 0.95rem;
 }
 
 .btn--lg {
-  height: 48px;
-  min-height: 48px;
-  padding: 0 1.8rem;
-  font-size: 1rem;
+  height: 52px;
+  min-height: 52px;
+  padding: 0 1.85rem;
+  font-size: 1.05rem;
 }
 
 .btn--full {
@@ -622,32 +670,35 @@ p {
 }
 
 /* ==========================================================================
-   HEADER Y NAVEGACIÓN INSTITUCIONAL (FASE 2.3 & 2.4)
-   Azul hielo (#EDF4FB), borde inferior grueso 2.5px solid #0F2747.
-   Logo + 'San Miguel' en una línea con 'Trasteos y Mudanzas' pequeño debajo.
-   'Cómo funciona' nowrap, gap reducido, indicador deslizante y menú desplegable hasta 60dvh.
+   HEADER Y NAVEGACIÓN INSTITUCIONAL (FASE 2.1)
+   Azul tinta (#0B1F3F) con texto claro, logo visible, borde inferior fino.
+   Logo + 'San Miguel' en blanco con 'Trasteos y Mudanzas' en amarillo debajo.
+   Menú de 5 enlaces claros, 'Cómo funciona' nowrap, subrayado activo que se desliza.
+   'Cotizar gratis' amarillo y WhatsApp verde. Se compacta al bajar.
    ========================================================================== */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background-color: var(--azul-hielo);
-  border-bottom: var(--brut-borde);
-  padding: 0.65rem 0;
+  background-color: var(--tinta);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.12);
+  padding: 0.75rem 0;
+  color: #FFFFFF;
   transition: padding 200ms var(--ease-out-strong),
-              box-shadow 200ms var(--ease-out-strong);
+              box-shadow 200ms var(--ease-out-strong),
+              background-color 200ms ease-out;
 }
 
 .site-header.scrolled {
-  padding: 0.35rem 0;
-  box-shadow: var(--brut-sombra);
+  padding: 0.4rem 0;
+  box-shadow: 0 4px 16px rgba(11, 31, 63, 0.4);
 }
 
 .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.25rem;
   width: 100%;
   position: relative;
 }
@@ -678,9 +729,10 @@ p {
 .brand-title {
   font-family: var(--font-headings);
   font-weight: 800;
-  font-size: 1.15rem;
-  color: var(--azul-tinta);
-  letter-spacing: -0.01em;
+  font-size: 1.25rem;
+  color: #FFFFFF;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
@@ -688,7 +740,7 @@ p {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   font-weight: 700;
-  color: var(--azul-marca);
+  color: var(--amarillo);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   white-space: nowrap;
@@ -703,18 +755,18 @@ p {
     width: 36px;
   }
   .brand-title {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
   .brand-sub {
     font-size: 0.66rem;
   }
 }
 
-/* Navegación Desktop: 5 Enlaces Máximos con espacio reducido */
+/* Navegación Desktop: 5 Enlaces con espacio armónico */
 .nav-links {
   display: none;
   align-items: center;
-  gap: 1.15rem;
+  gap: 1.35rem;
 }
 
 .nav-item {
@@ -722,9 +774,12 @@ p {
 }
 
 .nav-link {
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: var(--azul-tinta);
+  font-family: var(--font-headings);
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
   padding: 0.4rem 0.25rem;
   display: flex;
   align-items: center;
@@ -739,16 +794,16 @@ p {
 
 .nav-link:hover,
 .nav-link.active {
-  color: var(--azul-marca);
+  color: var(--amarillo);
 }
 
 /* Indicador deslizante dinámico de sección activa */
 .nav-sliding-indicator {
   position: absolute;
-  bottom: 0;
+  bottom: -4px;
   left: 0;
   height: 3px;
-  background-color: var(--amarillo-marca);
+  background-color: var(--amarillo);
   border-radius: 2px;
   pointer-events: none;
   opacity: 0;
@@ -763,11 +818,11 @@ p {
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 190px;
-  background-color: var(--azul-hielo);
-  border: var(--brut-borde);
-  border-radius: var(--brut-radius);
-  box-shadow: var(--brut-sombra);
+  min-width: 200px;
+  background-color: var(--tinta);
+  border: 2px solid var(--amarillo);
+  border-radius: var(--radius-btn);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   padding: 0.5rem 0;
   opacity: 0;
   visibility: hidden;
@@ -790,15 +845,19 @@ p {
   align-items: center;
   gap: 0.5rem;
   padding: 0.65rem 1.25rem;
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--azul-tinta);
-  transition: background-color var(--duration-snap) ease-out;
+  font-family: var(--font-headings);
+  font-size: 0.98rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+  transition: background-color var(--duration-snap) ease-out,
+              color var(--duration-snap) ease-out;
 }
 
 .dropdown-item:hover {
-  background-color: var(--crema-amarilla);
-  color: var(--azul-tinta);
+  background-color: var(--cobalto);
+  color: #FFFFFF;
 }
 
 .header-actions {
@@ -834,10 +893,10 @@ p {
   height: 44px;
   min-width: 44px;
   min-height: 44px;
-  background: var(--crema-amarilla);
-  border: var(--brut-borde);
-  box-shadow: 2px 2px 0 var(--azul-tinta);
-  border-radius: var(--brut-radius);
+  background: var(--amarillo);
+  border: 2px solid var(--amarillo);
+  box-shadow: 2px 2px 0 #000000;
+  border-radius: var(--radius-btn);
   cursor: pointer;
   padding: 0;
   gap: 5px;
@@ -849,13 +908,13 @@ p {
 
 .hamburger-btn:active {
   transform: translate(1px, 1px);
-  box-shadow: 1px 1px 0 var(--azul-tinta);
+  box-shadow: 1px 1px 0 #000000;
 }
 
 .hamburger-line {
   width: 22px;
   height: 2.5px;
-  background-color: var(--azul-tinta);
+  background-color: var(--tinta);
   border-radius: 1px;
   transition: transform 250ms var(--ease-out-strong),
               opacity 200ms ease;
@@ -876,7 +935,7 @@ p {
   position: fixed;
   inset: 0;
   top: 60px;
-  background-color: rgba(15, 39, 71, 0.65);
+  background-color: rgba(11, 31, 63, 0.75);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   z-index: 990;
@@ -891,10 +950,9 @@ p {
 }
 
 /* ==========================================================================
-   MENÚ MÓVIL DESPLEGABLE REHECHO (FASE 2.4)
-   Baja bajo el encabezado, ancho completo, alto adaptativo hasta 60 dvh,
-   fondo azul hielo atenuado con desenfoque, cierre con Esc/touch-outside,
-   scroll bloqueado, aria-expanded/controls, enlaces escalonados a 30ms.
+   MENÚ MÓVIL DESPLEGABLE (FASE 2.1)
+   Baja bajo el encabezado, ancho completo, fondo azul tinta (#0B1F3F),
+   enlaces en blanco con acento amarillo, cierre con Esc/touch-outside.
    ========================================================================== */
 .mobile-nav-drawer {
   position: absolute;
@@ -905,11 +963,11 @@ p {
   max-height: 60dvh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  background: rgba(237, 244, 251, 0.98);
+  background: rgba(11, 31, 63, 0.98);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: var(--brut-borde);
-  box-shadow: var(--brut-sombra);
+  border-bottom: 3px solid var(--amarillo);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
   z-index: 995;
   display: flex;
   flex-direction: column;
@@ -955,18 +1013,21 @@ p {
   align-items: center;
   min-height: 48px;
   padding: 0.75rem 0.5rem;
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--azul-tinta);
+  font-family: var(--font-headings);
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
   text-decoration: none;
-  border-bottom: 1px solid rgba(15, 39, 71, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: color 150ms ease, padding-left 150ms ease;
   touch-action: manipulation;
 }
 
 .mobile-nav-link:hover,
 .mobile-nav-link:active {
-  color: var(--azul-marca);
+  color: var(--amarillo);
   padding-left: 0.75rem;
 }
 
@@ -974,7 +1035,7 @@ p {
 .mobile-coverage-block {
   margin-top: 0.85rem;
   padding-top: 0.85rem;
-  border-top: var(--brut-borde);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .mobile-coverage-title {
@@ -983,7 +1044,7 @@ p {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--azul-tinta);
+  color: var(--amarillo);
   margin-bottom: 0.5rem;
 }
 
@@ -998,20 +1059,22 @@ p {
   align-items: center;
   gap: 0.45rem;
   padding: 0.65rem 0.75rem;
-  background: var(--crema-amarilla);
-  border: var(--brut-borde);
-  border-radius: var(--brut-radius);
-  box-shadow: 2px 2px 0 var(--azul-tinta);
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--azul-tinta);
+  background: var(--cobalto-oscuro);
+  border: 1px solid var(--amarillo);
+  border-radius: var(--radius-btn);
+  box-shadow: 2px 2px 0 #000000;
+  font-family: var(--font-headings);
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #FFFFFF;
   text-decoration: none;
   min-height: 44px;
 }
 
 .mobile-coverage-card svg {
   flex-shrink: 0;
-  color: var(--azul-marca);
+  color: var(--amarillo);
 }
 
 /* Dos botones lado a lado al final */
@@ -1320,12 +1383,12 @@ p {
 }
 
 /* ==========================================================================
-   2. SERVICIOS: FONDO CREMA SUAVE (BLOQUE B)
+   2. SERVICIOS: FONDO CIELO MEDIO (#C9DAFB) - FASE 1 RITMO (60/30/10)
    4 Servicios Nucleares + Franja Servicios Adicionales + Cobertura
    ========================================================================== */
 .services-section {
-  background-color: var(--azul-cielo);
-  color: var(--azul-tinta);
+  background-color: var(--cielo-medio);
+  color: var(--tinta);
 }
 
 .services-list-container {
@@ -1340,7 +1403,7 @@ p {
   align-items: center;
   gap: 1.25rem;
   padding: 1.25rem 1.5rem;
-  background-color: #FFFFFF;
+  background-color: var(--hielo);
   border: var(--brut-borde);
   border-radius: var(--brut-radius);
   box-shadow: var(--brut-sombra);
@@ -1371,9 +1434,11 @@ p {
 .service-icon-wrap {
   width: 52px;
   height: 52px;
-  border-radius: var(--radius-md);
-  background-color: var(--navy-deep);
-  color: var(--yellow-brand);
+  border-radius: 50%;
+  background-color: var(--amarillo);
+  color: var(--tinta);
+  border: var(--brut-borde);
+  box-shadow: 2px 2px 0 var(--tinta);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1532,21 +1597,21 @@ p {
 }
 
 /* ==========================================================================
-   3. CÓMO FUNCIONA: FONDO CREMA AMARILLA (#FFF0B8) - FASE 1 RITMO
+   3. CÓMO FUNCIONA: FONDO COBALTO (#1E4FD6) - FASE 1 RITMO (60/30/10)
    Línea de Tiempo Conectora Animada y Tarjetas Neobrutalistas
    ========================================================================== */
 .how-it-works-section {
-  background-color: var(--crema-amarilla);
-  color: var(--azul-tinta);
+  background-color: var(--cobalto);
+  color: #FFFFFF;
   position: relative;
 }
 
 .how-it-works-section h2 {
-  color: var(--azul-tinta);
+  color: #FFFFFF;
 }
 
 .how-it-works-section .section-header p {
-  color: var(--azul-tinta);
+  color: var(--cielo);
 }
 
 .timeline-steps-grid {
@@ -1614,11 +1679,11 @@ p {
 }
 
 .timeline-step-number {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--brut-radius);
-  background-color: var(--amarillo-marca);
-  color: var(--azul-tinta);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: var(--amarillo);
+  color: var(--tinta);
   border: var(--brut-borde);
   font-family: var(--font-mono);
   font-size: 1.35rem;
@@ -1626,7 +1691,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 2px 2px 0 var(--azul-tinta);
+  box-shadow: 2px 2px 0 var(--tinta);
   transition: transform 200ms var(--ease-out-strong),
               background-color 200ms ease-out;
 }
@@ -1647,11 +1712,11 @@ p {
 }
 
 /* ==========================================================================
-   4. GARANTÍAS Y PROMESAS: FONDO AZUL HIELO (#EDF4FB) - FASE 1 RITMO
+   4. GARANTÍAS Y PROMESAS: FONDO CIELO (#E3ECFD) - FASE 1 RITMO
    ========================================================================== */
 .guarantees-section {
-  background-color: var(--azul-hielo);
-  color: var(--azul-tinta);
+  background-color: var(--cielo);
+  color: var(--tinta);
 }
 
 .guarantees-list-layout {
@@ -1675,7 +1740,7 @@ p {
 
 .guarantee-item-card {
   padding: 1.5rem;
-  background-color: #FFFFFF;
+  background-color: var(--hielo);
   border: var(--brut-borde);
   border-radius: var(--brut-radius);
   box-shadow: var(--brut-sombra);
@@ -1737,10 +1802,10 @@ p {
   flex-grow: 1;
 }
 
-/* 5. Factores de Precio: FONDO CARTÓN CLARO (#F2E0C2) - FASE 1 RITMO */
+/* 5. Factores de Precio: FONDO CIELO MEDIO (#C9DAFB) - FASE 1 RITMO (60/30/10) */
 .pricing-factors-section {
-  background-color: var(--carton-claro);
-  color: var(--azul-tinta);
+  background-color: var(--cielo-medio);
+  color: var(--tinta);
 }
 
 .pricing-factors-grid {
@@ -1762,7 +1827,7 @@ p {
 
 .factor-card {
   padding: 1.5rem;
-  background-color: #FFFFFF;
+  background-color: var(--hielo);
   border: var(--brut-borde);
   border-radius: var(--brut-radius);
   box-shadow: var(--brut-sombra);
@@ -1793,11 +1858,11 @@ p {
 }
 
 /* ==========================================================================
-   6. GALERÍA: FONDO AZUL MARCA (#1F4E8C) - FASE 1 RITMO
+   6. GALERÍA: FONDO AZUL TINTA (#0B1F3F) - FASE 1 RITMO (60/30/10)
    Grid Sin Huecos: 1 Grande + 4 Pequeñas con Misma Altura de Fila
    ========================================================================== */
 .gallery-section {
-  background-color: var(--azul-marca);
+  background-color: var(--tinta);
   color: #FFFFFF;
 }
 
@@ -1806,7 +1871,7 @@ p {
 }
 
 .gallery-section .section-header p {
-  color: var(--azul-hielo);
+  color: var(--cielo);
 }
 
 .gallery-grid,
@@ -2000,11 +2065,11 @@ p {
 }
 
 /* ==========================================================================
-   7. OPINIONES: FONDO CREMA AMARILLA (#FFF0B8) - FASE 1 RITMO
+   7. OPINIONES: FONDO CIELO (#E3ECFD) - FASE 1 RITMO (60/30/10)
    ========================================================================== */
 .reviews-section {
-  background-color: var(--crema-amarilla);
-  color: var(--azul-tinta);
+  background-color: var(--cielo);
+  color: var(--tinta);
 }
 
 .reviews-grid {
@@ -2015,7 +2080,7 @@ p {
 
 .review-card {
   padding: 1.5rem;
-  background: #FFFFFF;
+  background-color: var(--hielo);
   border: var(--brut-borde);
   border-radius: var(--brut-radius);
   box-shadow: var(--brut-sombra);
@@ -2054,11 +2119,11 @@ p {
 }
 
 .review-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--brut-radius);
-  background-color: var(--azul-tinta);
-  color: var(--amarillo-marca);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--tinta);
+  color: var(--amarillo);
   border: var(--brut-borde);
   display: flex;
   align-items: center;
@@ -2095,11 +2160,11 @@ p {
 }
 
 /* ==========================================================================
-   9. PREGUNTAS FRECUENTES: FONDO AZUL CIELO (#D6E6F7) - FASE 1 RITMO
+   9. PREGUNTAS FRECUENTES: FONDO CIELO MEDIO (#C9DAFB) - FASE 1 RITMO (60/30/10)
    ========================================================================== */
 .faqs-section {
-  background-color: var(--azul-cielo);
-  color: var(--azul-tinta);
+  background-color: var(--cielo-medio);
+  color: var(--tinta);
 }
 
 .faq-accordion {
@@ -2162,30 +2227,30 @@ p {
 }
 
 /* ==========================================================================
-   COTIZADOR ASISTENTE UNIFICADO EN 4 PASOS (BLOQUE A)
+   COTIZADORES: FONDO CIELO (#E3ECFD), NUNCA BLANCO (FASE 4.4)
    ========================================================================== */
 .quote-wizard-section {
   padding-top: var(--space-2xl);
   padding-bottom: var(--space-2xl);
-  background: #FFFFFF;
-  border-top: 1px solid var(--border-light);
-  border-bottom: 1px solid var(--border-light);
+  background-color: var(--cielo);
+  border-top: var(--brut-borde);
+  border-bottom: var(--brut-borde);
 }
 
 .quote-wizard-card {
   max-width: 760px;
   margin: 0 auto;
-  background-color: #FFFFFF;
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lift);
+  background-color: var(--hielo);
+  border: var(--brut-borde);
+  border-radius: 16px;
+  box-shadow: var(--brut-sombra);
   overflow: hidden;
 }
 
 .wizard-progress {
   padding: 1.25rem 1.5rem;
-  background-color: var(--bg-soft);
-  border-bottom: 1px solid var(--border-light);
+  background-color: var(--cielo-medio);
+  border-bottom: var(--brut-borde);
 }
 
 .wizard-progress-bar-wrap {
@@ -2399,20 +2464,23 @@ p {
 }
 
 .visual-radio-card .card-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-sm);
-  background-color: var(--navy-deep);
-  color: var(--yellow-brand);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--amarillo);
+  color: var(--tinta);
+  border: 1.5px solid var(--tinta);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: transform var(--duration-snap) ease-out;
+  flex-shrink: 0;
 }
 
 .visual-radio-card.selected .card-icon {
-  background-color: var(--yellow-brand);
-  color: var(--navy-deep);
+  background-color: var(--amarillo);
+  color: var(--tinta);
+  transform: scale(1.08);
 }
 
 .visual-radio-card span.card-title {
@@ -2764,16 +2832,13 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  height: 48px;
-  min-height: 48px;
-  padding: 0 1.15rem;
-  border-radius: var(--brut-radius);
+  width: 56px;
+  height: 56px;
+  min-height: 56px;
+  padding: 0;
+  border-radius: 50%;
   border: var(--brut-borde);
   box-shadow: var(--brut-sombra);
-  font-family: var(--font-headings);
-  font-size: 0.9rem;
-  font-weight: 700;
   text-decoration: none;
   cursor: pointer;
   touch-action: manipulation;
@@ -2790,14 +2855,14 @@ p {
 .floating-btn--wa {
   background-color: var(--verde-wa);
   color: #FFFFFF;
-  border-color: var(--azul-tinta);
+  border-color: var(--tinta);
   animation: fabPulse 4s ease-in-out infinite;
 }
 
 .floating-btn--call {
-  background-color: var(--amarillo-marca);
-  color: var(--azul-tinta);
-  border-color: var(--azul-tinta);
+  background-color: var(--cobalto);
+  color: #FFFFFF;
+  border-color: var(--tinta);
 }
 
 @keyframes fabPulse {
@@ -3215,4 +3280,725 @@ body:not(.js-reveal-ready) h2 strong,
   .wizard-step-pane {
     animation: none !important;
   }
+}
+
+/* ==========================================================================
+   FASE 3 · PORTADAS A PANTALLA COMPLETA (88 dvh, min 640px)
+   Degradado Cobalto (90deg, cobalto oscuro 92%, cobalto 70%, tinta 35%)
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  min-height: 88dvh;
+  min-height: 640px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--tinta);
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  color: #FFFFFF;
+  overflow: hidden;
+  padding: 3rem 0 0 0;
+}
+
+.hero-section--home {
+  background-image: linear-gradient(90deg, rgba(18, 58, 158, 0.94) 0%, rgba(18, 58, 158, 0.88) 50%, rgba(30, 79, 214, 0.70) 78%, rgba(11, 31, 63, 0.38) 100%), url('assets/img/quipo.webp');
+}
+
+.hero-section--valle {
+  background-image: linear-gradient(90deg, rgba(18, 58, 158, 0.94) 0%, rgba(18, 58, 158, 0.88) 50%, rgba(30, 79, 214, 0.70) 78%, rgba(11, 31, 63, 0.38) 100%), url('assets/img/camion_frente.webp');
+}
+
+.hero-section--nacional {
+  background-image: linear-gradient(90deg, rgba(18, 58, 158, 0.94) 0%, rgba(18, 58, 158, 0.88) 50%, rgba(30, 79, 214, 0.70) 78%, rgba(11, 31, 63, 0.38) 100%), url('assets/img/camion_frente.webp');
+}
+
+@media (max-width: 900px) {
+  .hero-section--home,
+  .hero-section--valle,
+  .hero-section--nacional {
+    background-image: linear-gradient(180deg, rgba(18, 58, 158, 0.96) 0%, rgba(18, 58, 158, 0.92) 55%, rgba(11, 31, 63, 0.88) 100%), url('assets/img/quipo.webp');
+  }
+}
+
+.hero-main-container {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 2.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .hero-main-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.hero-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  z-index: 2;
+}
+
+.hero-left-col h1 {
+  font-family: var(--font-headings);
+  font-size: clamp(2.5rem, 5.5vw, 4.75rem);
+  line-height: 0.96;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+.hero-left-col h1 .text-highlight-yellow {
+  color: var(--amarillo);
+  display: inline-block;
+}
+
+.hero-subtitle {
+  font-size: 1.12rem;
+  line-height: 1.5;
+  color: var(--cielo);
+  max-width: 580px;
+}
+
+.hero-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0.25rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 1.25rem;
+}
+
+@media (max-width: 540px) {
+  .hero-checklist {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hero-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.check-circle-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--amarillo);
+  color: var(--tinta);
+  border: 1.5px solid var(--tinta);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.82rem;
+  flex-shrink: 0;
+}
+
+.hero-actions-trio {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 540px) {
+  .hero-actions-trio {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-actions-trio .btn {
+    width: 100%;
+  }
+}
+
+/* Tarjeta Cotización Rápida Derecha (Borde y Sombra Dura, Radio 18px) */
+.quick-quote-card {
+  position: relative;
+  background-color: var(--hielo);
+  color: var(--tinta);
+  border: 2px solid var(--tinta);
+  border-radius: 18px;
+  box-shadow: 4px 4px 0 var(--tinta);
+  padding: 1.75rem;
+  z-index: 2;
+  transition: transform 160ms var(--ease-out-strong),
+              box-shadow 160ms var(--ease-out-strong);
+}
+
+.quick-quote-card h3 {
+  font-family: var(--font-headings);
+  font-size: 1.45rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--tinta);
+  margin-bottom: 0.35rem;
+}
+
+.quick-quote-card p.card-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.quick-options-grid,
+.quick-quote-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  margin-bottom: 1.25rem;
+}
+
+.quick-option-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.85rem 0.5rem;
+  background-color: var(--cielo);
+  border: 1.5px solid var(--tinta);
+  border-radius: 10px;
+  font-family: var(--font-headings);
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--tinta);
+  cursor: pointer;
+  text-align: center;
+  transition: all 150ms ease-out;
+}
+
+.quick-option-btn:hover,
+.quick-option-btn.selected,
+.quick-option-btn.active {
+  background-color: var(--amarillo);
+  border-color: var(--tinta);
+  box-shadow: 2px 2px 0 var(--tinta);
+  transform: translate(-1px, -1px);
+}
+
+.quick-option-btn svg {
+  color: var(--tinta);
+}
+
+/* Círculo 6+ años sobre la esquina con giro leve */
+.hero-badge-experience {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background-color: var(--amarillo);
+  color: var(--tinta);
+  border: 2px solid var(--tinta);
+  box-shadow: 3px 3px 0 var(--tinta);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
+  transform: rotate(8deg);
+  z-index: 3;
+  user-select: none;
+  transition: transform 300ms var(--ease-out-strong);
+}
+
+.hero-badge-experience:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.hero-badge-experience .badge-num {
+  font-family: var(--font-headings);
+  font-size: 1.55rem;
+  font-weight: 800;
+}
+
+.hero-badge-experience .badge-text {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* Barra inferior de 4 cifras en banda tinta al 60% con desenfoque */
+.hero-bottom-stats-bar {
+  width: 100%;
+  background-color: rgba(11, 31, 63, 0.60);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.85rem 0;
+  margin-top: 1.5rem;
+}
+
+.stats-inner-flex,
+.hero-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  align-items: center;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .stats-inner-flex,
+  .hero-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+}
+
+.stat-pill,
+.stat-pill-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+@media (max-width: 600px) {
+  .stat-pill,
+  .stat-pill-item {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+}
+
+.stat-pill-num {
+  font-family: var(--font-headings);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--amarillo);
+  line-height: 1;
+}
+
+.stat-pill-icon {
+  font-size: 1.15rem;
+}
+
+.stat-pill-label,
+.stat-pill-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   SERVICIOS EN FORMATO BENTO (FASE 3.8)
+   1 Tarjeta Grande + 3 Pequeñas alineadas
+   ========================================================================== */
+.services-bento-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 860px) {
+  .services-bento-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bento-card-large {
+  grid-row: span 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--hielo);
+  border: 2px solid var(--tinta);
+  border-radius: 16px;
+  box-shadow: 4px 4px 0 var(--tinta);
+  overflow: hidden;
+  transition: transform 160ms var(--ease-out-strong), box-shadow 160ms var(--ease-out-strong);
+}
+
+.bento-card-large:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--tinta);
+}
+
+.bento-card-img-wrap {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  border-bottom: 2px solid var(--tinta);
+}
+
+.bento-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 400ms var(--ease-out-strong);
+}
+
+.bento-card-large:hover .bento-card-img-wrap img {
+  transform: scale(1.04);
+}
+
+.bento-card-body {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.bento-card-body h3 {
+  font-size: 1.55rem;
+  color: var(--tinta);
+}
+
+.bento-card-body p {
+  color: var(--text-muted);
+  line-height: 1.55;
+  font-size: 0.98rem;
+}
+
+.bento-card-small {
+  background-color: var(--hielo);
+  border: 2px solid var(--tinta);
+  border-radius: 16px;
+  box-shadow: 4px 4px 0 var(--tinta);
+  padding: 1.35rem 1.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1.25rem;
+  transition: transform 160ms var(--ease-out-strong), box-shadow 160ms var(--ease-out-strong);
+}
+
+.bento-card-small:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--tinta);
+}
+
+@media (max-width: 600px) {
+  .bento-card-small {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+}
+
+/* ==========================================================================
+   ¿DÓNDE ES TU MUDANZA?: DOS TARJETAS GRANDES CON FOTO (FASE 3.8)
+   ========================================================================== */
+.where-bento-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .where-bento-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.where-photo-card {
+  position: relative;
+  background-color: var(--hielo);
+  border: 2px solid var(--tinta);
+  border-radius: 16px;
+  box-shadow: 4px 4px 0 var(--tinta);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 160ms var(--ease-out-strong), box-shadow 160ms var(--ease-out-strong);
+}
+
+.where-photo-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--tinta);
+}
+
+.where-card-media {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-bottom: 2px solid var(--tinta);
+  position: relative;
+}
+
+.where-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 400ms var(--ease-out-strong);
+}
+
+.where-photo-card:hover .where-card-media img {
+  transform: scale(1.04);
+}
+
+.where-card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.where-card-content h3 {
+  font-size: 1.45rem;
+  color: var(--tinta);
+}
+
+.where-card-content p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Ruta gráfica Nacional que se dibuja */
+.nacional-route-infographic {
+  margin: 1.5rem 0 2rem 0;
+  padding: 1.5rem;
+  background-color: var(--cielo);
+  border: 2px solid var(--tinta);
+  border-radius: 16px;
+  box-shadow: 4px 4px 0 var(--tinta);
+}
+
+.route-steps-horizontal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.route-step-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.35rem;
+  z-index: 2;
+}
+
+.route-node-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--amarillo);
+  border: 2px solid var(--tinta);
+  color: var(--tinta);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+}
+
+.route-node-label {
+  font-family: var(--font-headings);
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--tinta);
+}
+
+/* Franja de Zonas del Valle del Cauca (FASE 3.6) */
+.valle-zones-strip {
+  margin: 1.5rem 0 2rem 0;
+  padding: 1.25rem 1.5rem;
+  background-color: var(--cielo);
+  border: 2px solid var(--tinta);
+  border-radius: 16px;
+  box-shadow: 4px 4px 0 var(--tinta);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.valle-zone-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.85rem;
+  background-color: var(--hielo);
+  border: 1.5px solid var(--tinta);
+  border-radius: 8px;
+  font-family: var(--font-headings);
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--tinta);
+}
+
+.valle-zone-pill.featured {
+  background-color: var(--amarillo);
+}
+
+/* Animación de ruta gráfica SVG (FASE 7) */
+.animated-route-svg {
+  width: 100%;
+  height: 60px;
+  overflow: visible;
+}
+
+.animated-route-line {
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  transition: stroke-dashoffset 1.2s var(--ease-out-strong);
+}
+
+.is-revealed .animated-route-line {
+  stroke-dashoffset: 0;
+}
+
+
+
+/* ==========================================================================
+   FASE 7 · MOVIMIENTO Y MICRO-ANIMACIONES (emil-design-eng & animate)
+   - Maximo 300ms en interacciones, 400ms en revelados
+   - Solo transform y opacity (GPU accelerated, sin repaints)
+   - Quieto con prefers-reduced-motion
+   ========================================================================== */
+
+@keyframes heroTitleStagger {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-title-main {
+  animation: heroTitleStagger 380ms var(--ease-out-strong) both;
+}
+
+.hero-sub-two-lines {
+  animation: heroTitleStagger 380ms var(--ease-out-strong) 80ms both;
+}
+
+.hero-checks-four {
+  animation: heroTitleStagger 380ms var(--ease-out-strong) 140ms both;
+}
+
+.hero-cta-trio {
+  animation: heroTitleStagger 380ms var(--ease-out-strong) 200ms both;
+}
+
+.hero-quick-quote-card {
+  animation: heroTitleStagger 380ms var(--ease-out-strong) 120ms both;
+}
+
+@keyframes badgeGentleDrift {
+  0%, 100% {
+    transform: rotate(-4deg) scale(1);
+  }
+  50% {
+    transform: rotate(3deg) scale(1.03);
+  }
+}
+
+.hero-badge-experience {
+  animation: badgeGentleDrift 6s ease-in-out infinite;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.hero-badge-experience:hover {
+  transform: scale(1.08) rotate(0deg);
+  transition: transform 250ms var(--ease-out-strong);
+}
+
+@keyframes statsBarRise {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-stats-bottom-bar {
+  animation: statsBarRise 400ms var(--ease-out-strong) 250ms both;
+}
+
+.service-bento-card,
+.where-bento-card {
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.service-bento-card:hover,
+.where-bento-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 0 var(--tinta);
+}
+
+.service-bento-card:active,
+.where-bento-card:active {
+  transform: translateY(2px);
+  box-shadow: 2px 2px 0 var(--tinta);
+}
+
+.step-fieldset {
+  transition: opacity 280ms var(--ease-out-strong),
+              transform 280ms var(--ease-out-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-title-main,
+  .hero-sub-two-lines,
+  .hero-checks-four,
+  .hero-cta-trio,
+  .hero-quick-quote-card,
+  .hero-badge-experience,
+  .hero-stats-bottom-bar,
+  .service-bento-card,
+  .where-bento-card,
+  .animated-route-line,
+  .fab-pill,
+  .step-fieldset {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+.quick-quote-card h2.quick-quote-heading,
+.quick-quote-card h2 {
+  font-family: var(--font-headings);
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--tinta);
+  margin-bottom: 0.35rem;
 }

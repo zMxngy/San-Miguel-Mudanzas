@@ -138,67 +138,131 @@
   <main id="contenido-principal">
     
     <!-- Hero Valle del Cauca (Banda Azul Noche) -->
-    <section class="hero-section" aria-labelledby="valle-hero-title">
-      <!-- Ilustración de línea vectorial sutil de fondo (camión y cajas de trasteo, opacidad 10%) -->
-      <svg class="hero-bg-illustration" viewBox="0 0 800 450" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M 0 380 L 800 380" stroke-dasharray="12 12" />
-        <path d="M 0 395 L 800 395" />
-        <path d="M 620 380 L 620 270 L 560 270 L 520 310 L 520 380 Z" />
-        <path d="M 605 285 L 565 285 L 540 315 L 605 315 Z" />
-        <circle cx="530" cy="350" r="6" />
-        <rect x="230" y="210" width="290" height="170" rx="4" />
-        <line x1="375" y1="210" x2="375" y2="380" />
-        <line x1="250" y1="260" x2="500" y2="260" stroke-dasharray="6 6" />
-        <circle cx="300" cy="380" r="24" stroke-width="2.5" />
-        <circle cx="300" cy="380" r="10" />
-        <circle cx="450" cy="380" r="24" stroke-width="2.5" />
-        <circle cx="450" cy="380" r="10" />
-        <circle cx="580" cy="380" r="24" stroke-width="2.5" />
-        <circle cx="580" cy="380" r="10" />
-        <rect x="60" y="320" width="70" height="60" rx="2" />
-        <line x1="60" y1="340" x2="130" y2="340" />
-        <path d="M 90 320 L 90 335 L 100 335 L 100 320" />
-        <rect x="135" y="310" width="80" height="70" rx="2" />
-        <line x1="135" y1="335" x2="215" y2="335" />
-        <path d="M 170 310 L 170 325 L 180 325 L 180 310" />
-        <rect x="90" y="260" width="65" height="58" rx="2" />
-        <line x1="90" y1="280" x2="155" y2="280" />
-        <path d="M 30 380 L 45 340 L 45 290 L 35 285" />
-        <circle cx="35" cy="380" r="8" />
-        <line x1="45" y1="340" x2="60" y2="340" />
-        <line x1="650" y1="300" x2="720" y2="300" stroke-dasharray="8 8" />
-        <line x1="660" y1="330" x2="750" y2="330" stroke-dasharray="10 10" />
-        <line x1="640" y1="360" x2="700" y2="360" stroke-dasharray="6 6" />
-      </svg>
-      <div class="container hero-grid">
-        <div class="hero-content">
+    <section class="hero-section hero-section--valle" aria-labelledby="valle-hero-title">
+      <div class="container hero-main-container">
+        
+        <!-- Columna Izquierda: Sello, Título en Barlow Condensed Mayúsculas, Subtítulo, 4 Checks, Trío de Botones -->
+        <div class="hero-left-col">
           <div>
-            <span class="badge-pill">Zona Principal: Cali y todo el Valle del Cauca</span>
+            <span class="badge-pill">
+              <!-- Lucide map-pin -->
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              COBERTURA VALLE DEL CAUCA
+            </span>
           </div>
-          <h1 id="valle-hero-title">Mudanzas y trasteos locales en el Valle del Cauca</h1>
-          <p class="hero-tagline">
-            Operamos en Santiago de Cali como centro neurálgico y cubrimos todas las conexiones departamentales del Valle del Cauca. Personal capacitado y uniformado, camiones adecuados y más de 6 años de experiencia.
+
+          <h1 id="valle-hero-title">
+            DEL BARRIO DE SIEMPRE<br>
+            <span class="text-highlight-yellow">A TU HOGAR NUEVO.</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            Cali y el Valle del Cauca, de puerta a puerta con camiones furgonados y personal uniformado.
           </p>
-          <div class="hero-actions">
-            <a href="#cotizador" class="btn btn--yellow btn--lg">
-              <span>Cotizador en 4 pasos</span>
+
+          <ul class="hero-checklist" aria-label="Beneficios principales en el Valle">
+            <li>
+              <span class="check-circle-icon" aria-hidden="true">✓</span>
+              <span>Cali y municipios del Valle</span>
+            </li>
+            <li>
+              <span class="check-circle-icon" aria-hidden="true">✓</span>
+              <span>Camiones furgonados y protegidos</span>
+            </li>
+            <li>
+              <span class="check-circle-icon" aria-hidden="true">✓</span>
+              <span>Personal capacitado y uniformado</span>
+            </li>
+            <li>
+              <span class="check-circle-icon" aria-hidden="true">✓</span>
+              <span>Cotización inmediata por WhatsApp</span>
+            </li>
+          </ul>
+
+          <div class="hero-actions-trio">
+            <a href="#cotizador" class="btn btn--primary btn--hero-action">
+              <span>Cotizar Valle</span>
               <span class="arrow-icon" aria-hidden="true">→</span>
             </a>
-            <a href="https://wa.me/573217676571?text=Hola%2C%20necesito%20cotizar%20un%20trasteo%20en%20el%20Valle%20del%20Cauca" 
-               class="btn btn--wa btn--lg" 
+            <a href="https://wa.me/573217676571?text=Hola%2C%20quisiera%20cotizar%20un%20trasteo%20en%20el%20Valle%20del%20Cauca" 
+               class="btn btn--wa btn--hero-action" 
                target="_blank" 
-               rel="noopener noreferrer">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.978-.276-.1-.477-.15-.678.15-.201.301-.778.978-.954 1.179-.176.2-.351.226-.652.075-.301-.15-1.272-.469-2.423-1.496-.896-.799-1.501-1.786-1.677-2.087-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.201-.301.301-.502.101-.2.05-.376-.025-.527-.075-.15-.678-1.636-.929-2.241-.244-.589-.493-.509-.678-.519l-.578-.01c-.201 0-.527.075-.803.376-.276.301-1.054 1.029-1.054 2.509 0 1.48 1.079 2.909 1.23 3.11.15.201 2.124 3.243 5.145 4.549.719.311 1.28.497 1.718.636.722.23 1.379.197 1.898.12.579-.087 1.78-.727 2.031-1.43.251-.703.251-1.305.176-1.43-.075-.125-.276-.201-.577-.351zM12.042 21.82a9.78 9.78 0 0 1-4.99-1.365l-.358-.213-3.71.973.99-3.616-.233-.371A9.778 9.778 0 0 1 2.25 12.04c0-5.397 4.39-9.787 9.792-9.787 2.614 0 5.072 1.018 6.921 2.868a9.73 9.73 0 0 1 2.866 6.919c0 5.398-4.39 9.78-9.787 9.78zm0-18.04c-4.55 0-8.25 3.7-8.25 8.26 0 1.455.38 2.875 1.1 4.12l.17.296-.728 2.66 2.723-.715.286.17a8.216 8.216 0 0 0 4.699 1.429c4.55 0 8.25-3.7 8.25-8.26 0-2.206-.859-4.28-2.418-5.84a8.212 8.212 0 0 0-5.882-2.42z"/></svg>
-              <span>Consultar por WhatsApp</span>
+               rel="noopener noreferrer" 
+               aria-label="WhatsApp">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.978-.276-.1-.477-.15-.678.15-.201.301-.778.978-.954 1.179-.176.2-.351.226-.652.075-.301-.15-1.272-.469-2.423-1.496-.896-.799-1.501-1.786-1.677-2.087-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.201-.301.301-.502.101-.2.05-.376-.025-.527-.075-.15-.678-1.636-.929-2.241-.244-.589-.493-.509-.678-.519l-.578-.01c-.201 0-.527.075-.803.376-.276.301-1.054 1.029-1.054 2.509 0 1.48 1.079 2.909 1.23 3.11.15.201 2.124 3.243 5.145 4.549.719.311 1.28.497 1.718.636.722.23 1.379.197 1.898.12.579-.087 1.78-.727 2.031-1.43.251-.703.251-1.305.176-1.43-.075-.125-.276-.201-.577-.351zM12.042 21.82a9.78 9.78 0 0 1-4.99-1.365l-.358-.213-3.71.973.99-3.616-.233-.371A9.778 9.778 0 0 1 2.25 12.04c0-5.397 4.39-9.787 9.792-9.787 2.614 0 5.072 1.018 6.921 2.868a9.73 9.73 0 0 1 2.866 6.919c0 5.398-4.39 9.78-9.787 9.78zm0-18.04c-4.55 0-8.25 3.7-8.25 8.26 0 1.455.38 2.875 1.1 4.12l.17.296-.728 2.66 2.723-.715.286.17a8.216 8.216 0 0 0 4.699 1.429c4.55 0 8.25-3.7 8.25-8.26 0-2.206-.859-4.28-2.418-5.84a8.212 8.212 0 0 0-5.882-2.42z"/></svg>
+              <span>WhatsApp</span>
+            </a>
+            <a href="tel:+573217676571" class="btn btn--call btn--hero-action" aria-label="Llamar al 321 767 6571">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>Llamar</span>
             </a>
           </div>
         </div>
 
-        <div class="hero-media-card">
-          <img src="assets/img/camion_frente.webp" alt="Camión rotulado de Mudanzas San Miguel en servicio en Cali" width="800" height="600" fetchpriority="high">
+        <!-- Columna Derecha: Tarjeta de Cotización Rápida y Círculo 6+ años -->
+        <div style="position: relative;">
+          <div class="hero-badge-experience" aria-label="Más de 6 años de experiencia">
+            <span class="badge-num">+6</span>
+            <span class="badge-text">AÑOS EXP</span>
+          </div>
+
+          <div class="quick-quote-card" role="region" aria-label="Cotización rápida Valle">
+            <h2 class="quick-quote-heading">Cotización rápida · Valle</h2>
+            <p class="card-desc">Indica tus puntos de partida y llegada para tu cotización local:</p>
+            
+            <div class="form-group" style="margin-bottom: 0.85rem;">
+              <label for="wizQuickOrigenValle" class="form-label" style="font-size: 0.88rem; color: var(--tinta);">Dirección de recogida</label>
+              <input type="text" id="wizQuickOrigenValle" class="form-input places-autocomplete-input" placeholder="Ej. Calle 14 # 85-20, Cali" style="background-color: #FFFFFF;">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 1.25rem;">
+              <label for="wizQuickDestinoValle" class="form-label" style="font-size: 0.88rem; color: var(--tinta);">Dirección de entrega</label>
+              <input type="text" id="wizQuickDestinoValle" class="form-input places-autocomplete-input" placeholder="Ej. Cra 12 # 5-40, Jamundí" style="background-color: #FFFFFF;">
+            </div>
+
+            <button type="button" class="btn btn--primary" id="btnQuickValleAction" style="width: 100%;">
+              <span>Continuar mi cotización</span>
+              <span class="arrow-icon" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Barra Inferior de 4 Cifras en Banda Tinta al 60% con Desenfoque (FASE 3.5) -->
+      <div class="hero-bottom-stats-bar" role="region" aria-label="Datos clave del servicio en Valle">
+        <div class="container hero-stats-grid">
+          <div class="stat-pill-item">
+            <span class="stat-pill-num">+6 AÑOS</span>
+            <span class="stat-pill-text">DE EXPERIENCIA</span>
+          </div>
+          <div class="stat-pill-item">
+            <span class="stat-pill-num">100%</span>
+            <span class="stat-pill-text">COTIZACIÓN GRATIS</span>
+          </div>
+          <div class="stat-pill-item">
+            <span class="stat-pill-num">CALI · VALLE</span>
+            <span class="stat-pill-text">PUERTA A PUERTA</span>
+          </div>
+          <div class="stat-pill-item">
+            <span class="stat-pill-num">DIRECTA</span>
+            <span class="stat-pill-text">ATENCIÓN POR WHATSAPP</span>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- Franja de Zonas del Valle del Cauca (FASE 3.6) -->
+    <div class="container" style="margin-top: -1rem; margin-bottom: 1.5rem;">
+      <div class="valle-zones-strip" role="region" aria-label="Zonas de operación en el Valle">
+        <span style="font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700; color: var(--tinta); text-transform: uppercase;">Zonas Principales:</span>
+        <div class="valle-zone-pill featured">📍 Santiago de Cali</div>
+        <div class="valle-zone-pill">Jamundí</div>
+        <div class="valle-zone-pill">Palmira</div>
+        <div class="valle-zone-pill">Yumbo</div>
+        <div class="valle-zone-pill">Valle del Cauca</div>
+      </div>
+    </div>
 
     <!-- Garantías Locales en Azul Niebla (Bloque C & G: Sin afirmaciones no verificadas) -->
     <section class="section-padding guarantees-section" aria-labelledby="valle-features-title">
@@ -234,7 +298,7 @@
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
             </div>
             <h3>Personal capacitado</h3>
-            <p>Personal uniformado y capacitado con experiencia en cuidado de enseres.</p>
+            <p>Personal uniformado y capacitado con experiencia en cuidado de objetos.</p>
           </div>
 
           <div class="guarantee-item-card">
@@ -243,7 +307,7 @@
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/></svg>
             </div>
             <h3>Embalaje y protección</h3>
-            <p>Mantas y vinipel para proteger superficies durante el traslado local.</p>
+            <p>Mantas y papel vitafilm para proteger superficies durante el traslado local.</p>
           </div>
         </div>
       </div>
@@ -354,87 +418,131 @@
             <!-- PASO 2: DIRECCIONES EN CALI Y VALLE (SIN PARADAS INTERMEDIAS) -->
             <div class="wizard-step-pane" id="stepPane2">
               <div class="step-pane-header">
-                <h3>2. Trayecto en Cali y Valle del Cauca</h3>
-                <p>Indica dónde recogemos y dónde entregamos tus enseres. Sin paradas intermedias.</p>
+                <h3>2. Recorrido en Cali y Valle del Cauca</h3>
+                <p>Indica dónde recogemos y dónde entregamos tus pertenencias. Sin paradas intermedias.</p>
               </div>
 
               <!-- Dónde recogemos -->
-              <div style="background-color: var(--bg-soft); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
-                <h4 style="font-size: 1rem; color: var(--blue-footer); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+              <div style="background-color: var(--cielo); border: 2px solid var(--tinta); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.25rem;">
+                <h4 style="font-size: 1rem; color: var(--tinta); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; font-weight: 800; font-family: var(--font-headings); text-transform: uppercase;">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
                   Punto de Recogida (Cali / Valle)
                 </h4>
                 <div class="form-group">
                   <label for="wizOrigenLocal" class="form-label">Dirección o barrio exacto en Cali o Valle *</label>
                   <input type="text" id="wizOrigenLocal" name="wizOrigenLocal" class="form-input places-autocomplete-input" placeholder="Ej. Calle 14 # 85-20, Valle del Lili, Cali" required aria-describedby="errOrigenLocal">
-                  <span class="field-error-msg" id="errOrigenLocal">Especifica la dirección o barrio de recogida (mínimo 5 caracteres).</span>
+                  <span class="field-error-msg" id="errOrigenLocal">Especifica una dirección válida de mínimo 8 caracteres con número.</span>
                   <input type="hidden" id="wizOrigenLat" name="wizOrigenLat" value="">
                   <input type="hidden" id="wizOrigenLng" name="wizOrigenLng" value="">
                   <input type="hidden" id="wizOrigenFormatted" name="wizOrigenFormatted" value="">
                 </div>
-                <div class="form-row-3">
+                
+                <div class="form-row-2">
                   <div class="form-group">
                     <label for="wizTipoOrigenLocal" class="form-label">Tipo de lugar</label>
-                    <select id="wizTipoOrigenLocal" name="wizTipoOrigenLocal" class="form-select">
-                      <option value="Casa primer piso">Casa primer piso</option>
-                      <option value="Casa dos pisos">Casa dos pisos</option>
-                      <option value="Apartamento con ascensor">Apartamento con ascensor</option>
-                      <option value="Apartamento por escaleras">Apartamento por escaleras</option>
-                      <option value="Local u oficina">Local u oficina</option>
+                    <select id="wizTipoOrigenLocal" name="wizTipoOrigenLocal" class="form-select place-type-select" data-target="OrigenLocal">
+                      <option value="Casa">Casa</option>
+                      <option value="Apartamento">Apartamento</option>
+                      <option value="Oficina o local">Oficina o local</option>
                       <option value="Bodega">Bodega</option>
                     </select>
                   </div>
                   <div class="form-group">
                     <label for="wizPisoOrigenLocal" class="form-label">Piso</label>
-                    <input type="number" id="wizPisoOrigenLocal" name="wizPisoOrigenLocal" min="1" value="1" class="form-input">
+                    <select id="wizPisoOrigenLocal" name="wizPisoOrigenLocal" class="form-select floor-select" data-target="OrigenLocal">
+                      <option value="1">Piso 1</option>
+                      <option value="2">Piso 2</option>
+                      <option value="3">Piso 3</option>
+                      <option value="4">Piso 4</option>
+                      <option value="5">Piso 5</option>
+                      <option value="6">Piso 6</option>
+                      <option value="7">Piso 7</option>
+                      <option value="8">Piso 8</option>
+                      <option value="9">Piso 9</option>
+                      <option value="10">Piso 10</option>
+                      <option value="más de 10">Más de 10</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row-2">
+                  <div class="form-group elevator-group" id="grpAscensorOrigenLocal" style="display: none;">
+                    <label for="wizAscensorOrigenLocal" class="form-label">¿Cuenta con ascensor?</label>
+                    <select id="wizAscensorOrigenLocal" name="wizAscensorOrigenLocal" class="form-select">
+                      <option value="Sí">Sí</option>
+                      <option value="No">No</option>
+                      <option value="No sé">No sé</option>
+                    </select>
                   </div>
                   <div class="form-group">
-                    <label for="wizAscensorOrigenLocal" class="form-label">¿Ascensor?</label>
-                    <select id="wizAscensorOrigenLocal" name="wizAscensorOrigenLocal" class="form-select">
-                      <option value="No aplica">No aplica</option>
-                      <option value="Sí cuenta con ascensor">Sí cuenta con ascensor</option>
-                      <option value="No, solo escaleras">No, solo escaleras</option>
+                    <label for="wizCamionEntraOrigenLocal" class="form-label">¿El camión llega hasta la puerta?</label>
+                    <select id="wizCamionEntraOrigenLocal" name="wizCamionEntraOrigenLocal" class="form-select">
+                      <option value="Sí">Sí</option>
+                      <option value="No">No</option>
+                      <option value="No sé">No sé</option>
                     </select>
                   </div>
                 </div>
               </div>
 
               <!-- Dónde entregamos -->
-              <div style="background-color: var(--bg-soft); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 1.25rem;">
-                <h4 style="font-size: 1rem; color: var(--blue-footer); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+              <div style="background-color: var(--cielo); border: 2px solid var(--tinta); border-radius: 12px; padding: 1.25rem;">
+                <h4 style="font-size: 1rem; color: var(--tinta); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; font-weight: 800; font-family: var(--font-headings); text-transform: uppercase;">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
                   Punto de Entrega (Cali / Valle)
                 </h4>
                 <div class="form-group">
                   <label for="wizDestinoLocal" class="form-label">Dirección o barrio exacto en Cali o Valle *</label>
                   <input type="text" id="wizDestinoLocal" name="wizDestinoLocal" class="form-input places-autocomplete-input" placeholder="Ej. Carrera 12 # 5-40, Alfaguara, Jamundí" required aria-describedby="errDestinoLocal">
-                  <span class="field-error-msg" id="errDestinoLocal">Especifica la dirección o barrio de entrega (mínimo 5 caracteres).</span>
+                  <span class="field-error-msg" id="errDestinoLocal">Especifica una dirección válida de mínimo 8 caracteres con número.</span>
                   <input type="hidden" id="wizDestinoLat" name="wizDestinoLat" value="">
                   <input type="hidden" id="wizDestinoLng" name="wizDestinoLng" value="">
                   <input type="hidden" id="wizDestinoFormatted" name="wizDestinoFormatted" value="">
                 </div>
-                <div class="form-row-3">
+                
+                <div class="form-row-2">
                   <div class="form-group">
                     <label for="wizTipoDestinoLocal" class="form-label">Tipo de lugar</label>
-                    <select id="wizTipoDestinoLocal" name="wizTipoDestinoLocal" class="form-select">
-                      <option value="Casa primer piso">Casa primer piso</option>
-                      <option value="Casa dos pisos">Casa dos pisos</option>
-                      <option value="Apartamento con ascensor">Apartamento con ascensor</option>
-                      <option value="Apartamento por escaleras">Apartamento por escaleras</option>
-                      <option value="Local u oficina">Local u oficina</option>
+                    <select id="wizTipoDestinoLocal" name="wizTipoDestinoLocal" class="form-select place-type-select" data-target="DestinoLocal">
+                      <option value="Casa">Casa</option>
+                      <option value="Apartamento">Apartamento</option>
+                      <option value="Oficina o local">Oficina o local</option>
                       <option value="Bodega">Bodega</option>
                     </select>
                   </div>
                   <div class="form-group">
                     <label for="wizPisoDestinoLocal" class="form-label">Piso</label>
-                    <input type="number" id="wizPisoDestinoLocal" name="wizPisoDestinoLocal" min="1" value="1" class="form-input">
+                    <select id="wizPisoDestinoLocal" name="wizPisoDestinoLocal" class="form-select floor-select" data-target="DestinoLocal">
+                      <option value="1">Piso 1</option>
+                      <option value="2">Piso 2</option>
+                      <option value="3">Piso 3</option>
+                      <option value="4">Piso 4</option>
+                      <option value="5">Piso 5</option>
+                      <option value="6">Piso 6</option>
+                      <option value="7">Piso 7</option>
+                      <option value="8">Piso 8</option>
+                      <option value="9">Piso 9</option>
+                      <option value="10">Piso 10</option>
+                      <option value="más de 10">Más de 10</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row-2">
+                  <div class="form-group elevator-group" id="grpAscensorDestinoLocal" style="display: none;">
+                    <label for="wizAscensorDestinoLocal" class="form-label">¿Cuenta con ascensor?</label>
+                    <select id="wizAscensorDestinoLocal" name="wizAscensorDestinoLocal" class="form-select">
+                      <option value="Sí">Sí</option>
+                      <option value="No">No</option>
+                      <option value="No sé">No sé</option>
+                    </select>
                   </div>
                   <div class="form-group">
-                    <label for="wizAscensorDestinoLocal" class="form-label">¿Ascensor?</label>
-                    <select id="wizAscensorDestinoLocal" name="wizAscensorDestinoLocal" class="form-select">
-                      <option value="No aplica">No aplica</option>
-                      <option value="Sí cuenta con ascensor">Sí cuenta con ascensor</option>
-                      <option value="No, solo escaleras">No, solo escaleras</option>
+                    <label for="wizCamionEntraDestinoLocal" class="form-label">¿El camión llega hasta la puerta?</label>
+                    <select id="wizCamionEntraDestinoLocal" name="wizCamionEntraDestinoLocal" class="form-select">
+                      <option value="Sí">Sí</option>
+                      <option value="No">No</option>
+                      <option value="No sé">No sé</option>
                     </select>
                   </div>
                 </div>
@@ -710,23 +818,23 @@
 
               <!-- 3.4 PANE MAQUINARIA O EQUIPOS (FORMULARIO TÉCNICO) -->
               <div id="paneItemsMaquinaria" class="service-items-pane" style="display: none;">
-                <div class="machinery-tech-card">
-                  <span class="client-confirm-tag">[POR CONFIRMAR CON EL CLIENTE: qué tipos acepta realmente y hasta qué peso]</span>
-                  <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
-                    Por favor especifica las características técnicas de la maquinaria o equipos a mover. No se requieren cajas ni muebles.
+                <div class="machinery-tech-card" style="background-color: var(--cielo); border: 2px solid var(--tinta); border-radius: 12px; padding: 1.25rem;">
+                  <p style="font-size: 0.9rem; color: var(--tinta); margin-bottom: 1rem; font-weight: 600;">
+                    Especifica los detalles técnicos del equipo o maquinaria a trasladar para evaluar capacidad y sujeción en furgón:
                   </p>
 
                   <div class="form-row-2">
                     <div class="form-group">
-                      <label for="wizMaqTipo" class="form-label">Tipo general de maquinaria / equipo *</label>
+                      <label for="wizMaqTipo" class="form-label">Tipo de equipo *</label>
                       <select id="wizMaqTipo" name="wizMaqTipo" class="form-select">
-                        <option value="Equipos de panadería o cocina industrial">Equipos de panadería o cocina industrial</option>
-                        <option value="Máquinas de coser o confección / textil">Máquinas de coser o confección / textil</option>
-                        <option value="Equipos de gimnasio o fitness">Equipos de gimnasio o fitness</option>
-                        <option value="Herramientas y talleres">Herramientas y talleres</option>
-                        <option value="Equipos médicos, odontológicos o estética">Equipos médicos, odontológicos o estética</option>
-                        <option value="Equipos de artes gráficas / imprenta">Equipos de artes gráficas / imprenta</option>
-                        <option value="Otro tipo de maquinaria comercial">Otro tipo de maquinaria comercial</option>
+                        <option value="Panadería o cocina industrial">Panadería o cocina industrial</option>
+                        <option value="Confección o textil">Máquinas de confección o textil</option>
+                        <option value="Gimnasio o fitness">Equipos de gimnasio o fitness</option>
+                        <option value="Taller o herramientas">Taller y herramientas industriales</option>
+                        <option value="Médico, odontológico o estética">Médico, odontológico o estética</option>
+                        <option value="Artes gráficas o imprenta">Artes gráficas o imprenta</option>
+                        <option value="Mobiliario comercial pesado">Mobiliario comercial pesado</option>
+                        <option value="Otro tipo de equipo">Otro tipo de equipo</option>
                       </select>
                     </div>
                     <div class="form-group">
@@ -737,8 +845,8 @@
 
                   <div class="form-row-2">
                     <div class="form-group">
-                      <label for="wizMaqPeso" class="form-label">Peso aproximado total (kg)</label>
-                      <input type="number" id="wizMaqPeso" name="wizMaqPeso" min="1" placeholder="Ej. 250" class="form-input">
+                      <label for="wizMaqPeso" class="form-label">Peso aproximado (kg)</label>
+                      <input type="number" id="wizMaqPeso" name="wizMaqPeso" min="1" placeholder="Ej. 150" class="form-input">
                     </div>
                     <div class="form-group">
                       <label for="wizMaqMedidas" class="form-label">Medidas aprox (Largo × Ancho × Alto)</label>
@@ -746,45 +854,44 @@
                     </div>
                   </div>
 
-                  <div class="form-group" style="margin-top: 0.75rem;">
-                    <label class="form-label">Requerimientos especiales de manipulación</label>
-                    <div class="tech-checkboxes-grid">
-                      <label class="tech-checkbox-label">
-                        <input type="checkbox" id="wizMaqMontacargas" value="Requiere montacargas">
-                        <span>Montacargas</span>
-                      </label>
-                      <label class="tech-checkbox-label">
-                        <input type="checkbox" id="wizMaqGrua" value="Requiere grúa pluma">
-                        <span>Grúa o elevación</span>
-                      </label>
-                      <label class="tech-checkbox-label">
-                        <input type="checkbox" id="wizMaqRampa" value="Requiere rampa hidráulica">
-                        <span>Rampa hidráulica</span>
-                      </label>
-                      <label class="tech-checkbox-label">
-                        <input type="checkbox" id="wizMaqManual" value="Cargue manual por ayudantes" checked>
-                        <span>Cargue manual ayudantes</span>
-                      </label>
-                    </div>
-                  </div>
-
-                  <div class="form-row-2" style="margin-top: 0.75rem;">
+                  <div class="form-row-2">
                     <div class="form-group">
-                      <label for="wizMaqPisoAcceso" class="form-label">Piso y acceso en cargue</label>
-                      <input type="text" id="wizMaqPisoAcceso" name="wizMaqPisoAcceso" placeholder="Ej. Primer piso a nivel de andén" class="form-input">
+                      <label for="wizMaqDesarmable" class="form-label">¿Se puede desarmar?</label>
+                      <select id="wizMaqDesarmable" name="wizMaqDesarmable" class="form-select">
+                        <option value="No, pieza completa">No, pieza completa</option>
+                        <option value="Sí, se desarma">Sí, se desarma</option>
+                        <option value="Parcialmente">Parcialmente</option>
+                        <option value="No sé">No sé</option>
+                      </select>
                     </div>
                     <div class="form-group">
-                      <label for="wizMaqCamionEntra" class="form-label">¿El camión entra hasta el punto?</label>
-                      <select id="wizMaqCamionEntra" name="wizMaqCamionEntra" class="form-select">
-                        <option value="Sí, entrada directa para camión">Sí, entrada directa para camión</option>
-                        <option value="A unos 10-20 metros">A unos 10-20 metros</option>
-                        <option value="No, rampa o sótano estrecho">No, rampa o sótano estrecho</option>
+                      <label for="wizMaqRuedas" class="form-label">¿Tiene ruedas?</label>
+                      <select id="wizMaqRuedas" name="wizMaqRuedas" class="form-select">
+                        <option value="No">No</option>
+                        <option value="Sí">Sí</option>
+                        <option value="No sé">No sé</option>
                       </select>
                     </div>
                   </div>
+
+                  <div class="form-row-2">
+                    <div class="form-group">
+                      <label for="wizMaqEscaleras" class="form-label">¿Hay escaleras o puertas angostas?</label>
+                      <select id="wizMaqEscaleras" name="wizMaqEscaleras" class="form-select">
+                        <option value="No, paso amplio a nivel">No, paso amplio a nivel</option>
+                        <option value="Sí, hay escaleras">Sí, hay escaleras</option>
+                        <option value="Sí, puertas angostas">Sí, puertas angostas</option>
+                        <option value="No sé">No sé</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="wizMaqPisoAcceso" class="form-label">Piso y acceso</label>
+                      <input type="text" id="wizMaqPisoAcceso" name="wizMaqPisoAcceso" placeholder="Ej. Piso 1 a nivel de andén" class="form-input">
+                    </div>
+                  </div>
+
                 </div>
               </div>
-
               <!-- Objeto Personalizado (Solo para Hogar y Oficina) -->
               <div id="customItemContainer" class="custom-item-section" style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px dashed var(--border-light);">
                 <label for="customItemName" class="form-label" style="font-size: 0.88rem;">¿Otro objeto específico?</label>
@@ -825,7 +932,7 @@
               <div class="form-group">
                 <label for="wizAyudantes" class="form-label">Ayudantes para cargue y descargue</label>
                 <select id="wizAyudantes" name="wizAyudantes" class="form-select">
-                  <option value="2 ayudantes + conductor">2 ayudantes + conductor (Recomendado estándar)</option>
+                  <option value="2 ayudantes + conductor">2 ayudantes + conductor</option>
                   <option value="3 o más ayudantes + conductor">3 o más ayudantes + conductor (Mudanzas grandes o pisos altos)</option>
                   <option value="Solo conductor y furgón">Solo conductor y furgón (El cliente aporta el cargue)</option>
                 </select>
@@ -835,8 +942,8 @@
                 <label class="form-label">Servicios adicionales</label>
                 <div style="display: flex; flex-direction: column; gap: 0.65rem; margin-top: 0.25rem;">
                   <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.92rem;">
-                    <input type="checkbox" id="wizExtraEmbalaje" value="Protección con vinipel">
-                    <span>Protección con mantas y vinipel</span>
+                    <input type="checkbox" id="wizExtraEmbalaje" value="Protección con papel vitafilm">
+                    <span>Protección con mantas y papel vitafilm</span>
                   </label>
                   <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.92rem;">
                     <input type="checkbox" id="wizExtraDesarme" value="Desarme y armado de muebles">
@@ -902,7 +1009,7 @@
             <img src="assets/img/logo.webp" alt="Logo San Miguel" width="140" height="40">
             <span class="brand-name" style="color: #FFFFFF;">San Miguel</span>
           </a>
-          <p>Más de 6 años de experiencia en mudanzas residenciales, empresariales y trasteos locales en el Valle del Cauca y Colombia.</p>
+          <p>Especialistas en mudanzas residenciales, empresariales y trasteos locales en el Valle del Cauca y Colombia.</p>
         </div>
         <div class="footer-col">
           <h3>COBERTURA</h3>

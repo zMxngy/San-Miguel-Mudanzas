@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initTimelineAnimation();
   initGalleryLightbox();
   initSpecializedQuoteWizard();
+  initQuickQuoteCards();
   initServiceDirectLinks();
 });
 
@@ -386,7 +387,19 @@ function validateColombiaPhone(phone) {
 }
 
 function validateAddress(addr) {
-  return String(addr || "").trim().length >= 5;
+  const str = String(addr || "").trim();
+  const apiKey = window.APP_CONFIG?.GOOGLE_MAPS_API_KEY;
+  const hasValidKey = apiKey && apiKey.trim() !== "" && !apiKey.includes("[PENDIENTE");
+  
+  // Exigencia FASE 4.5: Mínimo 8 caracteres y al menos un número (ej: Calle 14 # 85-20, Carrera 7 # 72)
+  // Rechaza textos sin sentido o incompletos ("casa", "123", "prueba", "abcde")
+  const hasMinLength = str.length >= 8;
+  const hasNumber = /\d/.test(str);
+  
+  if (hasValidKey) {
+    return hasMinLength && hasNumber;
+  }
+  return hasMinLength && hasNumber;
 }
 
 function validateCity(city) {
@@ -512,6 +525,48 @@ function initSpecializedQuoteWizard() {
       targetRadio.closest(".que-mover-card")?.classList.add("selected");
     }
   }
+
+  // Inicialización de lógica condicional de ascensores (FASE 4.1)
+  function initElevatorControls() {
+    const placeSelects = wizardContainer.querySelectorAll(".place-type-select");
+    const floorSelects = wizardContainer.querySelectorAll(".floor-select");
+
+    function updateElevatorState(targetSuffix) {
+      const typeSelect = wizardContainer.querySelector(`.place-type-select[data-target="${targetSuffix}"]`);
+      const floorSelect = wizardContainer.querySelector(`.floor-select[data-target="${targetSuffix}"]`);
+      const elevatorGroup = document.getElementById(`grpAscensor${targetSuffix}`);
+      if (!typeSelect || !floorSelect || !elevatorGroup) return;
+
+      const typeVal = typeSelect.value;
+      const floorVal = floorSelect.value;
+
+      // Ascensor solo si es apartamento u oficina en piso 2 o más
+      const isEligibleType = typeVal === "Apartamento" || typeVal === "Oficina o local" || typeVal === "Oficina";
+      const isFloor2Plus = floorVal !== "1";
+
+      if (isEligibleType && isFloor2Plus) {
+        elevatorGroup.style.display = "block";
+      } else {
+        elevatorGroup.style.display = "none";
+        const elevatorSelect = document.getElementById(`wizAscensor${targetSuffix}`);
+        if (elevatorSelect) elevatorSelect.value = "No aplica";
+      }
+    }
+
+    placeSelects.forEach(sel => {
+      sel.addEventListener("change", () => updateElevatorState(sel.getAttribute("data-target")));
+    });
+
+    floorSelects.forEach(sel => {
+      sel.addEventListener("change", () => updateElevatorState(sel.getAttribute("data-target")));
+    });
+
+    ["OrigenLocal", "DestinoLocal", "OrigenNac", "DestinoNac"].forEach(suffix => {
+      updateElevatorState(suffix);
+    });
+  }
+
+  initElevatorControls();
 
   // Selección dinámica de paneles de objetos en Paso 3 según el servicio
   function syncItemsPaneWithService(service) {
@@ -833,16 +888,18 @@ function initSpecializedQuoteWizard() {
         quoteData.origenLocal = origenInput.value.trim();
         quoteData.origenLat = document.getElementById("wizOrigenLat")?.value || "";
         quoteData.origenLng = document.getElementById("wizOrigenLng")?.value || "";
-        quoteData.tipoOrigenLocal = document.getElementById("wizTipoOrigenLocal")?.value || "Casa primer piso";
-        quoteData.pisoOrigenLocal = document.getElementById("wizPisoOrigenLocal")?.value || 1;
+        quoteData.tipoOrigenLocal = document.getElementById("wizTipoOrigenLocal")?.value || "Casa";
+        quoteData.pisoOrigenLocal = document.getElementById("wizPisoOrigenLocal")?.value || "1";
         quoteData.ascensorOrigenLocal = document.getElementById("wizAscensorOrigenLocal")?.value || "No aplica";
+        quoteData.accesoOrigenLocal = document.getElementById("wizCamionEntraOrigenLocal")?.value || "Sí";
 
         quoteData.destinoLocal = destinoInput.value.trim();
         quoteData.destinoLat = document.getElementById("wizDestinoLat")?.value || "";
         quoteData.destinoLng = document.getElementById("wizDestinoLng")?.value || "";
-        quoteData.tipoDestinoLocal = document.getElementById("wizTipoDestinoLocal")?.value || "Casa primer piso";
-        quoteData.pisoDestinoLocal = document.getElementById("wizPisoDestinoLocal")?.value || 1;
+        quoteData.tipoDestinoLocal = document.getElementById("wizTipoDestinoLocal")?.value || "Casa";
+        quoteData.pisoDestinoLocal = document.getElementById("wizPisoDestinoLocal")?.value || "1";
         quoteData.ascensorDestinoLocal = document.getElementById("wizAscensorDestinoLocal")?.value || "No aplica";
+        quoteData.accesoDestinoLocal = document.getElementById("wizCamionEntraDestinoLocal")?.value || "Sí";
       }
       return true;
     }
@@ -853,15 +910,10 @@ function initSpecializedQuoteWizard() {
         quoteData.maquinaria.cantidad = document.getElementById("wizMaqCantidad")?.value || 1;
         quoteData.maquinaria.peso = document.getElementById("wizMaqPeso")?.value || "";
         quoteData.maquinaria.medidas = document.getElementById("wizMaqMedidas")?.value || "";
-        
-        quoteData.maquinaria.requerimientos = [];
-        if (document.getElementById("wizMaqMontacargas")?.checked) quoteData.maquinaria.requerimientos.push("Montacargas");
-        if (document.getElementById("wizMaqGrua")?.checked) quoteData.maquinaria.requerimientos.push("Grúa o elevación");
-        if (document.getElementById("wizMaqRampa")?.checked) quoteData.maquinaria.requerimientos.push("Rampa hidráulica");
-        if (document.getElementById("wizMaqManual")?.checked) quoteData.maquinaria.requerimientos.push("Cargue manual");
-
+        quoteData.maquinaria.desarmable = document.getElementById("wizMaqDesarmable")?.value || "No, pieza completa";
+        quoteData.maquinaria.ruedas = document.getElementById("wizMaqRuedas")?.value || "No";
+        quoteData.maquinaria.escaleras = document.getElementById("wizMaqEscaleras")?.value || "No, paso amplio a nivel";
         quoteData.maquinaria.pisoAcceso = document.getElementById("wizMaqPisoAcceso")?.value || "";
-        quoteData.maquinaria.camionEntra = document.getElementById("wizMaqCamionEntra")?.value || "";
       }
       return true;
     }
@@ -909,7 +961,7 @@ function initSpecializedQuoteWizard() {
     let itemsText = "";
     if (quoteData.queMover === "Maquinaria o equipos") {
       const m = quoteData.maquinaria;
-      itemsText = `${m.tipo} (${m.cantidad} unid)${m.peso ? ` · Peso aprox: ${m.peso} kg` : ""}${m.medidas ? ` · Medidas: ${m.medidas}` : ""}`;
+      itemsText = `${m.tipo} (${m.cantidad} unid)${m.peso ? ` · Peso: ${m.peso} kg` : ""}${m.medidas ? ` · Medidas: ${m.medidas}` : ""}${m.desarmable ? ` · Desarme: ${m.desarmable}` : ""}${m.ruedas === "Sí" ? " · Con ruedas" : ""}${m.pisoAcceso ? ` · Acceso: ${m.pisoAcceso}` : ""}`;
     } else {
       const activeItems = Object.entries(quoteData.inventario)
         .filter(([_, count]) => count > 0)
@@ -922,9 +974,23 @@ function initSpecializedQuoteWizard() {
       ? `Salida: Cali (${quoteData.barrioOrigenNac || "Barrio"}) → Llegada: ${quoteData.muniDestinoNac || "Ciudad"}, ${quoteData.deptoDestinoNac || "Departamento"}`
       : `${quoteData.origenLocal || "Origen"} → ${quoteData.destinoLocal || "Destino"}`;
 
+    function formatPlace(tipo, piso, ascensor, acceso) {
+      let desc = tipo;
+      if (piso && piso !== "1") desc += `, piso ${piso}`;
+      else desc += `, piso 1`;
+      
+      if (ascensor && ascensor !== "No aplica") {
+        if (ascensor.toLowerCase() === "sí") desc += `, con ascensor`;
+        else if (ascensor.toLowerCase() === "no") desc += `, por escaleras`;
+        else desc += `, ascensor: ${ascensor}`;
+      }
+      if (acceso && acceso.toLowerCase() === "sí") desc += `, camión a la puerta`;
+      return desc;
+    }
+
     const inmueblesText = isNacional
-      ? `Salida: ${quoteData.tipoOrigenNac} (Piso ${quoteData.pisoOrigenNac}, ${quoteData.ascensorOrigenNac}) | Llegada: ${quoteData.tipoDestinoNac} (Piso ${quoteData.pisoDestinoNac}, ${quoteData.ascensorDestinoNac})`
-      : `Salida: ${quoteData.tipoOrigenLocal} (Piso ${quoteData.pisoOrigenLocal}) | Llegada: ${quoteData.tipoDestinoLocal} (Piso ${quoteData.pisoDestinoLocal})`;
+      ? `Salida: ${formatPlace(quoteData.tipoOrigenNac, quoteData.pisoOrigenNac, quoteData.ascensorOrigenNac, quoteData.accesoOrigenNac)} | Llegada: ${formatPlace(quoteData.tipoDestinoNac, quoteData.pisoDestinoNac, quoteData.ascensorDestinoNac, quoteData.accesoDestinoNac)}`
+      : `Salida: ${formatPlace(quoteData.tipoOrigenLocal, quoteData.pisoOrigenLocal, quoteData.ascensorOrigenLocal, quoteData.accesoOrigenLocal)} | Llegada: ${formatPlace(quoteData.tipoDestinoLocal, quoteData.pisoDestinoLocal, quoteData.ascensorDestinoLocal, quoteData.accesoDestinoLocal)}`;
 
     summaryBox.innerHTML = `
       <div class="summary-list">
@@ -993,7 +1059,7 @@ function initSpecializedQuoteWizard() {
     quoteData.ayudantes = document.getElementById("wizAyudantes")?.value || "2 ayudantes + conductor";
     
     quoteData.extras = [];
-    if (document.getElementById("wizExtraEmbalaje")?.checked) quoteData.extras.push("Protección con vinipel");
+    if (document.getElementById("wizExtraEmbalaje")?.checked) quoteData.extras.push("Protección con papel vitafilm");
     if (document.getElementById("wizExtraDesarme")?.checked) quoteData.extras.push("Desarme y armado de muebles");
 
     quoteData.notas = document.getElementById("wizNotas")?.value.trim() || "";
@@ -1256,8 +1322,7 @@ function generateBloqueGWhatsAppText(data, isNacional) {
   let objetosStr = "";
   if (data.queMover === "Maquinaria o equipos") {
     const m = data.maquinaria;
-    const reqs = m.requerimientos && m.requerimientos.length > 0 ? m.requerimientos.join(", ") : "Manual";
-    objetosStr = `${m.tipo} (${m.cantidad} unid)${m.peso ? ` · Peso aprox: ${m.peso} kg` : ""}${m.medidas ? ` · Medidas: ${m.medidas}` : ""} · Manipulación: ${reqs}${m.pisoAcceso ? ` · Acceso: ${m.pisoAcceso}` : ""} [POR CONFIRMAR CON EL CLIENTE: peso y tipos aceptados]`;
+    objetosStr = `${m.tipo} (${m.cantidad} unid)${m.peso ? ` · Peso aprox: ${m.peso} kg` : ""}${m.medidas ? ` · Medidas: ${m.medidas}` : ""}${m.desarmable ? ` · Desarme: ${m.desarmable}` : ""}${m.ruedas === "Sí" ? " · Con ruedas" : ""}${m.escaleras ? ` · Escaleras/puertas: ${m.escaleras}` : ""}${m.pisoAcceso ? ` · Acceso: ${m.pisoAcceso}` : ""}`;
   } else {
     const items = Object.entries(data.inventario || {})
       .filter(([_, count]) => count > 0)
@@ -1302,7 +1367,7 @@ window.testWhatsAppFormat = function(scenario = "local_hogar") {
       fecha: "2026-10-26",
       horario: "Mañana (7:00 a.m. - 12:00 m.)",
       ayudantes: "2 ayudantes + conductor",
-      extras: ["Protección con vinipel"],
+      extras: ["Protección con papel vitafilm"],
       inventario: { "Sofá 3 puestos": 1, "Nevera": 1, "Cama Doble / Semidoble": 1 },
       notas: "Cuidado especial con el refrigerador."
     };
@@ -1374,7 +1439,7 @@ window.testWhatsAppFormat = function(scenario = "local_hogar") {
       fecha: "2026-11-02",
       horario: "Mañana (7:00 a.m. - 12:00 m.)",
       ayudantes: "2 ayudantes + conductor",
-      extras: ["Protección con vinipel", "Desarme y armado de muebles"],
+      extras: ["Protección con papel vitafilm", "Desarme y armado de muebles"],
       inventario: { "Escritorios": 4, "Sillas oficina": 4, "Computadores y pantallas": 4, "Archivadores": 2 },
       notas: "Coordinar ingreso con administración del edificio en Bogotá."
     };
@@ -1394,4 +1459,61 @@ function escapeHTML(str) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+/* ==========================================================================
+   INTERACCIÓN TARJETAS DE COTIZACIÓN RÁPIDA (FASE 3.3)
+   ========================================================================== */
+function initQuickQuoteCards() {
+  // 1. Home Quick Quote
+  const quickOptionBtns = document.querySelectorAll(".quick-option-btn");
+  const quickQuoteAction = document.getElementById("btnQuickQuoteAction");
+  let selectedService = "hogar";
+
+  quickOptionBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      quickOptionBtns.forEach(b => b.classList.remove("active", "selected"));
+      btn.classList.add("active", "selected");
+      selectedService = btn.getAttribute("data-service") || "hogar";
+      if (quickQuoteAction) {
+        quickQuoteAction.href = `#donde-es?servicio=${selectedService}`;
+      }
+    });
+  });
+
+  // 2. Valle Quick Quote
+  const btnQuickValle = document.getElementById("btnQuickValleAction");
+  if (btnQuickValle) {
+    btnQuickValle.addEventListener("click", () => {
+      const orig = document.getElementById("wizQuickOrigenValle")?.value.trim();
+      const dest = document.getElementById("wizQuickDestinoValle")?.value.trim();
+      const wizOrig = document.getElementById("wizOrigenLocal");
+      const wizDest = document.getElementById("wizDestinoLocal");
+      if (orig && wizOrig) wizOrig.value = orig;
+      if (dest && wizDest) wizDest.value = dest;
+      const cotizador = document.getElementById("cotizador");
+      if (cotizador) cotizador.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
+  // 3. Nacional Quick Quote
+  const btnQuickNac = document.getElementById("btnQuickNacAction");
+  if (btnQuickNac) {
+    btnQuickNac.addEventListener("click", () => {
+      const destCity = document.getElementById("wizQuickDestinoNac")?.value.trim();
+      const srvMover = document.getElementById("wizQuickMoverNac")?.value;
+      const wizDestMuni = document.getElementById("wizMuniDestinoNac");
+      if (destCity && wizDestMuni) wizDestMuni.value = destCity;
+      if (srvMover) {
+        const targetRadio = document.querySelector(`input[name="wizQueMover"][value="${srvMover}"]`);
+        if (targetRadio) {
+          targetRadio.checked = true;
+          document.querySelectorAll(".que-mover-card").forEach(c => c.classList.remove("selected"));
+          targetRadio.closest(".que-mover-card")?.classList.add("selected");
+        }
+      }
+      const cotizador = document.getElementById("cotizador");
+      if (cotizador) cotizador.scrollIntoView({ behavior: "smooth" });
+    });
+  }
 }

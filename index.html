@@ -174,140 +174,128 @@
     <!-- ==========================================================================
          1. PORTADA: FONDO AZUL MARCA (#1F4E8C) CON 3 CAPAS DE TRASTEOS SVG (FASE 3)
          ========================================================================== -->
-    <section class="hero-section" aria-labelledby="hero-title">
-      <!-- 3 Capas Decorativas SVG Propias (FASE 3.1) -->
-      <svg class="hero-bg-illustration" viewBox="0 0 1000 500" fill="none" aria-hidden="true">
-        <!-- Capa 1: Patrón irregular de cajas y flechas de línea gruesa (opacidad 10%) -->
-        <g class="hero-svg-layer-boxes" opacity="0.10" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="60" y="70" width="48" height="42" rx="2" />
-          <line x1="60" y1="84" x2="108" y2="84" />
-          <path d="M 80 70 L 80 84 L 88 84 L 88 70" />
-          
-          <rect x="180" y="40" width="56" height="50" rx="2" />
-          <line x1="180" y1="58" x2="236" y2="58" />
-          <path d="M 202 40 L 202 58 L 214 58 L 214 40" />
-
-          <rect x="30" y="320" width="60" height="52" rx="2" />
-          <line x1="30" y1="340" x2="90" y2="340" />
-
-          <rect x="130" y="360" width="52" height="46" rx="2" />
-          <line x1="130" y1="378" x2="182" y2="378" />
-
-          <!-- Flechas logísticas gruesas -->
-          <path d="M 120 120 L 160 120 M 150 110 L 160 120 L 150 130" stroke-width="3" />
-          <path d="M 270 90 L 310 90 M 300 80 L 310 90 L 300 100" stroke-width="3" />
-          <path d="M 80 270 L 120 270 M 110 260 L 120 270 L 110 280" stroke-width="3" />
-          <path d="M 190 320 L 230 320 M 220 310 L 230 320 L 220 330" stroke-width="3" />
-        </g>
-
-        <!-- Capa 2: Ruta punteada animada una sola vez de Cali a Destino con camión pequeño -->
-        <g class="hero-svg-layer-route" opacity="0.35">
-          <!-- Pin Cali -->
-          <g transform="translate(100, 200)">
-            <circle cx="0" cy="0" r="10" fill="#FFC21A" />
-            <circle cx="0" cy="0" r="4" fill="#0F2747" />
-            <text x="14" y="5" fill="#FFC21A" font-family="'Space Mono', monospace" font-size="12" font-weight="700">CALI</text>
-          </g>
-
-          <!-- Ruta punteada animada -->
-          <path class="hero-animated-route-path" d="M 100 200 C 220 150, 320 230, 460 180" stroke="#FFC21A" stroke-width="3" stroke-dasharray="6 6" fill="none" />
-
-          <!-- Pin Destino -->
-          <g transform="translate(460, 180)">
-            <circle cx="0" cy="0" r="9" fill="#FFF0B8" />
-            <circle cx="0" cy="0" r="3.5" fill="#0F2747" />
-            <text x="14" y="5" fill="#FFF0B8" font-family="'Space Mono', monospace" font-size="11" font-weight="700">DESTINO</text>
-          </g>
-
-          <!-- Camión pequeño sobre la ruta -->
-          <g class="hero-mini-truck-icon" transform="translate(280, 195) scale(0.85)">
-            <rect x="0" y="0" width="26" height="16" rx="2" fill="#FFC21A" />
-            <rect x="22" y="4" width="10" height="12" rx="1" fill="#FFC21A" />
-            <rect x="25" y="6" width="5" height="5" rx="1" fill="#0F2747" />
-            <circle cx="7" cy="17" r="3.5" fill="#0F2747" stroke="#FFC21A" stroke-width="1.5" />
-            <circle cx="25" cy="17" r="3.5" fill="#0F2747" stroke="#FFC21A" stroke-width="1.5" />
-          </g>
-        </g>
-
-        <!-- Capa 3: Camión grande en línea en amarillo suave, más visible, recortado en la esquina inferior derecha -->
-        <g class="hero-svg-layer-big-truck" transform="translate(680, 240)" stroke="#FFE082" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.22" fill="none">
-          <rect x="0" y="0" width="280" height="170" rx="4" />
-          <line x1="140" y1="0" x2="140" y2="170" />
-          <line x1="20" y1="50" x2="260" y2="50" stroke-dasharray="6 6" />
-          <path d="M 280 60 L 330 60 L 370 100 L 370 170 L 280 170 Z" />
-          <path d="M 325 72 L 290 72 L 290 105 L 355 105 Z" fill="rgba(255, 224, 130, 0.1)" />
-          <circle cx="70" cy="170" r="25" stroke-width="3" />
-          <circle cx="70" cy="170" r="10" />
-          <circle cx="210" cy="170" r="25" stroke-width="3" />
-          <circle cx="210" cy="170" r="10" />
-          <circle cx="330" cy="170" r="25" stroke-width="3" />
-          <circle cx="330" cy="170" r="10" />
-          <line x1="-80" y1="195" x2="420" y2="195" stroke-width="2.5" />
-        </g>
-      </svg>
-
-      <div class="container hero-grid">
-        <div class="hero-content">
+    <section class="hero-section hero-section--home" aria-labelledby="hero-title">
+      <div class="container hero-main-container">
+        
+        <!-- Columna Izquierda: Sello, Título en Barlow Condensed Mayúsculas, Subtítulo, 4 Checks, Trío de Botones -->
+        <div class="hero-left-col">
           <div>
             <span class="badge-pill">
-              <!-- Lucide clock -->
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              Más de 6 años de experiencia en Cali, Valle del Cauca y Colombia
+              <!-- Lucide shield -->
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              MUDANZAS Y TRASTEOS EN CALI Y COLOMBIA
             </span>
           </div>
 
-          <!-- Titular seleccionado (FASE 3.4): Concreto, con datos reales y trazo amarillo grueso -->
-          <h1 id="hero-title">Mudanzas y trasteos en Cali, el Valle y <strong>toda Colombia</strong></h1>
-          
-          <p class="hero-tagline">
-            Más de 6 años trasladando hogares, empresas y maquinaria con camiones furgonados y personal uniformado. Cotización gratis y directa por WhatsApp.
+          <h1 id="hero-title">
+            TÚ PONES LA FECHA.<br>
+            <span class="text-highlight-yellow">NOSOTROS PONEMOS LAS MANOS.</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            Trasladamos hogares y empresas en Cali y Colombia con camiones furgonados y personal uniformado.
           </p>
 
-          <div class="hero-actions">
-            <a href="#donde-es" class="btn btn--yellow btn--lg">
-              <span>Cotizar mudanza</span>
+          <ul class="hero-checklist" aria-label="Beneficios principales">
+            <li>
+              <span class="check-circle-icon" aria-hidden="true">✓</span>
+              <span>Camiones furgonados y protegidos</span>
+            </li>
+            <li>
+              <span class="check-circle-icon" aria-hidden="true">✓</span>
+              <span>Personal capacitado y uniformado</span>
+            </li>
+            <li>
+              <span class="check-circle-icon" aria-hidden="true">✓</span>
+              <span>Cotización gratis por WhatsApp</span>
+            </li>
+            <li>
+              <span class="check-circle-icon" aria-hidden="true">✓</span>
+              <span>Protección y cuidado de objetos</span>
+            </li>
+          </ul>
+
+          <div class="hero-actions-trio">
+            <a href="#donde-es" class="btn btn--primary btn--hero-action">
+              <span>Cotizar gratis</span>
               <span class="arrow-icon" aria-hidden="true">→</span>
             </a>
             <a href="https://wa.me/573217676571?text=Hola%2C%20quisiera%20cotizar%20un%20servicio%20de%20mudanza%20con%20San%20Miguel" 
-               class="btn btn--wa btn--lg" 
+               class="btn btn--wa btn--hero-action" 
                target="_blank" 
-               rel="noopener noreferrer">
-              <!-- WhatsApp SVG -->
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.978-.276-.1-.477-.15-.678.15-.201.301-.778.978-.954 1.179-.176.2-.351.226-.652.075-.301-.15-1.272-.469-2.423-1.496-.896-.799-1.501-1.786-1.677-2.087-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.201-.301.301-.502.101-.2.05-.376-.025-.527-.075-.15-.678-1.636-.929-2.241-.244-.589-.493-.509-.678-.519l-.578-.01c-.201 0-.527.075-.803.376-.276.301-1.054 1.029-1.054 2.509 0 1.48 1.079 2.909 1.23 3.11.15.201 2.124 3.243 5.145 4.549.719.311 1.28.497 1.718.636.722.23 1.379.197 1.898.12.579-.087 1.78-.727 2.031-1.43.251-.703.251-1.305.176-1.43-.075-.125-.276-.201-.577-.351zM12.042 21.82a9.78 9.78 0 0 1-4.99-1.365l-.358-.213-3.71.973.99-3.616-.233-.371A9.778 9.778 0 0 1 2.25 12.04c0-5.397 4.39-9.787 9.792-9.787 2.614 0 5.072 1.018 6.921 2.868a9.73 9.73 0 0 1 2.866 6.919c0 5.398-4.39 9.78-9.787 9.78zm0-18.04c-4.55 0-8.25 3.7-8.25 8.26 0 1.455.38 2.875 1.1 4.12l.17.296-.728 2.66 2.723-.715.286.17a8.216 8.216 0 0 0 4.699 1.429c4.55 0 8.25-3.7 8.25-8.26 0-2.206-.859-4.28-2.418-5.84a8.212 8.212 0 0 0-5.882-2.42z"/></svg>
-              <span>WhatsApp directo</span>
+               rel="noopener noreferrer" 
+               aria-label="Contactar por WhatsApp">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.978-.276-.1-.477-.15-.678.15-.201.301-.778.978-.954 1.179-.176.2-.351.226-.652.075-.301-.15-1.272-.469-2.423-1.496-.896-.799-1.501-1.786-1.677-2.087-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.201-.301.301-.502.101-.2.05-.376-.025-.527-.075-.15-.678-1.636-.929-2.241-.244-.589-.493-.509-.678-.519l-.578-.01c-.201 0-.527.075-.803.376-.276.301-1.054 1.029-1.054 2.509 0 1.48 1.079 2.909 1.23 3.11.15.201 2.124 3.243 5.145 4.549.719.311 1.28.497 1.718.636.722.23 1.379.197 1.898.12.579-.087 1.78-.727 2.031-1.43.251-.703.251-1.305.176-1.43-.075-.125-.276-.201-.577-.351zM12.042 21.82a9.78 9.78 0 0 1-4.99-1.365l-.358-.213-3.71.973.99-3.616-.233-.371A9.778 9.778 0 0 1 2.25 12.04c0-5.397 4.39-9.787 9.792-9.787 2.614 0 5.072 1.018 6.921 2.868a9.73 9.73 0 0 1 2.866 6.919c0 5.398-4.39 9.78-9.787 9.78zm0-18.04c-4.55 0-8.25 3.7-8.25 8.26 0 1.455.38 2.875 1.1 4.12l.17.296-.728 2.66 2.723-.715.286.17a8.216 8.216 0 0 0 4.699 1.429c4.55 0 8.25-3.7 8.25-8.26 0-2.206-.859-4.28-2.418-5.84a8.212 8.212 0 0 0-5.882-2.42z"/></svg>
+              <span>WhatsApp</span>
             </a>
-          </div>
-
-          <!-- 3 Etiquetas de Caja del Mismo Tamaño y Altura (FASE 3.3) -->
-          <div class="hero-trust-row" role="region" aria-label="Garantías reales del servicio">
-            <div class="trust-box-tag">
-              <strong class="trust-stat-big" id="statAnos">+6</strong>
-              <span class="trust-stat-label">AÑOS DE EXPERIENCIA</span>
-            </div>
-            <div class="trust-box-tag">
-              <!-- Lucide map -->
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
-              <span class="trust-stat-label">CALI · VALLE · TODA COLOMBIA</span>
-            </div>
-            <div class="trust-box-tag">
-              <!-- WhatsApp SVG -->
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.978-.276-.1-.477-.15-.678.15-.201.301-.778.978-.954 1.179-.176.2-.351.226-.652.075-.301-.15-1.272-.469-2.423-1.496-.896-.799-1.501-1.786-1.677-2.087-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.201-.301.301-.502.101-.2.05-.376-.025-.527-.075-.15-.678-1.636-.929-2.241-.244-.589-.493-.509-.678-.519l-.578-.01c-.201 0-.527.075-.803.376-.276.301-1.054 1.029-1.054 2.509 0 1.48 1.079 2.909 1.23 3.11.15.201 2.124 3.243 5.145 4.549.719.311 1.28.497 1.718.636.722.23 1.379.197 1.898.12.579-.087 1.78-.727 2.031-1.43.251-.703.251-1.305.176-1.43-.075-.125-.276-.201-.577-.351zM12.042 21.82a9.78 9.78 0 0 1-4.99-1.365l-.358-.213-3.71.973.99-3.616-.233-.371A9.778 9.778 0 0 1 2.25 12.04c0-5.397 4.39-9.787 9.792-9.787 2.614 0 5.072 1.018 6.921 2.868a9.73 9.73 0 0 1 2.866 6.919c0 5.398-4.39 9.78-9.787 9.78zm0-18.04c-4.55 0-8.25 3.7-8.25 8.26 0 1.455.38 2.875 1.1 4.12l.17.296-.728 2.66 2.723-.715.286.17a8.216 8.216 0 0 0 4.699 1.429c4.55 0 8.25-3.7 8.25-8.26 0-2.206-.859-4.28-2.418-5.84a8.212 8.212 0 0 0-5.882-2.42z"/></svg>
-              <span class="trust-stat-label">COTIZACIÓN GRATIS POR WHATSAPP</span>
-            </div>
+            <a href="tel:+573217676571" class="btn btn--call btn--hero-action" aria-label="Llamar al 321 767 6571">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>Llamar</span>
+            </a>
           </div>
         </div>
 
-        <!-- Foto Real del Equipo en Portada con Marco Grueso y Bloque Amarillo Desplazado (FASE 3.2) -->
-        <div class="hero-media-wrapper">
-          <div class="hero-media-card">
-            <img src="assets/img/quipo.webp" 
-                 alt="Equipo uniformado de Trasteos y Mudanzas San Miguel con camiones en Cali" 
-                 width="800" 
-                 height="600" 
-                 fetchpriority="high">
-            <div class="hero-corner-tag">
-              <span>Personal uniformado y capacitado</span>
+        <!-- Columna Derecha: Tarjeta de Cotización Rápida y Círculo 6+ años -->
+        <div style="position: relative;">
+          <!-- Badge circular 6+ años con giro suave -->
+          <div class="hero-badge-experience" aria-label="Más de 6 años de experiencia">
+            <span class="badge-num">+6</span>
+            <span class="badge-text">AÑOS EXP</span>
+          </div>
+
+          <div class="quick-quote-card" role="region" aria-label="Cotización rápida">
+            <h2 class="quick-quote-heading">Cotización rápida</h2>
+            <p class="card-desc">Elige tu requerimiento para calcular tu mudanza al instante:</p>
+            
+            <div class="form-group" style="margin-bottom: 1.25rem;">
+              <label class="form-label" style="font-size: 0.92rem; color: var(--tinta);">¿Qué vas a mover?</label>
+              <div class="quick-quote-options-grid" role="radiogroup" aria-label="Tipo de traslado">
+                <button type="button" class="quick-option-btn active" data-service="hogar">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                  <span>Hogar</span>
+                </button>
+                <button type="button" class="quick-option-btn" data-service="empresa">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/></svg>
+                  <span>Empresa</span>
+                </button>
+                <button type="button" class="quick-option-btn" data-service="pequena">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+                  <span>Mudanza pequeña</span>
+                </button>
+                <button type="button" class="quick-option-btn" data-service="maquinaria">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                  <span>Maquinaria</span>
+                </button>
+              </div>
             </div>
+
+            <a href="#donde-es" class="btn btn--primary" id="btnQuickQuoteAction" style="width: 100%;">
+              <span>Elegir mi ruta</span>
+              <span class="arrow-icon" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Barra Inferior de 4 Cifras en Banda Tinta al 60% con Desenfoque (FASE 3.5) -->
+      <div class="hero-bottom-stats-bar" role="region" aria-label="Datos clave del servicio">
+        <div class="container hero-stats-grid">
+          <div class="stat-pill-item">
+            <span class="stat-pill-num">+6 AÑOS</span>
+            <span class="stat-pill-text">DE EXPERIENCIA</span>
+          </div>
+          <div class="stat-pill-item">
+            <span class="stat-pill-num">100%</span>
+            <span class="stat-pill-text">COTIZACIÓN GRATIS</span>
+          </div>
+          <div class="stat-pill-item">
+            <span class="stat-pill-num">CALI · VALLE</span>
+            <span class="stat-pill-text">Y COLOMBIA</span>
+          </div>
+          <div class="stat-pill-item">
+            <span class="stat-pill-num">DIRECTA</span>
+            <span class="stat-pill-text">ATENCIÓN POR WHATSAPP</span>
           </div>
         </div>
       </div>
@@ -346,44 +334,36 @@
           <p>Selecciona tu destino para abrir el cotizador exacto en 4 pasos con las opciones y tarifas correspondientes:</p>
         </div>
 
-        <div class="where-move-grid">
-          <!-- Opción 1: Cali y Valle del Cauca (Local) -->
-          <article class="where-card reveal-on-scroll">
-            <span class="where-card-badge">Ruta Local</span>
-            <div class="where-card-icon" aria-hidden="true">
-              <!-- Lucide map-pin -->
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div class="where-bento-grid">
+          <!-- Opción 1: Cali y Valle del Cauca con Foto Real -->
+          <article class="where-photo-card reveal-on-scroll">
+            <div class="where-card-media">
+              <img src="assets/img/camion_frente.webp" alt="Camión rotulado de Mudanzas San Miguel en servicio en Cali" width="600" height="260" loading="lazy">
+              <span class="where-card-badge" style="position: absolute; top: 12px; left: 12px; z-index: 2;">Ruta Local</span>
             </div>
-            <h3>Cali y Valle del Cauca</h3>
-            <p>Trasteos y mudanzas locales en Cali y conexiones en el departamento del Valle del Cauca. Camiones furgonados y ayudantes uniformados.</p>
-            <ul class="where-card-features">
-              <li>Cali como zona principal de operación</li>
-              <li>Cotizador local en 4 pasos</li>
-              <li>Servicio para hogar, empresa, mudanza pequeña y maquinaria</li>
-            </ul>
-            <div class="where-card-action">
-              <a href="valle-del-cauca.html#cotizador" class="btn btn--yellow btn--full">
+            <div class="where-card-content">
+              <div>
+                <h3>Cali y Valle del Cauca</h3>
+                <p>Trasteos y mudanzas locales en Cali y conexiones en el departamento del Valle del Cauca. Camiones furgonados y personal uniformado.</p>
+              </div>
+              <a href="valle-del-cauca.html#cotizador" class="btn btn--primary btn--full">
                 <span>Cotizar en Cali y Valle</span>
                 <span class="arrow-icon" aria-hidden="true">→</span>
               </a>
             </div>
           </article>
 
-          <!-- Opción 2: Mudanzas Nacionales -->
-          <article class="where-card where-card--featured reveal-on-scroll">
-            <span class="where-card-badge where-card-badge--alt">Toda Colombia</span>
-            <div class="where-card-icon" aria-hidden="true">
-              <!-- Lucide route / road -->
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+          <!-- Opción 2: Mudanzas Nacionales con Foto Real -->
+          <article class="where-photo-card reveal-on-scroll">
+            <div class="where-card-media">
+              <img src="assets/img/hero.webp" alt="Camión furgonado de Mudanzas San Miguel para servicio nacional" width="600" height="260" loading="lazy">
+              <span class="where-card-badge where-card-badge--alt" style="position: absolute; top: 12px; left: 12px; z-index: 2;">Toda Colombia</span>
             </div>
-            <h3>Mudanzas Nacionales</h3>
-            <p>Traslados desde Cali y el Valle del Cauca hacia Bogotá, Medellín, Eje Cafetero, Costa Caribe y toda Colombia. Camiones furgonados para larga distancia.</p>
-            <ul class="where-card-features">
-              <li>Salidas programadas desde Cali a toda Colombia</li>
-              <li>Cotizador nacional con detalle de llegada</li>
-              <li>Protección y estiba cuidadosa de tus enseres</li>
-            </ul>
-            <div class="where-card-action">
+            <div class="where-card-content">
+              <div>
+                <h3>Mudanzas Nacionales</h3>
+                <p>De Cali a donde empiece tu historia. Salidas programadas con furgones protegidos y seguimiento constante hacia toda Colombia.</p>
+              </div>
               <a href="nacional.html#cotizador" class="btn btn--secondary btn--full">
                 <span>Cotizar Mudanza Nacional</span>
                 <span class="arrow-icon" aria-hidden="true">→</span>
@@ -407,91 +387,78 @@
           <p>Estructuramos nuestros servicios en 4 categorías principales para ajustarnos exactamente a tu volumen y requerimiento.</p>
         </div>
 
-        <div class="services-list-container">
+        <div class="services-bento-grid">
           
-          <!-- 1. Hogar -->
-          <article class="service-row reveal-on-scroll" aria-labelledby="srv-res">
-            <div class="service-icon-wrap" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          <!-- 1. Tarjeta Grande: Mudanza de Hogar con Foto Real -->
+          <article class="bento-card-large reveal-on-scroll">
+            <div class="bento-card-img-wrap">
+              <img src="assets/img/hero.webp" alt="Mudanza residencial y traslado de hogares en Cali" width="700" height="300" loading="lazy">
             </div>
-            <div class="service-info">
-              <h3 id="srv-res">Mudanzas de Hogar (Residencial)</h3>
-              <p>Trasladamos casas y apartamentos con personal uniformado y capacitado. Cuidado integral en cada mueble y enseres.</p>
-            </div>
-            <div class="service-cta">
-              <a href="valle-del-cauca.html?servicio=hogar#cotizador" class="btn btn--secondary btn--sm">
-                <span>Cotizar Hogar</span>
-                <span class="arrow-icon" aria-hidden="true">→</span>
-              </a>
-              <div class="secondary-route-wrap">
-                <a href="nacional.html#cotizador" class="secondary-route-link">¿Es a otra ciudad? Cotiza tu mudanza nacional</a>
+            <div class="bento-card-body">
+              <div>
+                <span class="badge-pill" style="margin-bottom: 0.5rem;">Servicio Principal</span>
+                <h3>Mudanzas de Hogar (Casas y Apartamentos)</h3>
+                <p>Del barrio de siempre a tu hogar nuevo. Trasladamos casas y apartamentos con personal uniformado y capacitado. Protección cuidadosa de cada mueble y pertenencias.</p>
+                <ul class="where-card-features" style="margin-top: 0.75rem;">
+                  <li>Empaque y protección con papel vitafilm y mantas</li>
+                  <li>Desarme y armado de camas y muebles básicos</li>
+                  <li>Cargue y descargue por personal capacitado</li>
+                </ul>
+              </div>
+              <div style="margin-top: 1rem;">
+                <a href="valle-del-cauca.html?servicio=hogar#cotizador" class="btn btn--primary btn--full">
+                  <span>Cotizar Mudanza de Hogar</span>
+                  <span class="arrow-icon" aria-hidden="true">→</span>
+                </a>
               </div>
             </div>
           </article>
 
-          <!-- 2. Empresa -->
-          <article class="service-row reveal-on-scroll" aria-labelledby="srv-emp">
+          <!-- 2. Tarjeta Pequeña: Empresas -->
+          <article class="bento-card-small reveal-on-scroll">
             <div class="service-icon-wrap" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/></svg>
             </div>
-            <div class="service-info">
-              <h3 id="srv-emp">Mudanzas de Empresa y Oficinas</h3>
-              <p>Traslado organizado de puestos de trabajo, archivo y mobiliario corporativo minimizando tiempos de inactividad.</p>
+            <div>
+              <h3 style="font-size: 1.15rem; margin-bottom: 0.25rem;">Cambia de oficina sin frenar tu negocio</h3>
+              <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Traslado de puestos de trabajo, silletería, archivadores y equipos de cómputo.</p>
             </div>
-            <div class="service-cta">
+            <div>
               <a href="valle-del-cauca.html?servicio=empresa#cotizador" class="btn btn--secondary btn--sm">
-                <span>Cotizar Empresa</span>
-                <span class="arrow-icon" aria-hidden="true">→</span>
+                <span>Cotizar</span>
               </a>
-              <div class="secondary-route-wrap">
-                <a href="nacional.html#cotizador" class="secondary-route-link">¿Es a otra ciudad? Cotiza tu mudanza nacional</a>
-              </div>
             </div>
           </article>
 
-          <!-- 3. Mudanza pequeña (hasta 4 objetos) -->
-          <article class="service-row featured reveal-on-scroll" aria-labelledby="srv-expres">
+          <!-- 3. Tarjeta Pequeña: Mudanza Pequeña -->
+          <article class="bento-card-small reveal-on-scroll">
             <div class="service-icon-wrap" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
             </div>
-            <div class="service-info">
-              <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-                <h3 id="srv-expres">Mudanza pequeña (hasta 4 objetos)</h3>
-                <span class="box-tag" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;">Máximo 4 objetos grandes</span>
-              </div>
-              <p>Por ejemplo, solo una nevera y una lavadora, o una cama y un sofá. Es más rápido que una mudanza completa.</p>
+            <div>
+              <h3 style="font-size: 1.15rem; margin-bottom: 0.25rem;">¿Pocos objetos? Mudanza pequeña, ayuda grande</h3>
+              <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Hasta 4 objetos grandes (ej. nevera, lavadora, cama o sofá). Rápido y económico.</p>
             </div>
-            <div class="service-cta">
-              <a href="valle-del-cauca.html?servicio=pequena#cotizador" class="btn btn--yellow btn--sm">
-                <span>Cotizar Mudanza pequeña</span>
-                <span class="arrow-icon" aria-hidden="true">→</span>
+            <div>
+              <a href="valle-del-cauca.html?servicio=pequena#cotizador" class="btn btn--primary btn--sm">
+                <span>Cotizar</span>
               </a>
-              <div class="secondary-route-wrap">
-                <a href="nacional.html#cotizador" class="secondary-route-link">¿Es a otra ciudad? Cotiza tu mudanza nacional</a>
-              </div>
             </div>
           </article>
 
-          <!-- 4. Maquinaria y Equipos -->
-          <article class="service-row reveal-on-scroll" aria-labelledby="srv-maq">
+          <!-- 4. Tarjeta Pequeña: Maquinaria o Equipos -->
+          <article class="bento-card-small reveal-on-scroll">
             <div class="service-icon-wrap" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 2v2"/><path d="M12 20v2"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
             </div>
-            <div class="service-info">
-              <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-                <h3 id="srv-maq">Maquinaria y Equipos</h3>
-                <span class="client-confirm-tag">[POR CONFIRMAR CON EL CLIENTE: tipos aceptados y peso máximo]</span>
-              </div>
-              <p>Transporte especializado de maquinaria comercial, equipos de taller y herramientas en vehículos adecuados. Evaluación técnica según peso y acceso.</p>
+            <div>
+              <h3 style="font-size: 1.15rem; margin-bottom: 0.25rem;">Maquinaria y Equipos Comerciales</h3>
+              <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Equipos de panadería, confección, gimnasios o talleres en vehículos adecuados.</p>
             </div>
-            <div class="service-cta">
+            <div>
               <a href="valle-del-cauca.html?servicio=maquinaria#cotizador" class="btn btn--secondary btn--sm">
-                <span>Cotizar Maquinaria</span>
-                <span class="arrow-icon" aria-hidden="true">→</span>
+                <span>Cotizar</span>
               </a>
-              <div class="secondary-route-wrap">
-                <a href="nacional.html#cotizador" class="secondary-route-link">¿Es a otra ciudad? Cotiza tu mudanza nacional</a>
-              </div>
             </div>
           </article>
 
@@ -505,8 +472,8 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
             </div>
             <div class="strip-item-text">
-              <h4>Protección con vinipel y mantas</h4>
-              <p>Embalaje y protección con mantas de algodón y vinipel industrial para superficies delicadas.</p>
+              <h4>Protección con papel vitafilm y mantas</h4>
+              <p>Embalaje y protección con mantas de algodón y papel vitafilm industrial para superficies delicadas.</p>
             </div>
           </div>
           <div class="strip-item">
@@ -553,13 +520,13 @@
           <div class="timeline-step-card reveal-on-scroll">
             <div class="timeline-step-number">3</div>
             <h3>Nos encargamos</h3>
-            <p>Nuestro personal uniformado y capacitado realiza la protección, cargue y transporte cuidadoso de tus enseres.</p>
+            <p>Nuestro personal uniformado y capacitado realiza la protección, cargue y transporte cuidadoso de tus objetos.</p>
           </div>
 
           <div class="timeline-step-card reveal-on-scroll">
             <div class="timeline-step-number">4</div>
             <h3>Entrega</h3>
-            <p>Descargamos y ubicamos tus enseres en el lugar de entrega conforme a tus indicaciones.</p>
+            <p>Descargamos y ubicamos tus objetos en el lugar de entrega conforme a tus indicaciones.</p>
           </div>
         </div>
       </div>
@@ -582,7 +549,7 @@
         <div class="gallery-grid gallery-seamless-grid">
           <!-- Foto Destacada Grande (Camión original limpio, FASE 6.2) -->
           <div class="gallery-photo-card gallery-area-hero photo-hero" tabindex="0" role="button" aria-label="Vehículo furgonado adecuado para mudanzas residenciales y empresariales">
-            <img src="assets/img/camion.webp" alt="Camión furgonado de Mudanzas San Miguel en Cali" width="700" height="520" loading="lazy">
+            <img src="assets/img/hero.webp" alt="Camión furgonado y equipo de Mudanzas San Miguel en Cali" width="700" height="520" loading="lazy">
             <div class="gallery-photo-caption">Vehículo furgonado adecuado para mudanzas residenciales y empresariales</div>
           </div>
 
@@ -592,7 +559,7 @@
             <div class="gallery-photo-caption">Personal uniformado</div>
           </div>
           <div class="gallery-photo-card gallery-area-p2" tabindex="0" role="button" aria-label="Embalaje y protección">
-            <img src="assets/img/empaques.webp" alt="Embalaje profesional de muebles con mantas y vinipel" width="400" height="300" loading="lazy">
+            <img src="assets/img/empaques.webp" alt="Embalaje profesional de muebles con mantas y papel vitafilm" width="400" height="300" loading="lazy">
             <div class="gallery-photo-caption">Embalaje y protección</div>
           </div>
           <div class="gallery-photo-card gallery-area-p3" tabindex="0" role="button" aria-label="Cuidado en cada pieza">
@@ -614,7 +581,7 @@
             </video>
           </div>
           <div style="padding: 0.85rem 1.25rem; color: #FFFFFF; font-size: 0.86rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-            <span>Mira cómo trabajamos: Registro real de nuestro personal cuidando tus enseres en cada cargue.</span>
+            <span>Mira cómo trabajamos: Registro real de nuestro personal cuidando tus objetos en cada cargue.</span>
           </div>
         </div>
       </div>
@@ -661,7 +628,7 @@
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
             </div>
             <h3>Protección</h3>
-            <p>Utilizamos mantas y vinipel para proteger superficies de muebles, electrodomésticos y objetos delicados.</p>
+            <p>Utilizamos mantas y papel vitafilm para proteger superficies de muebles, electrodomésticos y objetos delicados.</p>
           </div>
 
           <!-- Personal Capacitado -->
@@ -670,7 +637,7 @@
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
             <h3>Personal Capacitado</h3>
-            <p>Personal uniformado y capacitado con más de 6 años de experiencia en estiba y cuidado de enseres.</p>
+            <p>Personal uniformado y capacitado con comprobada experiencia en estiba y cuidado de objetos.</p>
           </div>
 
           <!-- Vehículos Adecuados -->
@@ -703,7 +670,7 @@
             <div class="factor-icon" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/></svg>
             </div>
-            <h3>1. Cantidad de enseres</h3>
+            <h3>1. Cantidad de objetos</h3>
             <p>La cantidad y dimensión de muebles, electrodomésticos y cajas a transportar.</p>
           </div>
 
@@ -719,7 +686,7 @@
             <div class="factor-icon" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg>
             </div>
-            <h3>3. Distancia del trayecto</h3>
+            <h3>3. Distancia del recorrido</h3>
             <p>La distancia entre el punto de recogida y el destino, ya sea local en el Valle o nacional.</p>
           </div>
 
@@ -728,7 +695,7 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
             </div>
             <h3>4. Nivel de embalaje</h3>
-            <p>Si requiere protección con mantas y vinipel o desarme y armado de camas y armarios.</p>
+            <p>Si requiere protección con mantas y papel vitafilm o desarme y armado de camas y armarios.</p>
           </div>
         </div>
       </div>
@@ -826,7 +793,7 @@
               </span>
             </summary>
             <div class="faq-answer">
-              <p>Sí. Utilizamos mantas protectoras y vinipel para cubrir superficies delicadas, muebles y electrodomésticos durante el cargue y transporte.</p>
+              <p>Sí. Utilizamos mantas protectoras y papel vitafilm para cubrir superficies delicadas, muebles y electrodomésticos durante el cargue y transporte.</p>
             </div>
           </details>
 
@@ -874,7 +841,7 @@
               </span>
             </summary>
             <div class="faq-answer">
-              <p>Varía según el volumen de enseres, la distancia y el tipo de servicio. Con tu información en el cotizador te damos un estimado preciso.</p>
+              <p>Varía según el volumen de objetos, la distancia y el tipo de servicio. Con tu información en el cotizador te damos un estimado preciso.</p>
             </div>
           </details>
 
@@ -918,7 +885,7 @@
             <img src="assets/img/logo.webp" alt="Logo San Miguel" width="140" height="40">
             <span class="brand-name" style="color: #FFFFFF;">San Miguel</span>
           </a>
-          <p>Más de 6 años de experiencia en mudanzas residenciales, empresariales y trasteos nacionales en Cali, Valle del Cauca y Colombia.</p>
+          <p>Especialistas en mudanzas residenciales, empresariales y trasteos nacionales en Cali, Valle del Cauca y Colombia.</p>
           <div class="social-row">
             <a href="https://www.instagram.com/trasteosymudanzassanmiguel24" class="social-icon-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
@@ -939,7 +906,7 @@
             <li><a href="#servicios" data-select-service="Oficina o empresa">Mudanzas de Empresa</a></li>
             <li><a href="valle-del-cauca.html?servicio=pequena#cotizador">Mudanza pequeña (hasta 4 objetos)</a></li>
             <li><a href="valle-del-cauca.html?servicio=maquinaria#cotizador">Transporte de Maquinaria</a></li>
-            <li><a href="valle-del-cauca.html#cotizador">Embalaje y Protección con Vinipel</a></li>
+            <li><a href="valle-del-cauca.html#cotizador">Embalaje y Protección con Papel Vitafilm</a></li>
             <li><a href="valle-del-cauca.html#cotizador">Desarme y Armado</a></li>
           </ul>
         </div>
