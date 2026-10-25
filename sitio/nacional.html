@@ -76,9 +76,8 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.978-.276-.1-.477-.15-.678.15-.201.301-.778.978-.954 1.179-.176.2-.351.226-.652.075-.301-.15-1.272-.469-2.423-1.496-.896-.799-1.501-1.786-1.677-2.087-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.201-.301.301-.502.101-.2.05-.376-.025-.527-.075-.15-.678-1.636-.929-2.241-.244-.589-.493-.509-.678-.519l-.578-.01c-.201 0-.527.075-.803.376-.276.301-1.054 1.029-1.054 2.509 0 1.48 1.079 2.909 1.23 3.11.15.201 2.124 3.243 5.145 4.549.719.311 1.28.497 1.718.636.722.23 1.379.197 1.898.12.579-.087 1.78-.727 2.031-1.43.251-.703.251-1.305.176-1.43-.075-.125-.276-.201-.577-.351zM12.042 21.82a9.78 9.78 0 0 1-4.99-1.365l-.358-.213-3.71.973.99-3.616-.233-.371A9.778 9.778 0 0 1 2.25 12.04c0-5.397 4.39-9.787 9.792-9.787 2.614 0 5.072 1.018 6.921 2.868a9.73 9.73 0 0 1 2.866 6.919c0 5.398-4.39 9.78-9.787 9.78zm0-18.04c-4.55 0-8.25 3.7-8.25 8.26 0 1.455.38 2.875 1.1 4.12l.17.296-.728 2.66 2.723-.715.286.17a8.216 8.216 0 0 0 4.699 1.429c4.55 0 8.25-3.7 8.25-8.26 0-2.206-.859-4.28-2.418-5.84a8.212 8.212 0 0 0-5.882-2.42z"/></svg>
           <span class="wa-label">WhatsApp</span>
         </a>
-        <a href="#cotizador" class="btn btn--yellow btn--sm header-quote-btn">
-          <span>Cotizar ruta</span>
-          <span class="arrow-icon" aria-hidden="true">→</span>
+        <a href="#cotizador" class="btn btn--primary header-sticky-quote-btn" aria-label="Cotizar mudanza">
+          <span>Cotizar</span>
         </a>
         <!-- Botón Hamburguesa 44px (FASE 2.4) -->
         <button type="button" class="hamburger-btn" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobileDrawer">
@@ -141,117 +140,104 @@
     <section class="hero-section hero-section--nacional" aria-labelledby="nac-hero-title">
       <div class="container hero-main-container">
         
-        <!-- Columna Izquierda: Sello, Título en Barlow Condensed Mayúsculas, Subtítulo, 4 Checks, Trío de Botones -->
+        <!-- Columna Izquierda: Sello, Título en Barlow Condensed Mayúsculas, Subtítulo (14px gap), 4 Checks, Dos Botones -->
         <div class="hero-left-col">
           <div>
             <span class="badge-pill">
-              <!-- Lucide route -->
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg>
-              MUDANZAS NACIONALES
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              COBERTURA NACIONAL EN COLOMBIA
             </span>
           </div>
 
-          <h1 id="nac-hero-title">
+          <h1 id="nac-hero-title" style="margin-bottom: 14px;">
             DE CALI A DONDE<br>
             <span class="text-highlight-yellow">EMPIECE TU HISTORIA.</span>
           </h1>
 
-          <p class="hero-subtitle">
-            Tu casa viaja. Tu tranquilidad se queda contigo. Salidas programadas desde Cali hacia toda Colombia con furgones protegidos.
+          <p class="hero-subtitle" style="margin-bottom: 1.5rem;">
+            Tu casa viaja segura. Traslados con camiones furgonados protegidos hacia cualquier ciudad del país.
           </p>
 
-          <ul class="hero-checklist" aria-label="Beneficios nacionales">
+          <ul class="hero-checklist" aria-label="Beneficios principales nacionales" style="margin-bottom: 2rem;">
             <li>
               <span class="check-circle-icon" aria-hidden="true">✓</span>
-              <span>Salidas programadas desde Cali</span>
+              <span>Rutas desde Cali a toda Colombia</span>
             </li>
             <li>
               <span class="check-circle-icon" aria-hidden="true">✓</span>
-              <span>Furgones cerrados de larga distancia</span>
+              <span>Camiones furgonados protegidos</span>
             </li>
             <li>
               <span class="check-circle-icon" aria-hidden="true">✓</span>
-              <span>Protección con papel vitafilm y mantas</span>
+              <span>Personal capacitado y de confianza</span>
             </li>
             <li>
               <span class="check-circle-icon" aria-hidden="true">✓</span>
-              <span>Cotización clara sin costos ocultos</span>
+              <span>Atención directa por WhatsApp</span>
             </li>
           </ul>
 
           <div class="hero-actions-trio">
             <a href="#cotizador" class="btn btn--primary btn--hero-action">
-              <span>Cotizar Nacional</span>
-              <span class="arrow-icon" aria-hidden="true">→</span>
+              <span>Cotizar mudanza nacional</span>
+              <span class="btn-arrow-circle" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
             </a>
             <a href="https://wa.me/573217676571?text=Hola%2C%20quisiera%20cotizar%20una%20mudanza%20nacional%20desde%20Cali" 
                class="btn btn--wa btn--hero-action" 
                target="_blank" 
                rel="noopener noreferrer" 
                aria-label="WhatsApp">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.978-.276-.1-.477-.15-.678.15-.201.301-.778.978-.954 1.179-.176.2-.351.226-.652.075-.301-.15-1.272-.469-2.423-1.496-.896-.799-1.501-1.786-1.677-2.087-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.201-.301.301-.502.101-.2.05-.376-.025-.527-.075-.15-.678-1.636-.929-2.241-.244-.589-.493-.509-.678-.519l-.578-.01c-.201 0-.527.075-.803.376-.276.301-1.054 1.029-1.054 2.509 0 1.48 1.079 2.909 1.23 3.11.15.201 2.124 3.243 5.145 4.549.719.311 1.28.497 1.718.636.722.23 1.379.197 1.898.12.579-.087 1.78-.727 2.031-1.43.251-.703.251-1.305.176-1.43-.075-.125-.276-.201-.577-.351zM12.042 21.82a9.78 9.78 0 0 1-4.99-1.365l-.358-.213-3.71.973.99-3.616-.233-.371A9.778 9.778 0 0 1 2.25 12.04c0-5.397 4.39-9.787 9.792-9.787 2.614 0 5.072 1.018 6.921 2.868a9.73 9.73 0 0 1 2.866 6.919c0 5.398-4.39 9.78-9.787 9.78zm0-18.04c-4.55 0-8.25 3.7-8.25 8.26 0 1.455.38 2.875 1.1 4.12l.17.296-.728 2.66 2.723-.715.286.17a8.216 8.216 0 0 0 4.699 1.429c4.55 0 8.25-3.7 8.25-8.26 0-2.206-.859-4.28-2.418-5.84a8.212 8.212 0 0 0-5.882-2.42z"/></svg>
+              <span class="wa-badge-circle" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.978-.276-.1-.477-.15-.678.15-.201.301-.778.978-.954 1.179-.176.2-.351.226-.652.075-.301-.15-1.272-.469-2.423-1.496-.896-.799-1.501-1.786-1.677-2.087-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.201-.301.301-.502.101-.2.05-.376-.025-.527-.075-.15-.678-1.636-.929-2.241-.244-.589-.493-.509-.678-.519l-.578-.01c-.201 0-.527.075-.803.376-.276.301-1.054 1.029-1.054 2.509 0 1.48 1.079 2.909 1.23 3.11.15.201 2.124 3.243 5.145 4.549.719.311 1.28.497 1.718.636.722.23 1.379.197 1.898.12.579-.087 1.78-.727 2.031-1.43.251-.703.251-1.305.176-1.43-.075-.125-.276-.201-.577-.351zM12.042 21.82a9.78 9.78 0 0 1-4.99-1.365l-.358-.213-3.71.973.99-3.616-.233-.371A9.778 9.778 0 0 1 2.25 12.04c0-5.397 4.39-9.787 9.792-9.787 2.614 0 5.072 1.018 6.921 2.868a9.73 9.73 0 0 1 2.866 6.919c0 5.398-4.39 9.78-9.787 9.78zm0-18.04c-4.55 0-8.25 3.7-8.25 8.26 0 1.455.38 2.875 1.1 4.12l.17.296-.728 2.66 2.723-.715.286.17a8.216 8.216 0 0 0 4.699 1.429c4.55 0 8.25-3.7 8.25-8.26 0-2.206-.859-4.28-2.418-5.84a8.212 8.212 0 0 0-5.882-2.42z"/></svg>
+              </span>
               <span>WhatsApp</span>
-            </a>
-            <a href="tel:+573217676571" class="btn btn--call btn--hero-action" aria-label="Llamar al 321 767 6571">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              <span>Llamar</span>
             </a>
           </div>
         </div>
 
-        <!-- Columna Derecha: Tarjeta de Cotización Rápida y Círculo 6+ años -->
-        <div style="position: relative;">
-          <div class="hero-badge-experience" aria-label="Más de 6 años de experiencia">
-            <span class="badge-num">+6</span>
-            <span class="badge-text">AÑOS EXP</span>
-          </div>
-
-          <div class="quick-quote-card" role="region" aria-label="Cotización rápida Nacional">
-            <h2 class="quick-quote-heading">Cotización rápida · Nacional</h2>
-            <p class="card-desc">Indica ciudad de llegada y qué vas a mover saliendo de Cali:</p>
-            
-            <div class="form-group" style="margin-bottom: 0.85rem;">
-              <label for="wizQuickDestinoNac" class="form-label" style="font-size: 0.88rem; color: var(--tinta);">Ciudad o municipio de destino</label>
-              <input type="text" id="wizQuickDestinoNac" class="form-input places-autocomplete-input" placeholder="Ej. Bogotá, Medellín, Pereira, Barranquilla..." style="background-color: #FFFFFF;">
-            </div>
-
-            <div class="form-group" style="margin-bottom: 1.25rem;">
-              <label for="wizQuickMoverNac" class="form-label" style="font-size: 0.88rem; color: var(--tinta);">¿Qué vas a mover?</label>
-              <select id="wizQuickMoverNac" class="form-select" style="background-color: #FFFFFF;">
-                <option value="Hogar">Mudanza de Hogar</option>
-                <option value="Oficina o empresa">Oficina o Empresa</option>
-                <option value="Mudanza pequeña (hasta 4 objetos)">Mudanza pequeña</option>
-                <option value="Maquinaria o equipos">Maquinaria o Equipos</option>
-              </select>
-            </div>
-
-            <button type="button" class="btn btn--primary" id="btnQuickNacAction" style="width: 100%;">
-              <span>Continuar mi cotización</span>
-              <span class="arrow-icon" aria-hidden="true">→</span>
-            </button>
+        <!-- Columna Derecha: Foto Completa del Camión en Marco de Vidrio con 2 Chips de Vidrio (FASE 4.1) -->
+        <div class="hero-depth-container">
+          <div class="hero-glass-photo-frame">
+            <span class="hero-glass-chip hero-glass-chip--top">🇨🇴 Cali → Toda Colombia</span>
+            <img src="assets/img/hero.webp" alt="Camión furgonado de Mudanzas San Miguel en carretera nacional" width="560" height="380">
+            <span class="hero-glass-chip hero-glass-chip--bottom">+6 años de experiencia</span>
           </div>
         </div>
 
       </div>
 
-      <!-- Barra Inferior de 4 Cifras en Banda Tinta al 60% con Desenfoque (FASE 3.5) -->
-      <div class="hero-bottom-stats-bar" role="region" aria-label="Datos clave del servicio nacional">
+            <!-- Barra Inferior de 4 Cifras con Frases Completas e Iconos (FASE 4.5) -->
+      <div class="hero-bottom-stats-bar" role="region" aria-label="Datos clave del servicio">
         <div class="container hero-stats-grid">
           <div class="stat-pill-item">
-            <span class="stat-pill-num">+6 AÑOS</span>
-            <span class="stat-pill-text">DE EXPERIENCIA</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div class="stat-pill-info">
+              <span class="stat-pill-num">+6 AÑOS</span>
+              <span class="stat-pill-text">DE EXPERIENCIA</span>
+            </div>
           </div>
           <div class="stat-pill-item">
-            <span class="stat-pill-num">100%</span>
-            <span class="stat-pill-text">COTIZACIÓN GRATIS</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <div class="stat-pill-info">
+              <span class="stat-pill-num">COTIZACIÓN</span>
+              <span class="stat-pill-text">GRATIS</span>
+            </div>
           </div>
           <div class="stat-pill-item">
-            <span class="stat-pill-num">CALI →</span>
-            <span class="stat-pill-text">TODA COLOMBIA</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div class="stat-pill-info">
+              <span class="stat-pill-num">CALI, VALLE</span>
+              <span class="stat-pill-text">Y COLOMBIA</span>
+            </div>
           </div>
           <div class="stat-pill-item">
-            <span class="stat-pill-num">DIRECTA</span>
-            <span class="stat-pill-text">ATENCIÓN POR WHATSAPP</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <div class="stat-pill-info">
+              <span class="stat-pill-num">ATENCIÓN</span>
+              <span class="stat-pill-text">POR WHATSAPP</span>
+            </div>
           </div>
         </div>
       </div>
@@ -298,53 +284,83 @@
     </div>
 
     <!-- Garantías Nacionales en Azul Niebla (Bloque C & G: Sin afirmaciones no verificadas) -->
-    <section class="section-padding guarantees-section" aria-labelledby="nac-features-title">
+    <!-- 2. SERVICIOS DE LA ZONA NACIONAL (INFO) - FASE 4.3 -->
+    <section class="section-padding section-light-blobs" aria-labelledby="nac-services-title">
       <div class="container">
-        <div class="section-header">
-          <span class="section-eyebrow">Logística por Carretera</span>
-          <h2 id="nac-features-title">Mudanzas de larga distancia con tranquilidad</h2>
-          <p>Traslados directos desde Cali con furgones cerrados y personal capacitado.</p>
+        <div class="section-header text-center" style="margin: 0 auto 2.5rem auto;">
+          <span class="section-eyebrow">Cobertura Nacional</span>
+          <h2 id="nac-services-title">Mudanzas de Cali hacia <strong>toda Colombia</strong></h2>
+          <p>Traslados en furgones cerrados con protección especializada para recorridos interdepartamentales.</p>
         </div>
 
-        <div class="guarantees-list-layout">
-          <div class="guarantee-item-card">
-            <div class="icon-container" aria-hidden="true">
-              <!-- Lucide route -->
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg>
-            </div>
-            <h3>Destinos en toda Colombia</h3>
-            <p>Conexión directa desde Cali hacia cualquier departamento del territorio nacional.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+          <div class="service-info-card" style="padding: 1.75rem;">
+            <div class="clay-icon-circle" style="margin-bottom: 1rem;" aria-hidden="true">🏠</div>
+            <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--tinta);">Mudanzas de Hogar</h3>
+            <p style="color: var(--text-muted); font-size: 0.92rem;">Traslado interdepartamental de casas y apartamentos con protección con papel vitafilm y mantas.</p>
           </div>
 
-          <div class="guarantee-item-card">
-            <div class="icon-container" aria-hidden="true">
-              <!-- Lucide package -->
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/></svg>
-            </div>
-            <h3>Embalaje y protección</h3>
-            <p>Mantas y papel vitafilm para proteger superficies en viajes prolongados por carretera.</p>
+          <div class="service-info-card" style="padding: 1.75rem;">
+            <div class="clay-icon-circle" style="margin-bottom: 1rem;" aria-hidden="true">🏢</div>
+            <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--tinta);">Empresas y Sucursales</h3>
+            <p style="color: var(--text-muted); font-size: 0.92rem;">Apertura o reubicación de oficinas, locales comerciales y archivo institucional en todo el país.</p>
           </div>
 
-          <div class="guarantee-item-card">
-            <div class="icon-container" aria-hidden="true">
-              <!-- Lucide truck -->
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
-            </div>
-            <h3>Camiones furgonados</h3>
-            <p>Camiones furgonados y cerrados adecuados para mudanzas de larga distancia a toda Colombia.</p>
+          <div class="service-info-card" style="padding: 1.75rem;">
+            <div class="clay-icon-circle" style="margin-bottom: 1rem;" aria-hidden="true">📦</div>
+            <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--tinta);">Objetos Grandes y Exclusivos</h3>
+            <p style="color: var(--text-muted); font-size: 0.92rem;">Traslado seguro de muebles principales o paquetes seleccionados entre departamentos.</p>
           </div>
 
-          <div class="guarantee-item-card">
-            <div class="icon-container" aria-hidden="true">
-              <!-- Lucide users -->
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-            </div>
-            <h3>Personal capacitado</h3>
-            <p>Personal uniformado y capacitado con comprobada experiencia en mudanzas.</p>
+          <div class="service-info-card" style="padding: 1.75rem;">
+            <div class="clay-icon-circle" style="margin-bottom: 1rem;" aria-hidden="true">⚙️</div>
+            <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--tinta);">Maquinaria y Equipos</h3>
+            <p style="color: var(--text-muted); font-size: 0.92rem;">Cuéntanos qué equipo necesitas mover y te confirmamos disponibilidad técnica y vehículo adecuado.</p>
           </div>
         </div>
       </div>
     </section>
+
+    <div class="packing-tape-divider" aria-hidden="true"></div>
+
+    <!-- 3. CÓMO FUNCIONA (4 PASOS) - FASE 4.3 -->
+    <section class="section-padding how-it-works-section" aria-labelledby="nac-how-title" style="background-color: var(--cobalto); color: #FFFFFF;">
+      <div class="container">
+        <div class="section-header text-center" style="margin: 0 auto 2.5rem auto;">
+          <span class="section-eyebrow" style="background: rgba(255,255,255,0.2); color: #FFFFFF;">Paso a Paso</span>
+          <h2 id="nac-how-title" style="color: #FFFFFF;">Cómo funciona tu <strong>mudanza nacional</strong></h2>
+          <p style="color: #E8F0FE;">Organización logística paso a paso desde Cali hasta tu nueva ciudad.</p>
+        </div>
+
+        <div class="timeline-steps-grid">
+          <div class="timeline-step-card reveal-on-scroll" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); color: #FFFFFF;">
+            <div class="timeline-step-number">1</div>
+            <h3 style="color: #FFFFFF;">Cotizas tu ruta</h3>
+            <p style="color: #E8F0FE;">Seleccionas departamento y municipio de destino en el cotizador o nos escribes por WhatsApp.</p>
+          </div>
+
+          <div class="timeline-step-card reveal-on-scroll" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); color: #FFFFFF;">
+            <div class="timeline-step-number">2</div>
+            <h3 style="color: #FFFFFF;">Planificamos salida</h3>
+            <p style="color: #E8F0FE;">Acordamos fecha, hora de cargue en Cali y asignamos camión furgonado adecuado.</p>
+          </div>
+
+          <div class="timeline-step-card reveal-on-scroll" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); color: #FFFFFF;">
+            <div class="timeline-step-number">3</div>
+            <h3 style="color: #FFFFFF;">Cargue y estiba</h3>
+            <p style="color: #E8F0FE;">Personal capacitado protege con mantas y papel vitafilm cada pieza para el recorrido nacional.</p>
+          </div>
+
+          <div class="timeline-step-card reveal-on-scroll" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); color: #FFFFFF;">
+            <div class="timeline-step-number">4</div>
+            <h3 style="color: #FFFFFF;">Entrega en destino</h3>
+            <p style="color: #E8F0FE;">Llegamos a tu ciudad, descargamos y ubicamos tus objetos con total cuidado.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="packing-tape-divider" aria-hidden="true"></div>
 
         <!-- ==========================================================================
          COTIZADOR NACIONAL EN 4 PASOS · DESDE CALI A TODA COLOMBIA (BLOQUE D)
@@ -934,14 +950,14 @@
                     <div class="form-group">
                       <label for="wizMaqTipo" class="form-label">Tipo general de maquinaria / equipo *</label>
                       <select id="wizMaqTipo" name="wizMaqTipo" class="form-select">
-                        <option value="Panadería o cocina industrial">Panadería o cocina industrial</option>
-                        <option value="Confección o textil">Máquinas de confección o textil</option>
-                        <option value="Gimnasio o fitness">Equipos de gimnasio o fitness</option>
-                        <option value="Taller o herramientas">Taller y herramientas industriales</option>
-                        <option value="Médico, odontológico o estética">Médico, odontológico o estética</option>
-                        <option value="Artes gráficas o imprenta">Artes gráficas o imprenta</option>
-                        <option value="Mobiliario comercial pesado">Mobiliario comercial pesado</option>
-                        <option value="Otro tipo de equipo">Otro tipo de equipo</option>
+                        <option value="Panadería o cocina industrial">Panadería o cocina industrial [POR CONFIRMAR]</option>
+                        <option value="Confección o textil">Máquinas de confección o textil [POR CONFIRMAR]</option>
+                        <option value="Gimnasio o fitness">Equipos de gimnasio o fitness [POR CONFIRMAR]</option>
+                        <option value="Taller o herramientas">Taller y herramientas industriales [POR CONFIRMAR]</option>
+                        <option value="Médico, odontológico o estética">Médico, odontológico o estética [POR CONFIRMAR]</option>
+                        <option value="Artes gráficas o imprenta">Artes gráficas o imprenta [POR CONFIRMAR]</option>
+                        <option value="Mobiliario comercial pesado">Mobiliario comercial pesado [POR CONFIRMAR]</option>
+                        <option value="Otro tipo de equipo">Otro tipo de equipo [POR CONFIRMAR]</option>
                       </select>
                     </div>
                     <div class="form-group">

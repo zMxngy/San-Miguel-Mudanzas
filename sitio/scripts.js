@@ -17,6 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
   initSpecializedQuoteWizard();
   initQuickQuoteCards();
   initServiceDirectLinks();
+  initCoberturaDropdown();
+  initCardTilt();
+  initHeroParallax();
 });
 
 /* --- 0. Control de Marcadores Pendientes --- */
@@ -128,6 +131,7 @@ function initMobileDrawer() {
     drawer.classList.add("is-open");
     if (backdrop) backdrop.classList.add("is-active");
     document.body.style.overflow = "hidden";
+    document.querySelectorAll(".floating-contact-btn").forEach(b => b.style.display = "none");
   };
 
   const closeDrawer = () => {
@@ -135,6 +139,7 @@ function initMobileDrawer() {
     drawer.classList.remove("is-open");
     if (backdrop) backdrop.classList.remove("is-active");
     document.body.style.overflow = "";
+    document.querySelectorAll(".floating-contact-btn").forEach(b => b.style.display = "");
   };
 
   btn.addEventListener("click", () => {
@@ -1516,4 +1521,123 @@ function initQuickQuoteCards() {
       if (cotizador) cotizador.scrollIntoView({ behavior: "smooth" });
     });
   }
+}
+
+
+/* --- 12. Menú Desplegable Cobertura con Accesibilidad Completa (FASE 6.1) --- */
+function initCoberturaDropdown() {
+  const btn = document.getElementById('coberturaDropdownBtn');
+  if (!btn) return;
+  const menu = btn.parentElement.querySelector('.dropdown-menu');
+  if (!menu) return;
+
+  const toggleDropdown = (open) => {
+    const shouldOpen = typeof open === 'boolean' ? open : !menu.classList.contains('is-open');
+    if (shouldOpen) {
+      menu.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+    } else {
+      menu.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  };
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleDropdown();
+  });
+
+  btn.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleDropdown(true);
+      const firstLink = menu.querySelector('a');
+      if (firstLink) firstLink.focus();
+    }
+  });
+
+  menu.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      toggleDropdown(false);
+      btn.focus();
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!btn.contains(e.target) && !menu.contains(e.target)) {
+      toggleDropdown(false);
+    }
+  });
+}
+
+/* --- 13. Inclinación 3D en Tarjetas con Puntero Fino (FASE 2.2) --- */
+function initCardTilt() {
+  const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!isFinePointer || prefersReducedMotion) return;
+
+  const tiltCards = document.querySelectorAll('.where-info-card, .service-info-card, .tilt-card');
+  tiltCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = -((y - centerY) / centerY) * 4; // máx 4-5 grados
+      const rotateY = ((x - centerX) / centerX) * 4;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+    });
+  });
+}
+
+/* --- 14. Parallax en Capas de Portada (FASE 2.2 & 4.1) --- */
+function initHeroParallax() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const heroFrame = document.querySelector('.hero-glass-photo-frame');
+  const chipTop = document.querySelector('.hero-glass-chip--top');
+  const chipBottom = document.querySelector('.hero-glass-chip--bottom');
+  if (!heroFrame && !chipTop && !chipBottom) return;
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const scrolled = window.scrollY;
+        if (scrolled < 800) {
+          if (heroFrame) heroFrame.style.transform = `translateY(${scrolled * 0.06}px)`;
+          if (chipTop) chipTop.style.transform = `translateY(${scrolled * -0.04}px)`;
+          if (chipBottom) chipBottom.style.transform = `translateY(${scrolled * -0.08}px)`;
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+}
+
+/* --- 15. Enlaces Directos y Scroll Suave a Cotizador --- */
+function initServiceDirectLinks() {
+  const anchors = document.querySelectorAll('a[href^="#"]');
+  anchors.forEach(a => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href');
+      if (href && href.length > 1 && href !== '#') {
+        const targetId = href.substring(1);
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          e.preventDefault();
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+          if (targetEl.hasAttribute('tabindex')) {
+            targetEl.focus();
+          }
+        }
+      }
+    });
+  });
 }

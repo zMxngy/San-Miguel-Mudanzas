@@ -17,56 +17,45 @@
 
 /* --- Tokens de Diseño y Variables CSS (FASE 1: Neobrutalismo Suave e Identidad de Trasteos v2) --- */
 :root {
+
   /* ==========================================================================
-     PALETA A OFICIAL FASE 1 (Contraste WCAG 2.2 AA Verificado)
-     60% Cielo y Cielo Medio | 30% Cobalto y Tinta | 10% Amarillo
+     PALETA SIMPLE PROMPT v3 (Cero Dispersión Cromática)
+     Solo: Cobalto #1E4FD6, Tinta #0B1F3F, Amarillo #FFC800, Azul Claro #E8F0FE,
+     Verde WA #25D366 (exclusivo WA), Blanco (vidrio y campos).
      ========================================================================== */
   --cobalto: #1E4FD6;
   --cobalto-oscuro: #123A9E;
   --tinta: #0B1F3F;
-  --cielo: #E3ECFD;
-  --cielo-medio: #C9DAFB;
-  --hielo: #F2F6FE; /* solo dentro de campos y tarjetas pequeñas */
   --amarillo: #FFC800;
-  --amarillo-claro: #FFF1B8;
-  --verde-wa: #25D366;
-  --carton: #D9A66B; /* decorativo: cinta y etiquetas, nunca fondo de sección */
-  --carton-claro: #F2E0C2;
+  --amarillo-oscuro: #D4A500;
+  --azul-claro: #E8F0FE; /* ÚNICO azul claro para fondos de sección */
+  --verde-wa: #25D366;   /* Solo dentro del botón WhatsApp */
+  --blanco: #FFFFFF;     /* Vidrio sobre color y campos */
+
+  /* Mapeos hacia el azul claro único (se eliminan cielo medio, hielo, beige) */
+  --cielo: var(--azul-claro);
+  --cielo-medio: var(--azul-claro);
+  --hielo: var(--blanco);
+  --amarillo-claro: var(--amarillo);
+  --carton: var(--amarillo);
+  --carton-claro: var(--azul-claro);
   --rojo-sello: #991B1B;
 
-  /* Mapeos Semánticos y de Compatibilidad Retrospectiva */
-  --azul-marca: var(--cobalto);
-  --azul-tinta: var(--tinta);
-  --azul-cielo: var(--cielo);
-  --azul-hielo: var(--cielo);
-  --amarillo-marca: var(--amarillo);
-  --crema-amarilla: var(--amarillo-claro);
-  --blue-brand: var(--cobalto);
-  --blue-brand-hover: var(--cobalto-oscuro);
-  --blue-brand-subtle: #2C64AC;
-  --blue-footer: var(--tinta);
-  --navy-deep: var(--tinta);
-  --navy-surface: var(--cobalto-oscuro);
-  --navy-subtle: var(--cobalto);
-  --yellow-brand: var(--amarillo);
-  --yellow-hover: #E5B200;
-  --yellow-subtle: var(--amarillo-claro);
-  --yellow-text: var(--tinta);
+  /* Fondos Alternos de Sección (CERO blanco puro como fondo de sección) */
+  --bg-sky: var(--azul-claro);
+  --bg-cream: var(--azul-claro);
+  --bg-card: var(--blanco);
+  --bg-pure: var(--azul-claro);
+  --bg-soft: var(--azul-claro);
 
-  /* Fondos Alternos de Sección (CERO blanco en secciones completas) */
-  --bg-sky: var(--cielo);
-  --bg-cream: var(--cielo-medio);
-  --bg-card: var(--hielo);
-  --bg-pure: var(--cielo);
-  --bg-soft: var(--cielo-medio);
-
+  /* Texto */
   --text-main: var(--tinta);
-  --text-muted: #243B53;
-  --text-subtle: #334E68;
+  --text-muted: #334E68;
+  --text-subtle: #486581;
   --text-light: #FFFFFF;
-  --text-light-muted: var(--cielo);
+  --text-light-muted: var(--azul-claro);
 
-  --border-light: rgba(11, 31, 63, 0.2);
+  --border-light: rgba(11, 31, 63, 0.12);
   --border-focus: var(--amarillo);
 
   /* Colores de Acción */
@@ -74,39 +63,48 @@
   --color-wa-hover: #1EB856;
   --color-call: var(--cobalto);
   --color-call-hover: var(--cobalto-oscuro);
-
   --color-error: #B91C1C;
   --color-error-bg: #FEF2F2;
   --color-success: var(--verde-wa);
   --color-success-bg: #F0FDF4;
 
   /* ==========================================================================
-     TOKENS NEOBRUTALISMO MEDIDO (Borde 2px tinta + Sombra dura 4px)
+     SISTEMA DE ESTILO v3: VIDRIO, PROFUNDIDAD, ARCILLA Y MINIMALISMO
      ========================================================================== */
-  --brut-borde: 2px solid var(--tinta);
-  --brut-sombra: 4px 4px 0 var(--tinta);
-  --brut-sombra-hover: 6px 6px 0 var(--tinta);
-  --brut-sombra-active: 2px 2px 0 var(--tinta);
+  /* 1. VIDRIO (Glassmorphism & Liquid Glass) */
+  --vidrio-bg-dark: rgba(255, 255, 255, 0.15);  /* 15% sobre oscuro */
+  --vidrio-bg-light: rgba(255, 255, 255, 0.65); /* 65% sobre claro */
+  --vidrio-blur: 14px;
+  --vidrio-border: 1px solid rgba(255, 255, 255, 0.28);
+  --vidrio-border-light: 1px solid rgba(11, 31, 63, 0.12);
+  --vidrio-inset-shine: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  --vidrio-specular: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
 
-  /* ==========================================================================
-     RADIOS EN TOKENS SUAVIZADOS (FASE 1)
-     ========================================================================== */
-  --radius-btn: 8px;
+  /* 2. PROFUNDIDAD (Sombras suaves teñidas de azul tinta) */
+  --shadow-sm: 0 4px 12px rgba(11, 31, 63, 0.08);
+  --shadow-md: 0 8px 24px rgba(11, 31, 63, 0.12), 0 2px 6px rgba(11, 31, 63, 0.06);
+  --shadow-lg: 0 16px 36px rgba(11, 31, 63, 0.18), 0 4px 12px rgba(11, 31, 63, 0.08);
+
+  /* 3. ARCILLA (Claymorphism: brillo arriba, sombra abajo, sombra difusa) */
+  --clay-yellow: #FFC800;
+  --clay-yellow-shadow: 0 4px 0 #D4A500, 0 8px 18px rgba(11, 31, 63, 0.16);
+  --clay-yellow-inset: inset 0 2px 3px rgba(255, 255, 255, 0.65), inset 0 -2px 3px rgba(0, 0, 0, 0.15);
+  --clay-pill-inset: inset 0 2px 2px rgba(255, 255, 255, 0.5), inset 0 -1.5px 2px rgba(0, 0, 0, 0.12);
+  --clay-pill-shadow: 0 4px 10px rgba(11, 31, 63, 0.12);
+
+  /* 4. RADIOS SUAVIZADOS */
+  --radius-btn: 10px;
   --radius-card: 16px;
   --radius-input: 10px;
-  --radius-img: 18px;
+  --radius-img: 16px;
   --radius-circle: 50%;
   --radius-pill: 9999px;
 
-  /* Tokens alias para compatibilidad */
-  --brut-radius: var(--radius-card);
-  --brut-radius-pill: var(--radius-btn);
-  --radius-sm: var(--radius-btn);
-  --radius-md: var(--radius-input);
-  --radius-lg: var(--radius-card);
-  --radius-full: var(--radius-pill);
+  /* Espaciado de secciones: 96px escritorio, 56px móvil */
+  --section-pad-desktop: 6rem;
+  --section-pad-mobile: 3.5rem;
+  --title-sub-gap: 14px;
 
-  /* Dimensiones de Componentes Clave */
   --btn-height: 52px;
   --service-icon-size: 52px;
   --fab-size: 56px;
@@ -215,12 +213,15 @@ h1 strong::after, h2 strong::after, .keyword-underline::after {
 
 /* Identidad de Trasteos FASE 1: Cinta de Embalar, Etiquetas de Caja, Sello FRÁGIL */
 .packing-tape-divider {
-  height: 18px;
+  height: 8px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--amarillo),
+    var(--amarillo) 10px,
+    var(--tinta) 10px,
+    var(--tinta) 14px
+  );
   width: 100%;
-  background: var(--tape-pattern);
-  border-top: var(--brut-borde);
-  border-bottom: var(--brut-borde);
-  display: block;
 }
 
 .box-tag, .badge-pill {
@@ -4001,4 +4002,725 @@ body:not(.js-reveal-ready) h2 strong,
   text-transform: uppercase;
   color: var(--tinta);
   margin-bottom: 0.35rem;
+}
+
+
+/* ==========================================================================
+   PROMPT v3 · SISTEMA DE ESTILO COMPLETO
+   ========================================================================== */
+
+/* Manchas difusas de cobalto y amarillo al 15-25% detrás de secciones claras */
+.section-light-blobs {
+  position: relative;
+  background-color: var(--azul-claro);
+  overflow: hidden;
+}
+
+.section-light-blobs::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -60px;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(30, 79, 214, 0.20) 0%, rgba(30, 79, 214, 0) 70%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-light-blobs::after {
+  content: "";
+  position: absolute;
+  bottom: -80px;
+  left: -60px;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 200, 0, 0.18) 0%, rgba(255, 200, 0) 70%);
+  filter: blur(55px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-light-blobs > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Espacio estricto de 14px entre título y subtítulo en todas las secciones */
+.section-header h2,
+.section-title {
+  margin-bottom: 14px !important;
+}
+
+.section-padding {
+  padding: var(--section-pad-desktop) 0;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: var(--section-pad-mobile) 0;
+  }
+}
+
+/* ENCABEZADO: Tinta 72% con blur 14px */
+.site-header {
+  background-color: rgba(11, 31, 63, 0.72) !important;
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 4px 20px rgba(11, 31, 63, 0.2) !important;
+}
+
+/* BARRA DE CIFRAS: Tinta con Glassmorphism */
+.hero-stats-bottom-bar,
+.hero-stats-panel {
+  background: rgba(11, 31, 63, 0.75) !important;
+  backdrop-filter: blur(14px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(1.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), var(--shadow-md) !important;
+  border-radius: 14px;
+}
+
+/* DROPDOWN COBERTURA (FASE 6.1) */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 290px;
+  background: rgba(11, 31, 63, 0.95) !important;
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45) !important;
+  padding: 0.65rem !important;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity 180ms ease, transform 180ms ease, visibility 180ms;
+  z-index: 1100;
+}
+
+.dropdown-menu.is-open,
+.nav-item:hover .dropdown-menu,
+.nav-item:focus-within .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  display: flex !important;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 8px;
+  color: #FFFFFF !important;
+  text-decoration: none;
+  transition: background-color 150ms ease;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: rgba(30, 79, 214, 0.5) !important;
+  outline: 2px solid var(--amarillo) !important;
+}
+
+.dropdown-item-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--amarillo);
+  color: var(--tinta);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dropdown-item-title {
+  font-family: var(--font-headings);
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  display: block;
+}
+
+.dropdown-item-desc {
+  font-size: 0.82rem;
+  color: #C9DAFB;
+  display: block;
+  margin-top: 2px;
+}
+
+/* BOTONES CON PERSONALIDAD (FASE 3) */
+/* 1. Principal Amarillo (Tecla táctil de arcilla) */
+.btn--primary {
+  height: 52px !important;
+  min-height: 52px !important;
+  background: var(--amarillo) !important;
+  color: var(--tinta) !important;
+  border: none !important;
+  border-bottom: 4px solid var(--amarillo-oscuro) !important;
+  border-radius: var(--radius-btn) !important;
+  box-shadow: var(--clay-yellow-inset), 0 8px 18px rgba(11, 31, 63, 0.16) !important;
+  font-family: var(--font-headings) !important;
+  font-size: 1.15rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 1.5rem !important;
+  position: relative;
+  overflow: hidden;
+  transition: transform 140ms ease, box-shadow 140ms ease, border-bottom 140ms ease !important;
+}
+
+.btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--clay-yellow-inset), 0 12px 24px rgba(11, 31, 63, 0.22) !important;
+}
+
+.btn--primary:active {
+  transform: translateY(3px) !important;
+  border-bottom-width: 1px !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25) !important;
+}
+
+.btn-arrow-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--tinta);
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.65rem;
+  transition: transform 220ms ease;
+  flex-shrink: 0;
+}
+
+.btn--primary:hover .btn-arrow-circle {
+  transform: rotate(45deg) translateX(2px);
+}
+
+/* Destello único shimmer en botón principal */
+@keyframes btnShimmer {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+.btn--primary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: btnShimmer 1.4s ease 0.4s 1 forwards;
+  pointer-events: none;
+}
+
+/* 2. Secundario Vidrio */
+.btn--secondary {
+  height: 52px !important;
+  min-height: 52px !important;
+  background: rgba(255, 255, 255, 0.16) !important;
+  background-image: var(--vidrio-specular) !important;
+  backdrop-filter: blur(14px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(1.4) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+  border-radius: var(--radius-btn) !important;
+  color: #FFFFFF !important;
+  font-family: var(--font-headings) !important;
+  font-size: 1.12rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 4px 14px rgba(11, 31, 63, 0.15) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 1.5rem !important;
+  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease !important;
+}
+
+.btn--secondary:hover {
+  background-color: rgba(255, 255, 255, 0.28) !important;
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 #FFFFFF, 0 8px 20px rgba(11, 31, 63, 0.22) !important;
+}
+
+/* 3. WhatsApp */
+.btn--wa {
+  height: 52px !important;
+  min-height: 52px !important;
+  background: linear-gradient(180deg, #2EE871 0%, #25D366 100%) !important;
+  color: var(--tinta) !important;
+  border: none !important;
+  border-radius: var(--radius-btn) !important;
+  box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.5), inset 0 -2px 3px rgba(0, 0, 0, 0.12), 0 8px 18px rgba(37, 211, 102, 0.25) !important;
+  font-family: var(--font-headings) !important;
+  font-size: 1.15rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 1.35rem !important;
+  transition: transform 160ms ease, box-shadow 160ms ease !important;
+}
+
+.btn--wa:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.6), 0 12px 24px rgba(37, 211, 102, 0.32) !important;
+}
+
+.wa-badge-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.6rem;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes logoMicroBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+
+.btn--wa:hover .wa-badge-circle {
+  animation: logoMicroBounce 0.35s ease;
+}
+
+/* 4. Llamar */
+.btn--call {
+  height: 52px !important;
+  min-height: 52px !important;
+  background: rgba(255, 255, 255, 0.16) !important;
+  background-image: var(--vidrio-specular) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
+  border-radius: var(--radius-btn) !important;
+  color: #FFFFFF !important;
+  font-family: var(--font-headings) !important;
+  font-size: 1.12rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 1.35rem !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 4px 14px rgba(11, 31, 63, 0.15) !important;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease !important;
+}
+
+.btn--call:hover {
+  background-color: rgba(255, 255, 255, 0.28) !important;
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 #FFFFFF, 0 8px 20px rgba(11, 31, 63, 0.22) !important;
+}
+
+.call-badge-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.6rem;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.call-badge-circle svg {
+  stroke: var(--cobalto);
+}
+
+@keyframes phoneVibrate {
+  0%, 100% { transform: rotate(0); }
+  20% { transform: rotate(-12deg); }
+  40% { transform: rotate(12deg); }
+  60% { transform: rotate(-8deg); }
+  80% { transform: rotate(8deg); }
+}
+
+.btn--call:hover .call-badge-circle svg {
+  animation: phoneVibrate 0.3s ease;
+}
+
+/* 5. Botones flotantes circulares (FABs 56px) - FASE 3.6 y 6.4 */
+.floating-contact {
+  z-index: 900 !important; /* Debajo del backdrop del mobile drawer */
+}
+
+.fab-pill {
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 8px 24px rgba(11, 31, 63, 0.25) !important;
+}
+
+.fab-pill--wa {
+  background: var(--verde-wa) !important;
+  border: 2px solid rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3), 0 8px 24px rgba(11, 31, 63, 0.25) !important;
+}
+
+.fab-pill--call {
+  background: var(--cobalto) !important;
+  border: 2px solid #FFFFFF !important;
+  box-shadow: 0 8px 24px rgba(11, 31, 63, 0.25) !important;
+}
+
+/* Mobile drawer backdrop z-index */
+#mobileDrawerBackdrop {
+  z-index: 9998 !important;
+}
+
+#mobileDrawer {
+  z-index: 9999 !important;
+}
+
+/* MINIMALISMO EN TARJETAS: Sin bordes gruesos ni sombras duras (FASE 2.4) */
+.factor-card,
+.faq-item,
+.quote-step-card,
+.where-info-card,
+.service-info-card {
+  border: 1px solid var(--border-light) !important;
+  box-shadow: var(--shadow-sm) !important;
+  border-radius: var(--radius-card) !important;
+  background-color: #FFFFFF !important;
+  transition: transform 220ms ease, box-shadow 220ms ease !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .factor-card:hover,
+  .faq-item:hover,
+  .where-info-card:hover,
+  .service-info-card:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: var(--shadow-md) !important;
+  }
+}
+
+/* ICONOS DE ARCILLA (FASE 2.3) */
+.clay-icon-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--amarillo);
+  color: var(--tinta);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.7), inset 0 -2px 3px rgba(0, 0, 0, 0.15), 0 6px 14px rgba(11, 31, 63, 0.14);
+  flex-shrink: 0;
+}
+
+/* NÚMEROS DE PASO DE ARCILLA */
+.timeline-step-number {
+  background: var(--amarillo) !important;
+  color: var(--tinta) !important;
+  border: none !important;
+  box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.7), inset 0 -2px 3px rgba(0, 0, 0, 0.15), 0 6px 14px rgba(11, 31, 63, 0.14) !important;
+}
+
+/* CHIPS DE DESTINO / ZONAS */
+.clay-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  background: #FFFFFF;
+  border: 1px solid rgba(11, 31, 63, 0.12);
+  border-radius: 9999px;
+  font-family: var(--font-headings);
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--tinta);
+  box-shadow: inset 0 1.5px 2px #FFFFFF, 0 3px 8px rgba(11, 31, 63, 0.08);
+}
+
+.clay-chip.featured {
+  background: var(--amarillo);
+  border-color: var(--amarillo-oscuro);
+  box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.6), 0 3px 8px rgba(11, 31, 63, 0.12);
+}
+
+/* BOTÓN FIJO COTIZAR EN HEADER TRAS SCROLL (FASE 4.3) */
+.header-sticky-quote-btn {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.95rem;
+  height: 40px !important;
+  min-height: 40px !important;
+  font-size: 0.95rem !important;
+  border-radius: 8px !important;
+}
+
+.site-header.scrolled .header-sticky-quote-btn {
+  display: inline-flex !important;
+}
+
+/* PORTADA EN 3 CAPAS DE PROFUNDIDAD (FASE 4.1 y 4.2) */
+.hero-depth-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-glass-photo-frame {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  border-radius: var(--radius-img);
+  overflow: hidden;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 20px 45px rgba(11, 31, 63, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.hero-glass-photo-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.hero-glass-chip {
+  position: absolute;
+  padding: 0.45rem 0.85rem;
+  border-radius: 9999px;
+  background: rgba(11, 31, 63, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+  font-family: var(--font-headings);
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  z-index: 2;
+}
+
+.hero-glass-chip--top {
+  top: 1rem;
+  right: 1rem;
+}
+
+.hero-glass-chip--bottom {
+  bottom: 1rem;
+  left: 1rem;
+}
+
+/* RESPALDO PREFERS-REDUCED-TRANSPARENCY (FASE 2.1) */
+@media (prefers-reduced-transparency: reduce) {
+  .site-header {
+    background-color: var(--tinta) !important;
+    backdrop-filter: none !important;
+  }
+  .hero-stats-bottom-bar,
+  .hero-stats-panel {
+    background-color: var(--tinta) !important;
+    backdrop-filter: none !important;
+  }
+  .btn--secondary,
+  .btn--call {
+    background: var(--cobalto-oscuro) !important;
+    backdrop-filter: none !important;
+  }
+  .hero-glass-photo-frame {
+    background: var(--tinta) !important;
+    backdrop-filter: none !important;
+  }
+  .dropdown-menu {
+    background: var(--tinta) !important;
+    backdrop-filter: none !important;
+  }
+}
+
+/* STAT PILL CON ICONO (FASE 4.5) */
+.stat-pill-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  justify-content: center !important;
+  text-align: left !important;
+}
+
+.stat-pill-item svg {
+  color: var(--amarillo) !important;
+  flex-shrink: 0;
+}
+
+.stat-pill-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-pill-info .stat-pill-num {
+  font-family: var(--font-headings);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+
+.stat-pill-info .stat-pill-text {
+  font-size: 0.76rem;
+  color: #C9DAFB;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+
+/* MARQUEE SIN CORTES (FASE 4.5) */
+.marquee-track {
+  animation: marqueeScroll 25s linear infinite !important;
+}
+
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* TIMELINE STEP CARDS VIDRIO SOBRE COBALTO (FASE 2.1 & FASE 6.3) */
+.timeline-step-card {
+  position: relative;
+  z-index: 3;
+  padding: 1.6rem !important;
+  background: rgba(255, 255, 255, 0.16) !important;
+  backdrop-filter: blur(14px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(1.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: 0 10px 24px rgba(11, 31, 63, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  color: #FFFFFF !important;
+}
+
+.timeline-step-card h3 {
+  color: var(--amarillo) !important;
+  font-family: var(--font-headings) !important;
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  margin: 0;
+}
+
+.timeline-step-card p {
+  color: #E8F0FE !important;
+  font-size: 0.94rem !important;
+  line-height: 1.5 !important;
+  margin: 0;
+}
+
+/* FIX CONTRASTE WCAG 2.2 AAA (LIGHTHOUSE AUDIT) */
+.site-header {
+  background: rgba(11, 31, 63, 0.96) !important;
+}
+
+.brand-sub {
+  color: #FFC800 !important;
+  font-weight: 800 !important;
+  font-size: 0.74rem !important;
+  letter-spacing: 0.06em !important;
+}
+
+.how-it-works-section .section-eyebrow {
+  background: rgba(11, 31, 63, 0.85) !important;
+  color: var(--amarillo) !important;
+  border: 1.5px solid var(--amarillo) !important;
+  font-weight: 800 !important;
+}
+
+/* TIMELINE CARDS VIDRIO TINTA DE ALTO CONTRASTE */
+.timeline-step-card {
+  background: rgba(11, 31, 63, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  color: #FFFFFF !important;
+}
+
+.timeline-step-card h3 {
+  color: var(--amarillo) !important;
+  font-weight: 800 !important;
+}
+
+.timeline-step-card p {
+  color: #FFFFFF !important;
+  font-weight: 500 !important;
+  line-height: 1.55 !important;
+}
+
+/* PIE DE PÁGINA TINTA ESTRICTO CON CONTRASTE AAA */
+.site-footer {
+  background-color: var(--tinta) !important;
+  color: #FFFFFF !important;
+}
+
+.site-footer p,
+.footer-col p {
+  color: #E8F0FE !important;
+  font-size: 0.9rem !important;
+}
+
+.footer-col h4 {
+  color: var(--amarillo) !important;
+  font-family: var(--font-headings) !important;
+  font-size: 1.1rem !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+}
+
+.footer-links a {
+  color: #FFFFFF !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+  font-size: 0.92rem !important;
+}
+
+.footer-links a:hover,
+.footer-links a:focus {
+  color: var(--amarillo) !important;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #C9DAFB !important;
 }
