@@ -1,0 +1,11 @@
+# Documentacion y notas internas
+*.md
+capturas-antes/
+capturas-despues/
+apps-script/
+docs/
+respaldo/
+
+# Archivos del sistema
+Thumbs.db
+.DS_Store
