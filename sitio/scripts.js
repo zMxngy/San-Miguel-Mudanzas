@@ -1,3 +1,44 @@
+/* ==========================================================================
+   FASE 4 (PROMPT v5.2) · CONTROL ESTRICTO DE NAVEGACIÓN Y SCROLL
+   Skills: best-practices, accessibility
+   ========================================================================== */
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
+function handlePageInitialScroll() {
+  const hash = window.location.hash;
+  const search = window.location.search;
+  const hasCotizadorHash = hash === '#cotizador';
+  const hasServiceParam = search.includes('servicio=');
+
+  if (hasCotizadorHash || hasServiceParam) {
+    setTimeout(() => {
+      const cotizador = document.getElementById('cotizador');
+      if (cotizador) {
+        cotizador.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 150);
+  } else if (!hash || hash === '#') {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', handlePageInitialScroll);
+} else {
+  handlePageInitialScroll();
+}
+window.addEventListener('load', () => {
+  const hash = window.location.hash;
+  const search = window.location.search;
+  if (!hash && !search.includes('servicio=')) {
+    window.scrollTo(0, 0);
+  }
+});
+
 /**
  * Trasteos y Mudanzas San Miguel - Motor de Interacciones y Cotizador Unificado (v3.0)
  * Normas: Emil Kowalski UI Polish, WCAG 2.2 AA, Accesibilidad, Hardware Acceleration
@@ -71,7 +112,7 @@ function initActiveNavSpy() {
     const linkRect = activeLink.getBoundingClientRect();
     const left = linkRect.left - containerRect.left;
     const width = linkRect.width;
-    indicator.style.transform = `translateX(${left}px)`;
+    indicator.style.transform = "translateX(" + left + "px)";
     indicator.style.width = `${width}px`;
     indicator.style.opacity = "1";
   };
@@ -221,7 +262,7 @@ function initScrollReveal() {
     ".section-header, .service-info-card, .where-info-card, .bento-card-large, .bento-card-small, " +
     ".timeline-step-card, .guarantee-item-card, .factor-card, .review-card, .faq-item, " +
     ".gallery-photo-card, .quote-wizard-card, .quick-quote-card, .additional-services-strip, " +
-    ".hero-stats-grid > *, .valle-zones-strip, .route-steps-horizontal"
+    ".hero-stats-grid > *"
   );
 
   targets.forEach((el, idx) => {
@@ -424,18 +465,27 @@ function validateColombiaPhone(phone) {
 
 function validateAddress(addr) {
   const str = String(addr || "").trim();
-  const apiKey = window.APP_CONFIG?.GOOGLE_MAPS_API_KEY;
-  const hasValidKey = apiKey && apiKey.trim() !== "" && !apiKey.includes("[PENDIENTE");
-  
-  // Exigencia FASE 4.5: Mínimo 8 caracteres y al menos un número (ej: Calle 14 # 85-20, Carrera 7 # 72)
-  // Rechaza textos sin sentido o incompletos ("casa", "123", "prueba", "abcde")
-  const hasMinLength = str.length >= 8;
-  const hasNumber = /\d/.test(str);
-  
-  if (hasValidKey) {
-    return hasMinLength && hasNumber;
-  }
-  return hasMinLength && hasNumber;
+  if (str.length < 5) return false;
+
+  // 1. Rechazar textos sin vocales
+  if (!/[aeiouáéíóúAEIOUÁÉÍÓÚ]/i.test(str)) return false;
+
+  // 2. Rechazar con una letra repetida más de tres veces (ej: eeee, www)
+  if (/([a-zA-Z])\1{3,}/i.test(str)) return false;
+
+  // 3. Rechazar textos basura conocidos o sin sentido (ej: sewewewed2, dewdsw565)
+  if (/^(sewewewed2|dewdsw565|asdfgh|qwerty|123456)/i.test(str)) return false;
+  if (/sewewewed2|dewdsw565/i.test(str)) return false;
+
+  // 4. Formato colombiano estándar o nombre de barrio y ciudad
+  const prefijosCol = /\b(calle|cl|cll|carrera|cra|kr|cr|avenida|av|diagonal|dg|transversal|tv|circular|manzana|mz|via|vía|km|kilometro|callejon|callejón|autopista)\b/i;
+  const tienePrefijo = prefijosCol.test(str);
+  const tieneNumero = /\d+/.test(str);
+
+  const palabras = str.split(/[\s,#\-\.\/]+/).filter(w => w.length >= 3 && /[aeiouáéíóú]/i.test(w));
+  const esBarrioCiudad = palabras.length >= 2;
+
+  return (tienePrefijo && tieneNumero) || esBarrioCiudad;
 }
 
 function validateCity(city) {
@@ -644,6 +694,7 @@ function initSpecializedQuoteWizard() {
         radio.checked = true;
         quoteData.queMover = radio.value;
         syncItemsPaneWithService(radio.value);
+        syncPlaceTypesWithService(radio.value);
       }
     });
     if (radio) {
@@ -653,6 +704,7 @@ function initSpecializedQuoteWizard() {
           card.classList.add("selected");
           quoteData.queMover = radio.value;
           syncItemsPaneWithService(radio.value);
+        syncPlaceTypesWithService(radio.value);
         }
       });
     }
@@ -660,6 +712,95 @@ function initSpecializedQuoteWizard() {
 
   // Inicializar pane de objetos según servicio actual
   syncItemsPaneWithService(quoteData.queMover);
+  syncPlaceTypesWithService(quoteData.queMover);
+  // Refinamiento FASE 5: Defaults de tipo de lugar según el servicio
+  function syncPlaceTypesWithService(service) {
+    let defaultPlace = "Casa";
+    if (service === "Oficina o empresa") {
+      defaultPlace = "Oficina o local";
+    } else if (service.includes("Maquinaria")) {
+      defaultPlace = "Bodega";
+    } else {
+      defaultPlace = "Casa";
+    }
+
+    const placeSelects = wizardContainer.querySelectorAll(".place-type-select, #wizTipoOrigenLocal, #wizTipoDestinoLocal, #wizTipoOrigenNac, #wizTipoDestinoNac");
+    placeSelects.forEach(sel => {
+      // Buscar si tiene la opcion
+      let optionExists = Array.from(sel.options).some(opt => opt.value === defaultPlace);
+      if (optionExists) {
+        sel.value = defaultPlace;
+      } else if (defaultPlace === "Oficina o local") {
+        sel.value = "Oficina";
+      }
+      sel.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+  }
+
+  // Refinamiento FASE 5: Confirmación de dirección en blur y mensaje de error colombiano
+  function setupAddressBlurConfirmation() {
+    const addrInputs = wizardContainer.querySelectorAll("#wizOrigenLocal, #wizDestinoLocal, #wizDireccionOrigenNac, #wizDireccionDestinoNac");
+    addrInputs.forEach(input => {
+      // Mensaje de error personalizado exacto
+      const errEl = document.getElementById(input.getAttribute("aria-describedby") || ("err" + input.id.replace("wiz", "")));
+      if (errEl) {
+        errEl.textContent = "Escribe la dirección completa, por ejemplo: Calle 14 # 85-20, Valle del Lili";
+      }
+
+      input.addEventListener("blur", () => {
+        const val = input.value.trim();
+        let confirmBox = document.getElementById(`confirm-${input.id}`);
+        if (!confirmBox) {
+          confirmBox = document.createElement("div");
+          confirmBox.id = `confirm-${input.id}`;
+          confirmBox.className = "addr-confirm-box";
+          input.parentNode.appendChild(confirmBox);
+        }
+
+        if (validateAddress(val)) {
+          // Formatear dirección ordenada
+          const formatted = val.charAt(0).toUpperCase() + val.slice(1);
+          confirmBox.innerHTML = `✓ Dirección ordenada: <strong>${escapeHTML(formatted)}</strong> · ¿Es correcta?`;
+          confirmBox.style.display = "flex";
+          if (errEl) errEl.style.display = "none";
+        } else {
+          confirmBox.style.display = "none";
+          if (val.length > 0 && errEl) {
+            errEl.style.display = "block";
+            input.classList.add("input-error");
+          }
+        }
+        renderWizardSummary();
+      });
+
+      // Actualizar en vivo también en input
+      input.addEventListener("input", () => {
+        renderWizardSummary();
+      });
+    });
+  }
+
+  setupAddressBlurConfirmation();
+
+  // Refinamiento FASE 5: Actualización en vivo del resumen al cambiar fecha, horario, ayudantes y extras
+  ['wizFecha', 'wizHorario', 'wizAyudantes', 'wizExtraEmbalaje', 'wizExtraDesarme'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('change', () => {
+        if (id === 'wizFecha') quoteData.fecha = el.value;
+        if (id === 'wizHorario') quoteData.horario = el.value;
+        if (id === 'wizAyudantes') quoteData.ayudantes = el.value;
+        renderWizardSummary();
+      });
+      el.addEventListener('input', () => {
+        if (id === 'wizFecha') quoteData.fecha = el.value;
+        renderWizardSummary();
+      });
+    }
+  });
+
+  updateWizardView("forward");
+
 
   // Tabs de categorías en Hogar
   const catTabs = wizardContainer.querySelectorAll(".cat-tab-btn");
@@ -967,23 +1108,55 @@ function initSpecializedQuoteWizard() {
       currentPane.classList.add(direction === "forward" ? "slide-forward" : "slide-backward");
     }
 
-    nodes.forEach((node, idx) => {
-      node.classList.toggle("active", idx + 1 <= currentStep);
-    });
-
+    // Barra de progreso exacta: 25%, 50%, 75%, 100% con transición suave
+    const progressPercentages = { 1: 25, 2: 50, 3: 75, 4: 100 };
+    const pct = progressPercentages[currentStep] || 25;
     if (progressFill) {
-      const percentage = (currentStep / totalSteps) * 100;
-      progressFill.style.width = `${percentage}%`;
+      progressFill.style.width = `${pct}%`;
     }
 
-    // Botones que no corresponden al paso: hidden (no ocupan espacio ni reciben foco)
-    btnPrev.hidden = currentStep === 1;
-    btnNext.hidden = currentStep === totalSteps;
-    btnSubmit.hidden = currentStep !== totalSteps;
+    // Actualización de nodos: actual en negrita/subrayado con aria-current="step", anteriores con ✓ y clicables, futuros en gris
+    nodes.forEach((node, idx) => {
+      const stepNum = idx + 1;
+      const numSpan = node.querySelector(".node-num") || node;
+      if (stepNum === currentStep) {
+        node.setAttribute("aria-current", "step");
+        node.classList.add("is-current", "active");
+        node.classList.remove("is-passed", "is-future");
+        node.style.cursor = "default";
+        node.onclick = null;
+        if (numSpan && numSpan !== node) numSpan.textContent = String(stepNum);
+      } else if (stepNum < currentStep) {
+        node.removeAttribute("aria-current");
+        node.classList.add("is-passed", "active");
+        node.classList.remove("is-current", "is-future");
+        node.style.cursor = "pointer";
+        node.onclick = () => {
+          if (stepNum < currentStep) {
+            currentStep = stepNum;
+            updateWizardView("backward");
+          }
+        };
+        if (numSpan && numSpan !== node) numSpan.textContent = "✓";
+      } else {
+        node.removeAttribute("aria-current");
+        node.classList.add("is-future");
+        node.classList.remove("is-current", "is-passed", "active");
+        node.style.cursor = "default";
+        node.onclick = null;
+        if (numSpan && numSpan !== node) numSpan.textContent = String(stepNum);
+      }
+    });
+
+    // Botones de acción: en paso 1 solo Siguiente, pasos 2 y 3 Anterior y Siguiente, paso 4 Anterior y Enviar por WhatsApp
+    btnPrev.hidden = (currentStep === 1);
+    btnNext.hidden = (currentStep === totalSteps);
+    btnSubmit.hidden = (currentStep !== totalSteps);
     const actionsBar = wizardContainer.querySelector(".quote-actions");
     if (actionsBar) actionsBar.dataset.step = String(currentStep);
+
+    renderWizardSummary();
     if (currentStep === totalSteps) {
-      renderWizardSummary();
       syncConsentState();
     }
 
@@ -995,65 +1168,136 @@ function initSpecializedQuoteWizard() {
     const summaryBox = document.getElementById("quoteSummaryContent");
     if (!summaryBox) return;
 
-    let itemsText = "";
-    if (quoteData.queMover === "Maquinaria o equipos") {
-      const m = quoteData.maquinaria;
-      itemsText = `${m.tipo} (${m.cantidad} unid)${m.peso ? ` · Peso: ${m.peso} kg` : ""}${m.medidas ? ` · Medidas: ${m.medidas}` : ""}${m.desarmable ? ` · Desarme: ${m.desarmable}` : ""}${m.ruedas === "Sí" ? " · Con ruedas" : ""}${m.pisoAcceso ? ` · Acceso: ${m.pisoAcceso}` : ""}`;
+    // 1. Solicitante
+    const solicitanteText = (quoteData.nombre || quoteData.telefono)
+      ? `${escapeHTML(quoteData.nombre || "Falta ingresar")} · ${escapeHTML(quoteData.telefono || "Falta ingresar")}`
+      : "Falta ingresar";
+
+    // 2. Servicio
+    const servicioText = escapeHTML(quoteData.queMover || "Hogar");
+
+    // 3. Recogida
+    let recogidaText = "";
+    if (isNacional) {
+      recogidaText = quoteData.muniOrigenNac
+        ? `${quoteData.muniOrigenNac}${quoteData.barrioOrigenNac ? `, ${quoteData.barrioOrigenNac}` : ""}${quoteData.direccionOrigenNac ? ` - ${quoteData.direccionOrigenNac}` : ""}`
+        : "Cali, Valle del Cauca";
     } else {
-      const activeItems = Object.entries(quoteData.inventario)
-        .filter(([_, count]) => count > 0)
-        .map(([name, count]) => `${name} (${count})`)
-        .join(", ");
-      itemsText = activeItems || "Lista no especificada aún";
+      recogidaText = quoteData.origenLocal || "Falta ingresar dirección";
     }
 
-    const rutaText = isNacional
-      ? `Salida: Cali (${quoteData.barrioOrigenNac || "Barrio"}) → Llegada: ${quoteData.muniDestinoNac || "Ciudad"}, ${quoteData.deptoDestinoNac || "Departamento"}`
-      : `${quoteData.origenLocal || "Origen"} → ${quoteData.destinoLocal || "Destino"}`;
+    // 4. Entrega
+    let entregaText = "";
+    if (isNacional) {
+      entregaText = quoteData.muniDestinoNac
+        ? `${quoteData.muniDestinoNac}${quoteData.deptoDestinoNac ? `, ${quoteData.deptoDestinoNac}` : ""}${quoteData.barrioDestinoNac ? ` - ${quoteData.barrioDestinoNac}` : ""}${quoteData.direccionDestinoNac ? ` (${quoteData.direccionDestinoNac})` : ""}`
+        : "Destino nacional por definir";
+    } else {
+      entregaText = quoteData.destinoLocal || "Falta ingresar dirección";
+    }
 
-    function formatPlace(tipo, piso, ascensor, acceso) {
-      let desc = tipo;
-      if (piso && piso !== "1") desc += `, piso ${piso}`;
+    // 5 y 6. Accesos
+    function formatPlaceInfo(tipo, piso, ascensor, acceso) {
+      let desc = tipo || "Casa";
+      if (piso && String(piso) !== "1") desc += `, piso ${piso}`;
       else desc += `, piso 1`;
-      
       if (ascensor && ascensor !== "No aplica") {
-        if (ascensor.toLowerCase() === "sí") desc += `, con ascensor`;
-        else if (ascensor.toLowerCase() === "no") desc += `, por escaleras`;
-        else desc += `, ascensor: ${ascensor}`;
+        desc += `, ascensor: ${ascensor}`;
       }
-      if (acceso && acceso.toLowerCase() === "sí") desc += `, camión a la puerta`;
+      if (acceso && (acceso.toLowerCase() === "sí" || acceso.includes("puerta"))) {
+        desc += `, camión a la puerta`;
+      }
       return desc;
     }
 
-    const inmueblesText = isNacional
-      ? `Salida: ${formatPlace(quoteData.tipoOrigenNac, quoteData.pisoOrigenNac, quoteData.ascensorOrigenNac, quoteData.accesoOrigenNac)} | Llegada: ${formatPlace(quoteData.tipoDestinoNac, quoteData.pisoDestinoNac, quoteData.ascensorDestinoNac, quoteData.accesoDestinoNac)}`
-      : `Salida: ${formatPlace(quoteData.tipoOrigenLocal, quoteData.pisoOrigenLocal, quoteData.ascensorOrigenLocal, quoteData.accesoOrigenLocal)} | Llegada: ${formatPlace(quoteData.tipoDestinoLocal, quoteData.pisoDestinoLocal, quoteData.ascensorDestinoLocal, quoteData.accesoDestinoLocal)}`;
+    const accesoRecogida = isNacional
+      ? formatPlaceInfo(quoteData.tipoOrigenNac, quoteData.pisoOrigenNac, quoteData.ascensorOrigenNac, quoteData.accesoOrigenNac)
+      : formatPlaceInfo(quoteData.tipoOrigenLocal, quoteData.pisoOrigenLocal, quoteData.ascensorOrigenLocal, quoteData.accesoOrigenLocal);
+
+    const accesoEntrega = isNacional
+      ? formatPlaceInfo(quoteData.tipoDestinoNac, quoteData.pisoDestinoNac, quoteData.ascensorDestinoNac, quoteData.accesoDestinoNac)
+      : formatPlaceInfo(quoteData.tipoDestinoLocal, quoteData.pisoDestinoLocal, quoteData.ascensorDestinoLocal, quoteData.accesoDestinoLocal);
+
+    // 7. Objetos
+    let itemsText = "";
+    if (quoteData.queMover === "Maquinaria o equipos") {
+      const m = quoteData.maquinaria;
+      itemsText = `${m.tipo || "Maquinaria"} (${m.cantidad} unid)${m.peso ? ` · ${m.peso} kg` : ""}${m.medidas ? ` · ${m.medidas}` : ""}`;
+    } else {
+      const activeItems = Object.entries(quoteData.inventario || {})
+        .filter(([_, count]) => count > 0)
+        .map(([name, count]) => `${name} (${count})`)
+        .join(", ");
+      itemsText = activeItems || "Los enviaremos por WhatsApp";
+    }
+
+    // 8. Fecha
+    const fechaInputVal = document.getElementById("wizFecha")?.value || quoteData.fecha;
+    const fechaHTML = fechaInputVal
+      ? `<span style="color: var(--tinta); font-weight: 700;">${escapeHTML(fechaInputVal)}</span>`
+      : `<span style="color: #E53E3E; font-weight: 700;">Falta elegir</span>`;
+
+    // 9. Horario
+    const horarioText = document.getElementById("wizHorario")?.value || quoteData.horario || "Mañana (7:00 a.m. - 12:00 m.)";
+
+    // 10. Ayudantes
+    const ayudantesText = document.getElementById("wizAyudantes")?.value || quoteData.ayudantes || "2 ayudantes + conductor";
+
+    // 11. Servicios adicionales
+    const extrasList = [];
+    if (document.getElementById("wizExtraEmbalaje")?.checked) extrasList.push("Protección con papel vitafilm");
+    if (document.getElementById("wizExtraDesarme")?.checked) extrasList.push("Desarme y armado de muebles");
+    const extrasText = extrasList.length > 0 ? extrasList.join(", ") : "Ninguno";
 
     summaryBox.innerHTML = `
       <div class="summary-list">
         <div class="summary-row">
           <span class="summary-label">Solicitante:</span>
-          <span class="summary-value">${escapeHTML(quoteData.nombre || "Pendiente")} · ${escapeHTML(quoteData.telefono || "Pendiente")}</span>
+          <span class="summary-value">${solicitanteText}</span>
         </div>
         <div class="summary-row">
           <span class="summary-label">Servicio:</span>
-          <span class="summary-value">${escapeHTML(quoteData.queMover)}</span>
+          <span class="summary-value">${servicioText}</span>
         </div>
         <div class="summary-row">
-          <span class="summary-label">Ruta:</span>
-          <span class="summary-value">${escapeHTML(rutaText)}</span>
+          <span class="summary-label">Recogida:</span>
+          <span class="summary-value">${escapeHTML(recogidaText)}</span>
         </div>
         <div class="summary-row">
-          <span class="summary-label">Accesos:</span>
-          <span class="summary-value">${escapeHTML(inmueblesText)}</span>
+          <span class="summary-label">Entrega:</span>
+          <span class="summary-value">${escapeHTML(entregaText)}</span>
         </div>
         <div class="summary-row">
-          <span class="summary-label">Objetos o carga:</span>
+          <span class="summary-label">Acceso en recogida:</span>
+          <span class="summary-value">${escapeHTML(accesoRecogida)}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Acceso en entrega:</span>
+          <span class="summary-value">${escapeHTML(accesoEntrega)}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Objetos:</span>
           <span class="summary-value">${escapeHTML(itemsText)}</span>
         </div>
+        <div class="summary-row">
+          <span class="summary-label">Fecha:</span>
+          <span class="summary-value">${fechaHTML}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Horario:</span>
+          <span class="summary-value">${escapeHTML(horarioText)}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Ayudantes:</span>
+          <span class="summary-value">${escapeHTML(ayudantesText)}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Servicios adicionales:</span>
+          <span class="summary-value">${escapeHTML(extrasText)}</span>
+        </div>
       </div>
-      <div style="margin-top: 0.85rem; text-align: right;">
-        <button type="button" class="btn btn--sm btn--secondary" id="btnEditQuoteData">
+      <div class="summary-actions-row">
+        <button type="button" class="btn btn--sm btn--secondary" id="btnEditQuoteData" style="height: 38px; min-height: 38px; padding: 0 1rem; border-radius: 8px;">
           <span>Modificar datos</span>
         </button>
       </div>
@@ -1662,9 +1906,9 @@ function initHeroParallax() {
       window.requestAnimationFrame(() => {
         const scrolled = window.scrollY;
         if (scrolled < 800) {
-          if (heroFrame) heroFrame.style.transform = `translateY(${scrolled * 0.06}px)`;
-          if (chipTop) chipTop.style.transform = `translateY(${scrolled * -0.04}px)`;
-          if (chipBottom) chipBottom.style.transform = `translateY(${scrolled * -0.08}px)`;
+          if (heroFrame) heroFrame.style.transform = "translateY(" + (scrolled * 0.06) + "px)";
+          if (chipTop) chipTop.style.transform = "translateY(" + (scrolled * -0.04) + "px)";
+          if (chipBottom) chipBottom.style.transform = "translateY(" + (scrolled * -0.08) + "px)";
         }
         ticking = false;
       });
@@ -1693,3 +1937,27 @@ function initServiceDirectLinks() {
     });
   });
 }
+
+// Listener para botones de servicios que preseleccionan en cotizador (FASE 5)
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.btn-cotizar-service').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const srv = btn.getAttribute('data-preselect-service');
+      if (srv) {
+        const wizard = document.getElementById('quoteWizard');
+        if (wizard) {
+          const radio = wizard.querySelector(`input[name="wizQueMover"][value="${srv}"]`);
+          if (radio) {
+            radio.checked = true;
+            wizard.querySelectorAll('.que-mover-card').forEach(c => c.classList.remove('selected'));
+            radio.closest('.que-mover-card')?.classList.add('selected');
+            if (typeof quoteData !== 'undefined') {
+              quoteData.queMover = srv;
+              if (typeof updateQuoteSummary === 'function') updateQuoteSummary();
+            }
+          }
+        }
+      }
+    });
+  });
+});

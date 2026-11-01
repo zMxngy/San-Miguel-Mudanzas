@@ -1,12 +1,24 @@
-# Documentacion y notas internas
+# Archivos internos y documentacion fuera del sitio publico
+/interno/
+/respaldo/
+/docs/
+PROGRESO.md
+registro-skills.md
+05-pendientes-cliente.md
 *.md
+
+# Capturas de auditoria y evidencias
 capturas-antes/
 capturas-despues/
 capturas-v4/
+capturas-v5/
 apps-script/
-docs/
-respaldo/
 
-# Archivos del sistema
+# Archivos temporales y scratch
+scratch*
+*.tmp
+*.log
+
+# Archivos del sistema operativo
 Thumbs.db
 .DS_Store

@@ -13,7 +13,7 @@
   <meta property="og:url" content="https://sanmiguelmudanzas.com/valle-del-cauca.html">
   <meta property="og:title" content="Mudanzas y Trasteos en Cali y el Valle del Cauca | San Miguel">
   <meta property="og:description" content="Trasteos y mudanzas en Cali, el Valle del Cauca y municipios cercanos. Personal uniformado y cotización gratis por WhatsApp.">
-  <meta property="og:image" content="https://sanmiguelmudanzas.com/assets/img/hero.webp">
+  <meta property="og:image" content="https://sanmiguelmudanzas.com/assets/img/camion.webp">
   <meta property="og:locale" content="es_CO">
 
   <link rel="stylesheet" href="styles.css?v=v4">
@@ -83,8 +83,8 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.978-.276-.1-.477-.15-.678.15-.201.301-.778.978-.954 1.179-.176.2-.351.226-.652.075-.301-.15-1.272-.469-2.423-1.496-.896-.799-1.501-1.786-1.677-2.087-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.201-.301.301-.502.101-.2.05-.376-.025-.527-.075-.15-.678-1.636-.929-2.241-.244-.589-.493-.509-.678-.519l-.578-.01c-.201 0-.527.075-.803.376-.276.301-1.054 1.029-1.054 2.509 0 1.48 1.079 2.909 1.23 3.11.15.201 2.124 3.243 5.145 4.549.719.311 1.28.497 1.718.636.722.23 1.379.197 1.898.12.579-.087 1.78-.727 2.031-1.43.251-.703.251-1.305.176-1.43-.075-.125-.276-.201-.577-.351zM12.042 21.82a9.78 9.78 0 0 1-4.99-1.365l-.358-.213-3.71.973.99-3.616-.233-.371A9.778 9.778 0 0 1 2.25 12.04c0-5.397 4.39-9.787 9.792-9.787 2.614 0 5.072 1.018 6.921 2.868a9.73 9.73 0 0 1 2.866 6.919c0 5.398-4.39 9.78-9.787 9.78zm0-18.04c-4.55 0-8.25 3.7-8.25 8.26 0 1.455.38 2.875 1.1 4.12l.17.296-.728 2.66 2.723-.715.286.17a8.216 8.216 0 0 0 4.699 1.429c4.55 0 8.25-3.7 8.25-8.26 0-2.206-.859-4.28-2.418-5.84a8.212 8.212 0 0 0-5.882-2.42z"/></svg>
           <span class="wa-label">WhatsApp</span>
         </a>
-        <a href="#cotizador" class="btn btn--primary header-sticky-quote-btn" aria-label="Cotizar mudanza">
-          <span>Cotizar</span>
+        <a href="#cotizador" class="btn btn--primary header-sticky-quote-btn" aria-label="Cotizar gratis">
+          <span>Cotizar gratis</span>
         </a>
         <!-- Botón Hamburguesa 44px (FASE 2.4) -->
         <button type="button" class="hamburger-btn" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mobileDrawer">
@@ -143,124 +143,104 @@
 
   <main id="contenido-principal">
     
-    <!-- Hero Valle del Cauca (Banda Azul Noche) -->
-    <section class="hero-section hero-section--valle" aria-labelledby="valle-hero-title">
-      <div class="container hero-main-container">
-        
-        <!-- Columna Izquierda: Sello, Título en Barlow Condensed Mayúsculas, Subtítulo (14px gap), 4 Checks, Dos Botones -->
-        <div class="hero-left-col">
-          <div>
-            <span class="badge-pill">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-              COBERTURA VALLE DEL CAUCA
-            </span>
+        <!-- ==========================================================================
+         1. PORTADA V5: FOTO ANCHO COMPLETO + PANEL TINTA INCLINADO (FASE 3)
+         ========================================================================== -->
+        <section class="hero-v5 hero-valle" aria-labelledby="valle-hero-title">
+      <picture class="hero-v5-picture">
+        <source media="(max-width: 768px)" srcset="assets/img/portada-valle-mobile.webp" width="800" height="600">
+        <img src="assets/img/portada-valle-desktop.webp" alt="Camión furgonado de Mudanzas San Miguel en Cali y el Valle" class="hero-v5-bg-img" width="1600" height="900" fetchpriority="high">
+      </picture>
+      <div class="hero-v5-overlay"></div>
+      <div class="hero-valle-container">
+        <div class="hero-valle-content">
+          <div class="hero-v5-tag">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Cobertura Valle del Cauca</span>
           </div>
-
-          <h1 id="valle-hero-title" style="margin-bottom: 14px;">
-            DEL BARRIO DE SIEMPRE<br>
-            <span class="text-highlight-yellow">A TU HOGAR NUEVO.</span>
+          <h1 id="valle-hero-title" class="hero-valle-title">
+            Del barrio de siempre<br>
+            <span class="line-yellow">a tu nuevo hogar.</span>
           </h1>
-
-          <p class="hero-subtitle" style="margin-bottom: 1.5rem;">
+          <p class="hero-valle-subtitle">
             Cali y el Valle del Cauca, de puerta a puerta con camiones furgonados y personal uniformado.
           </p>
-
-          <ul class="hero-checklist" aria-label="Beneficios principales en el Valle" style="margin-bottom: 2rem;">
+          <ul class="hero-valle-checks" aria-label="Beneficios principales en el Valle">
             <li>
-              <span class="check-circle-icon" aria-hidden="true"></span>
+              <span class="hero-v5-check-icon" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
               <span>Cali y municipios del Valle</span>
             </li>
             <li>
-              <span class="check-circle-icon" aria-hidden="true"></span>
+              <span class="hero-v5-check-icon" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
               <span>Camiones furgonados y protegidos</span>
             </li>
             <li>
-              <span class="check-circle-icon" aria-hidden="true"></span>
+              <span class="hero-v5-check-icon" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
               <span>Personal capacitado y uniformado</span>
             </li>
             <li>
-              <span class="check-circle-icon" aria-hidden="true"></span>
+              <span class="hero-v5-check-icon" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
               <span>Cotización gratis por WhatsApp</span>
             </li>
           </ul>
-
-          <div class="hero-actions-trio">
-            <a href="#cotizador" class="btn btn--primary btn--hero-action">
-              <span>Cotizar mi mudanza</span>
-              <span class="btn-arrow-circle" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </span>
+          <div class="hero-v5-actions">
+            <a href="#cotizador" class="btn btn--primary btn--hero-v5">
+              <span>Cotizar gratis</span>
+              <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
-            <a href="https://wa.me/573217676571?text=Hola%2C%20quisiera%20cotizar%20un%20trasteo%20en%20el%20Valle%20del%20Cauca" 
-               class="btn btn--wa btn--hero-action" 
-               target="_blank" 
-               rel="noopener noreferrer" 
-               aria-label="WhatsApp">
-              <span class="wa-badge-circle" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.978-.276-.1-.477-.15-.678.15-.201.301-.778.978-.954 1.179-.176.2-.351.226-.652.075-.301-.15-1.272-.469-2.423-1.496-.896-.799-1.501-1.786-1.677-2.087-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.176.201-.301.301-.502.101-.2.05-.376-.025-.527-.075-.15-.678-1.636-.929-2.241-.244-.589-.493-.509-.678-.519l-.578-.01c-.201 0-.527.075-.803.376-.276.301-1.054 1.029-1.054 2.509 0 1.48 1.079 2.909 1.23 3.11.15.201 2.124 3.243 5.145 4.549.719.311 1.28.497 1.718.636.722.23 1.379.197 1.898.12.579-.087 1.78-.727 2.031-1.43.251-.703.251-1.305.176-1.43-.075-.125-.276-.201-.577-.351zM12.042 21.82a9.78 9.78 0 0 1-4.99-1.365l-.358-.213-3.71.973.99-3.616-.233-.371A9.778 9.778 0 0 1 2.25 12.04c0-5.397 4.39-9.787 9.792-9.787 2.614 0 5.072 1.018 6.921 2.868a9.73 9.73 0 0 1 2.866 6.919c0 5.398-4.39 9.78-9.787 9.78zm0-18.04c-4.55 0-8.25 3.7-8.25 8.26 0 1.455.38 2.875 1.1 4.12l.17.296-.728 2.66 2.723-.715.286.17a8.216 8.216 0 0 0 4.699 1.429c4.55 0 8.25-3.7 8.25-8.26 0-2.206-.859-4.28-2.418-5.84a8.212 8.212 0 0 0-5.882-2.42z"/></svg>
-              </span>
-              <span>WhatsApp</span>
+            <a href="https://wa.me/573217676571?text=Hola%2C%20quisiera%20cotizar%20un%20trasteo%20en%20el%20Valle%20del%20Cauca" class="btn btn--wa btn--hero-v5" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp directo">
+              <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/></svg>
+              <span>WhatsApp directo</span>
             </a>
-          </div>
-        </div>
-
-        <!-- Columna Derecha: Foto Completa del Camión en Marco de Vidrio con 2 Chips de Vidrio (FASE 4.1) -->
-        <div class="hero-depth-container">
-          <div class="hero-glass-photo-frame">
-            <span class="hero-glass-chip hero-glass-chip--top"> Cali y Valle del Cauca</span>
-            <img src="assets/img/hero.webp" alt="Camión furgonado de Mudanzas San Miguel en servicio en Cali" width="560" height="380">
-          </div>
-        </div>
-
-      </div>
-
-            <!-- Barra Inferior de 4 Cifras con Frases Completas e Iconos (FASE 4.5) -->
-      <div class="hero-bottom-stats-bar" role="region" aria-label="Datos clave del servicio">
-        <div class="container hero-stats-grid">
-          <div class="stat-pill-item">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <div class="stat-pill-info">
-              <span class="stat-pill-num">+6 AÑOS</span>
-              <span class="stat-pill-text">DE EXPERIENCIA</span>
-            </div>
-          </div>
-          <div class="stat-pill-item">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            <div class="stat-pill-info">
-              <span class="stat-pill-num">COTIZACIÓN</span>
-              <span class="stat-pill-text">GRATIS</span>
-            </div>
-          </div>
-          <div class="stat-pill-item">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-            <div class="stat-pill-info">
-              <span class="stat-pill-num">CALI, VALLE</span>
-              <span class="stat-pill-text">Y COLOMBIA</span>
-            </div>
-          </div>
-          <div class="stat-pill-item">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-            <div class="stat-pill-info">
-              <span class="stat-pill-num">ATENCIÓN</span>
-              <span class="stat-pill-text">POR WHATSAPP</span>
-            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Franja de Zonas del Valle del Cauca (FASE 3.6) -->
-    <div class="container" style="margin-top: -1rem; margin-bottom: 1.5rem;">
-      <div class="valle-zones-strip" role="region" aria-label="Zonas de operación en el Valle">
-        <span style="font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700; color: var(--tinta); text-transform: uppercase;">Zonas Principales:</span>
-        <div class="valle-zone-pill featured">Cali</div>
-        <div class="valle-zone-pill">Valle del Cauca</div>
-        <div class="valle-zone-pill">Municipios cercanos</div>
+    
+    <!-- Barra de 4 Cifras -->
+    <div class="hero-bottom-stats-bar" role="region" aria-label="Datos clave del servicio">
+      <div class="container hero-stats-grid">
+        <div class="stat-pill-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div class="stat-pill-info">
+            <span class="stat-pill-num">+6 AÑOS</span>
+            <span class="stat-pill-text">DE EXPERIENCIA</span>
+          </div>
+        </div>
+        <div class="stat-pill-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <div class="stat-pill-info">
+            <span class="stat-pill-num">COTIZACIÓN</span>
+            <span class="stat-pill-text">GRATIS</span>
+          </div>
+        </div>
+        <div class="stat-pill-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div class="stat-pill-info">
+            <span class="stat-pill-num">CALI, VALLE</span>
+            <span class="stat-pill-text">Y COLOMBIA</span>
+          </div>
+        </div>
+        <div class="stat-pill-item">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <div class="stat-pill-info">
+            <span class="stat-pill-num">ATENCIÓN</span>
+            <span class="stat-pill-text">POR WHATSAPP</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Garantías Locales en Azul Niebla (Bloque C & G: Sin afirmaciones no verificadas) -->
-    <!-- 2. SERVICIOS DE LA ZONA VALLE (INFO) - FASE 4.3 -->
+        <!-- 2. SERVICIOS DE LA ZONA VALLE (4 TARJETAS SÓLIDAS) - FASE 5 -->
     <section class="section-padding section-light-blobs" aria-labelledby="valle-services-title">
       <div class="container">
         <div class="section-header text-center" style="margin: 0 auto 2.5rem auto;">
@@ -269,30 +249,62 @@
           <p>Operamos con camiones furgonados y personal uniformado en Santiago de Cali y municipios del departamento.</p>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
-          <div class="service-info-card" style="padding: 1.75rem;">
-            <div class="clay-icon-circle" style="margin-bottom: 1rem;" aria-hidden="true"></div>
-            <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--tinta);">Mudanzas de Hogar</h3>
-            <p style="color: var(--text-muted); font-size: 0.92rem;">Traslado completo de casas y apartamentos con protección para sofás, neveras y camas.</p>
-          </div>
+        <div class="services-grid-v52">
+          <article class="service-card-v52">
+            <div class="service-card-v52-top">
+              <div class="service-icon-circle-v52" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </div>
+              <h3>Mudanzas de Hogar</h3>
+              <p>Traslado completo de casas y apartamentos con protección especializada de muebles.</p>
+            </div>
+            <a href="#cotizador" class="btn btn--primary btn-cotizar-service" data-preselect-service="Hogar">
+              <span>Cotizar Hogar</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </article>
 
-          <div class="service-info-card" style="padding: 1.75rem;">
-            <div class="clay-icon-circle" style="margin-bottom: 1rem;" aria-hidden="true"></div>
-            <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--tinta);">Empresas y Oficinas</h3>
-            <p style="color: var(--text-muted); font-size: 0.92rem;">Traslado de puestos de trabajo, muebles de oficina y archivo comercial sin frenar tu operación.</p>
-          </div>
+          <article class="service-card-v52">
+            <div class="service-card-v52-top">
+              <div class="service-icon-circle-v52" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="9" y1="22" x2="9" y2="22.01"/><line x1="15" y1="22" x2="15" y2="22.01"/><line x1="12" y1="18" x2="12" y2="18.01"/><line x1="8" y1="6" x2="8" y2="6.01"/><line x1="16" y1="6" x2="16" y2="6.01"/><line x1="8" y1="10" x2="8" y2="10.01"/><line x1="16" y1="10" x2="16" y2="10.01"/><line x1="8" y1="14" x2="8" y2="14.01"/><line x1="16" y1="14" x2="16" y2="14.01"/></svg>
+              </div>
+              <h3>Empresas y Oficinas</h3>
+              <p>Traslado ágil de puestos de trabajo, archivo y mobiliario corporativo sin interrumpir tu operación.</p>
+            </div>
+            <a href="#cotizador" class="btn btn--primary btn-cotizar-service" data-preselect-service="Oficina o empresa">
+              <span>Cotizar Empresa</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </article>
 
-          <div class="service-info-card" style="padding: 1.75rem;">
-            <div class="clay-icon-circle" style="margin-bottom: 1rem;" aria-hidden="true"></div>
-            <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--tinta);">Mudanza Pequeña</h3>
-            <p style="color: var(--text-muted); font-size: 0.92rem;">Hasta 4 objetos grandes (ej. lavadora, nevera, cama o sofá).</p>
-          </div>
+          <article class="service-card-v52">
+            <div class="service-card-v52-top">
+              <div class="service-icon-circle-v52" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+              </div>
+              <h3>Mudanza Pequeña</h3>
+              <p>Transporte rápido y económico de hasta 4 objetos grandes con el mismo cuidado profesional.</p>
+            </div>
+            <a href="#cotizador" class="btn btn--primary btn-cotizar-service" data-preselect-service="Mudanza pequeña (hasta 4 objetos)">
+              <span>Cotizar Pequeña</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </article>
 
-          <div class="service-info-card" style="padding: 1.75rem;">
-            <div class="clay-icon-circle" style="margin-bottom: 1rem;" aria-hidden="true"></div>
-            <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--tinta);">Maquinaria y Equipos</h3>
-            <p style="color: var(--text-muted); font-size: 0.92rem;">Cuéntanos qué equipo necesitas mover y te confirmamos disponibilidad técnica y vehículo adecuado.</p>
-          </div>
+          <article class="service-card-v52">
+            <div class="service-card-v52-top">
+              <div class="service-icon-circle-v52" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+              <h3>Maquinaria y Equipos</h3>
+              <p>Transporte técnico de herramientas, vitrinas comerciales y equipos con confirmación de requerimientos.</p>
+            </div>
+            <a href="#cotizador" class="btn btn--primary btn-cotizar-service" data-preselect-service="Maquinaria o equipos">
+              <span>Cotizar Equipos</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </article>
         </div>
       </div>
     </section>
@@ -341,8 +353,30 @@
         <!-- ==========================================================================
          COTIZADOR LOCAL EN 4 PASOS · CALI Y VALLE DEL CAUCA (BLOQUE D)
          ========================================================================== -->
+        <!-- FRANJA PREVENTIVA ANTES DEL COTIZADOR (FASE 5.4) -->
+    <div class="pre-wizard-hint-strip" role="note" aria-label="Recomendación para cotizar">
+      <div class="container">
+        <div class="pre-wizard-hint-inner">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <span><strong>Ten a la mano:</strong> direcciones, fecha aproximada y lista de objetos.</span>
+        </div>
+      </div>
+    </div>
+
     <section id="cotizador" class="quote-wizard-section" aria-labelledby="wizard-valle-title">
       <div class="container">
+                <div class="cotizador-header-strip" role="region" aria-label="Cotizador de mudanza para el Valle del Cauca">
+          <picture class="cotizador-header-picture">
+            <img src="assets/img/franja-valle-240.webp" alt="Servicio de mudanzas y empaques en Cali" class="cotizador-header-img" width="1400" height="240" loading="lazy">
+          </picture>
+          <div class="cotizador-header-overlay"></div>
+          <div class="cotizador-header-panel">
+            <span class="badge-pill" style="margin-bottom: 0.5rem; width: fit-content;">COTIZADOR EN LÍNEA</span>
+            <h2>Cotiza tu mudanza en el Valle</h2>
+            <p>Calcula tu presupuesto en 4 pasos y recibe respuesta inmediata por WhatsApp.</p>
+          </div>
+        </div>
+
         <div class="section-header text-center">
           <span class="section-eyebrow">Cotizador Local</span>
           <h2 id="wizard-valle-title">Cotizador de Mudanzas Locales · Cali y Valle del Cauca</h2>
@@ -456,10 +490,10 @@
                 <div class="form-group">
                   <label for="wizOrigenLocal" class="form-label">Dirección o barrio exacto en Cali o Valle *</label>
                   <input type="text" id="wizOrigenLocal" name="wizOrigenLocal" class="form-input places-autocomplete-input" placeholder="Ej. Calle 14 # 85-20, Valle del Lili, Cali" required aria-describedby="errOrigenLocal">
-                  <span class="field-error-msg" id="errOrigenLocal">Especifica una dirección válida de mínimo 8 caracteres con número.</span>
-                  <input type="hidden" id="wizOrigenLat" name="wizOrigenLat" value="">
-                  <input type="hidden" id="wizOrigenLng" name="wizOrigenLng" value="">
-                  <input type="hidden" id="wizOrigenFormatted" name="wizOrigenFormatted" value="">
+                  <span class="field-error-msg" id="errOrigenLocal">Escribe la dirección completa, por ejemplo: Calle 14 # 85-20, Valle del Lili</span>
+                  <input type="hidden" id="wizOrigenLat" aria-hidden="true" tabindex="-1" name="wizOrigenLat" value="">
+                  <input type="hidden" id="wizOrigenLng" aria-hidden="true" tabindex="-1" name="wizOrigenLng" value="">
+                  <input type="hidden" id="wizOrigenFormatted" aria-hidden="true" tabindex="-1" name="wizOrigenFormatted" value="">
                 </div>
                 
                 <div class="form-row-2">
@@ -519,10 +553,10 @@
                 <div class="form-group">
                   <label for="wizDestinoLocal" class="form-label">Dirección o barrio exacto en Cali o Valle *</label>
                   <input type="text" id="wizDestinoLocal" name="wizDestinoLocal" class="form-input places-autocomplete-input" placeholder="Ej. Carrera 12 # 5-40, barrio, municipio" required aria-describedby="errDestinoLocal">
-                  <span class="field-error-msg" id="errDestinoLocal">Especifica una dirección válida de mínimo 8 caracteres con número.</span>
-                  <input type="hidden" id="wizDestinoLat" name="wizDestinoLat" value="">
-                  <input type="hidden" id="wizDestinoLng" name="wizDestinoLng" value="">
-                  <input type="hidden" id="wizDestinoFormatted" name="wizDestinoFormatted" value="">
+                  <span class="field-error-msg" id="errDestinoLocal">Escribe la dirección completa, por ejemplo: Calle 14 # 85-20, Valle del Lili</span>
+                  <input type="hidden" id="wizDestinoLat" aria-hidden="true" tabindex="-1" name="wizDestinoLat" value="">
+                  <input type="hidden" id="wizDestinoLng" aria-hidden="true" tabindex="-1" name="wizDestinoLng" value="">
+                  <input type="hidden" id="wizDestinoFormatted" aria-hidden="true" tabindex="-1" name="wizDestinoFormatted" value="">
                 </div>
                 
                 <div class="form-row-2">
@@ -966,10 +1000,12 @@
               <div class="form-group">
                 <label class="form-label">Servicios adicionales</label>
                 <div style="display: flex; flex-direction: column; gap: 0.65rem; margin-top: 0.25rem;">
-                  <label for="wizExtraEmbalaje" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.92rem;">`r`n                    <input type="checkbox" id="wizExtraEmbalaje" aria-label="Protección con mantas y papel vitafilm" value="Protección con papel vitafilm">
+                  <label for="wizExtraEmbalaje" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.92rem;">
+                    <input type="checkbox" id="wizExtraEmbalaje" aria-label="Protección con mantas y papel vitafilm" value="Protección con papel vitafilm">
                     <span>Protección con mantas y papel vitafilm</span>
                   </label>
-                  <label for="wizExtraDesarme" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.92rem;">`r`n                    <input type="checkbox" id="wizExtraDesarme" aria-label="Desarme y armado de camas o muebles básicos" value="Desarme y armado de muebles">
+                  <label for="wizExtraDesarme" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.92rem;">
+                    <input type="checkbox" id="wizExtraDesarme" aria-label="Desarme y armado de camas o muebles básicos" value="Desarme y armado de muebles">
                     <span>Desarme y armado de camas o muebles básicos</span>
                   </label>
                 </div>
@@ -1019,6 +1055,239 @@
             </div>
           </div>
 
+        </div>
+      </div>
+    </section>
+
+  
+
+    
+
+    <!-- ==========================================================================
+         6. GALERÍA: FONDO AZUL MARCA (#1F4E8C) - FASE 1 RITMO & FASE 6
+         Grid sin huecos: 1 Grande + 4 Pequeñas de igual altura con grid-template-areas
+         ========================================================================== -->
+    <section id="galeria" class="section-padding gallery-section" aria-labelledby="gallery-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Nuestro Trabajo</span>
+          <h2 id="gallery-title">En Acción: Nuestro equipo y <strong>camiones</strong></h2>
+          <p>Imágenes reales de nuestro personal uniformado y vehículos en Cali. Haz clic en cualquier imagen para ampliar.</p>
+        </div>
+
+        <div class="gallery-grid gallery-seamless-grid">
+          <!-- Foto Destacada Grande (Camión completo de costado, FASE 5.1 & 5.2) -->
+          <div class="gallery-photo-card gallery-area-hero photo-hero" tabindex="0" role="button" aria-label="Vehículo furgonado adecuado para mudanzas residenciales y empresariales">
+            <img src="assets/img/camion.webp" alt="Camión furgonado completo de Mudanzas San Miguel en Cali" width="700" height="520" loading="lazy">
+            <div class="gallery-photo-caption">Vehículo furgonado</div>
+          </div>
+
+          <!-- 4 Fotos Pequeñas: camión en operación, embalaje, cuidado de piezas, camión de frente -->
+          <div class="gallery-photo-card gallery-area-p1" tabindex="0" role="button" aria-label="Camión en operación">
+            <img src="assets/img/camion.webp" alt="Camión de Mudanzas San Miguel en operación de cargue" width="400" height="300" loading="lazy">
+            <div class="gallery-photo-caption">Camión en operación</div>
+          </div>
+          <div class="gallery-photo-card gallery-area-p2" tabindex="0" role="button" aria-label="Embalaje y protección">
+            <img src="assets/img/empaques.webp" alt="Embalaje profesional de muebles con mantas y papel vitafilm" width="400" height="300" loading="lazy">
+            <div class="gallery-photo-caption">Embalaje y protección</div>
+          </div>
+          <div class="gallery-photo-card gallery-area-p3" tabindex="0" role="button" aria-label="Cuidado de piezas">
+            <img src="assets/img/empaques2.webp" alt="Protección cuidadosa de muebles y sofás" width="400" height="300" loading="lazy">
+            <div class="gallery-photo-caption">Cuidado de piezas</div>
+          </div>
+          <div class="gallery-photo-card gallery-area-p4" tabindex="0" role="button" aria-label="Camión de frente">
+            <img src="assets/img/camion_frente.webp" alt="Camión furgonado de frente en Cali" width="400" height="300" loading="lazy">
+            <div class="gallery-photo-caption">Camión de frente</div>
+          </div>
+        </div>
+
+        <!-- Video con Poster y Carga Diferida -->
+        <div class="video-showcase-box">
+          <div class="video-wrapper">
+            <video id="sanMiguelVideo" controls preload="none" poster="assets/img/video-poster.webp">
+              <source data-src="assets/img/video_san_miguel.mp4" type="video/mp4">
+              Tu navegador no soporta la reproducción de video HTML5.
+            </video>
+          </div>
+          <div style="padding: 0.85rem 1.25rem; color: #FFFFFF; font-size: 0.86rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+            <span>Mira cómo trabajamos: Registro real de nuestro personal cuidando tus objetos en cada cargue.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         9. OPINIONES: FONDO CREMA AMARILLA (#FFF0B8) - FASE 1 RITMO
+         ========================================================================== -->
+    <section id="testimonios" class="section-padding reviews-section" aria-labelledby="reviews-title">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Comentarios</span>
+          <h2 id="reviews-title">Opiniones de <strong>clientes</strong></h2>
+          <p>Experiencias de personas y empresas que han contratado nuestros servicios de transporte y mudanza.</p>
+        </div>
+
+        <div class="reviews-grid">
+          <article class="review-card reveal-on-scroll">
+            <div class="review-stars" role="img" aria-label="5 de 5 estrellas"></div>
+            <p class="review-text">"Excelente servicio, llegaron puntuales y cuidaron todos mis muebles. Sin duda los recomiendo."</p>
+            <div class="review-author">
+              <div class="review-avatar" aria-hidden="true">MG</div>
+              <div>
+                <strong>María González</strong>
+                <span style="font-size: 0.8rem; color: var(--text-muted); display: block;">Mudanza residencial · Cali</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="review-card reveal-on-scroll">
+            <div class="review-stars" role="img" aria-label="5 de 5 estrellas"></div>
+            <p class="review-text">"Muy recomendados. La atención fue excelente desde la cotización hasta la entrega final. ¡Volveré a contratarlos!"</p>
+            <div class="review-author">
+              <div class="review-avatar" aria-hidden="true">CR</div>
+              <div>
+                <strong>Carlos Rodríguez</strong>
+                <span style="font-size: 0.8rem; color: var(--text-muted); display: block;">Traslado de oficina · Cali</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="review-card reveal-on-scroll">
+            <div class="review-stars" role="img" aria-label="5 de 5 estrellas"></div>
+            <p class="review-text">"Mi mudanza llegó en perfectas condiciones y a tiempo. El equipo fue muy profesional y amable."</p>
+            <div class="review-author">
+              <div class="review-avatar" aria-hidden="true">AM</div>
+              <div>
+                <strong>Andrea Martínez</strong>
+                <span style="font-size: 0.8rem; color: var(--text-muted); display: block;">Mudanza nacional</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div style="margin-top: 1.5rem; text-align: center;" data-pending="true">
+        </div>
+      </div>
+    </section>
+
+    <div class="packing-tape-divider" aria-hidden="true"></div>
+
+    <!-- ==========================================================================
+         10. PREGUNTAS FRECUENTES: FONDO AZUL CIELO (#D6E6F7) - FASE 1 RITMO
+         ========================================================================== -->
+    <section id="faqs" class="section-padding faqs-section section-light-blobs" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-header text-center" style="margin: 0 auto 2.5rem auto;">
+          <span class="section-eyebrow">Resolvemos tus dudas</span>
+          <h2 id="faq-title">Preguntas <strong>Frecuentes</strong></h2>
+          <p>Respuestas claras sobre nuestros servicios de mudanza y transporte.</p>
+        </div>
+
+        <div class="faq-accordion" role="region" aria-label="Preguntas frecuentes">
+          
+          <details class="faq-item" open>
+            <summary class="faq-question">
+              <span>¿Realizan mudanzas nacionales?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </summary>
+            <div class="faq-answer">
+              <p>Sí, prestamos servicio en todo el territorio colombiano saliendo desde Cali y el Valle del Cauca. Puedes cotizar en nuestra página de mudanzas nacionales o por WhatsApp.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿Protegen los muebles durante el traslado?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </summary>
+            <div class="faq-answer">
+              <p>Sí. Utilizamos mantas protectoras y papel vitafilm para cubrir superficies delicadas, muebles y electrodomésticos durante el cargue y transporte.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿La cotización tiene algún costo?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </summary>
+            <div class="faq-answer">
+              <p>No, todas nuestras cotizaciones son 100% gratuitas y sin ningún compromiso de tu parte.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿Qué incluye la mudanza pequeña (hasta 4 objetos)?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </summary>
+            <div class="faq-answer">
+              <p>Está pensada para trasladar hasta 4 objetos grandes, por ejemplo solo una nevera y una lavadora, o una cama y un sofá. Se coordina con un vehículo acorde a la carga.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿Trabajan los fines de semana?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </summary>
+            <div class="faq-answer">
+              <p>Sí, según disponibilidad y programación. Te recomendamos reservar con anticipación para garantizar tu fecha.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿Cuánto tiempo tarda una mudanza?</span>
+              <span class="faq-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
+            </summary>
+            <div class="faq-answer">
+              <p>Varía según el volumen de objetos, la distancia y el tipo de servicio. Con tu información en el cotizador te damos un estimado preciso.</p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="packing-tape-divider" aria-hidden="true"></div>
+
+    <!-- ==========================================================================
+         11. LLAMADO FINAL: FRANJA AMARILLA (#FFC21A) - FASE 1 RITMO
+         ========================================================================== -->
+    <section class="cta-banner-photo" id="contacto" aria-labelledby="cta-final-title">
+      <picture class="cta-banner-picture">
+        <img src="assets/img/cta-bg-valle.webp" alt="Trasteos y mudanzas seguras en el Valle del Cauca" class="cta-banner-bg-img" width="1400" height="500" loading="lazy">
+      </picture>
+      <div class="cta-banner-overlay"></div>
+      <div class="cta-banner-content">
+        <span class="badge-pill" style="margin: 0 auto 0.75rem auto; width: fit-content;">ATENCIÓN INMEDIATA</span>
+        <h2 id="cta-final-title" style="font-family: var(--font-headings); font-size: clamp(2rem, 3.5vw, 2.75rem); font-weight: 800; text-transform: uppercase; margin: 0 0 0.75rem 0; color: #FFFFFF;">
+          Tu mudanza empieza <span style="color: var(--mostaza);">con un mensaje.</span>
+        </h2>
+        <p style="color: #E2E8F0; font-size: 1.05rem; max-width: 600px; margin: 0 auto 1.75rem auto; line-height: 1.5;">
+          Elige tu ruta para cotizar en línea o escríbenos directamente por WhatsApp para recibir atención personalizada hoy mismo.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="#cotizador" class="btn btn--primary btn--hero-v5">
+            <span>Cotizar mi mudanza</span>
+            <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="https://wa.me/573217676571?text=Hola%2C%20quisiera%20cotizar%20un%20trasteo%20en%20el%20Valle%20del%20Cauca" class="btn btn--wa btn--hero-v5" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp directo">
+            <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/></svg>
+            <span>WhatsApp directo</span>
+          </a>
         </div>
       </div>
     </section>
