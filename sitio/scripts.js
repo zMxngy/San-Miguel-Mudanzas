@@ -18,8 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initQuickQuoteCards();
   initServiceDirectLinks();
   initCoberturaDropdown();
-  initCardTilt();
-  initHeroParallax();
 });
 
 /* --- 0. Control de Marcadores Pendientes --- */
@@ -131,7 +129,8 @@ function initMobileDrawer() {
     drawer.classList.add("is-open");
     if (backdrop) backdrop.classList.add("is-active");
     document.body.style.overflow = "hidden";
-    document.querySelectorAll(".floating-contact-btn").forEach(b => b.style.display = "none");
+    document.body.classList.add("menu-abierto");
+    document.querySelectorAll(".floating-actions-container, .floating-btn").forEach(b => b.style.display = "none");
   };
 
   const closeDrawer = () => {
@@ -139,7 +138,8 @@ function initMobileDrawer() {
     drawer.classList.remove("is-open");
     if (backdrop) backdrop.classList.remove("is-active");
     document.body.style.overflow = "";
-    document.querySelectorAll(".floating-contact-btn").forEach(b => b.style.display = "");
+    document.body.classList.remove("menu-abierto");
+    document.querySelectorAll(".floating-actions-container, .floating-btn").forEach(b => b.style.display = "");
   };
 
   btn.addEventListener("click", () => {
@@ -173,13 +173,30 @@ function initMobileDrawer() {
   });
 }
 
-/* --- 4. Revelado Escalonado al Scroll (IntersectionObserver - FASE 7) --- */
-function initScrollReveal() {
-  // Marca para indicar que JavaScript está activo (contenido visible por defecto sin JS)
-  document.body.classList.add("js-reveal-ready");
+/* --- 3b. Control de Menú Móvil con bloqueo y ocultamiento de botones flotantes --- */
+// (Integrado en initMobileDrawer)
 
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    document.querySelectorAll(".reveal-on-scroll, .stagger-card, .hero-section, .section-header, .how-it-works-section").forEach(el => el.classList.add("is-revealed"));
+/* --- 4. Revelado Escalonado al Scroll (IntersectionObserver - FASE 5) --- */
+function initScrollReveal() {
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!prefersReduced) {
+    document.documentElement.classList.add("js-motion");
+    document.body.classList.add("js-motion");
+  }
+
+  // Marquesina: pausar cuando sale de pantalla para ahorrar GPU (animation-performance)
+  const marquee = document.querySelector(".marquee-strip");
+  if (marquee && "IntersectionObserver" in window) {
+    const marqueeObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        marquee.classList.toggle("is-offscreen", !e.isIntersecting);
+      });
+    }, { threshold: 0.05 });
+    marqueeObs.observe(marquee);
+  }
+
+  if (prefersReduced || !("IntersectionObserver" in window)) {
+    document.querySelectorAll("[data-reveal], .reveal-on-scroll, .stagger-card").forEach(el => el.classList.add("is-revealed"));
     return;
   }
 
@@ -188,23 +205,35 @@ function initScrollReveal() {
       if (entry.isIntersecting) {
         const target = entry.target;
         const parent = target.parentElement;
-        const siblings = parent ? Array.from(parent.children).filter(c => c.classList.contains("stagger-card")) : [];
+        const siblings = parent ? Array.from(parent.children).filter(c => c.hasAttribute("data-reveal")) : [];
         const index = siblings.indexOf(target);
         const delay = index > 0 ? Math.min(index * 60, 360) : 0; // 60ms entre tarjetas, máx 6
 
-        setTimeout(() => {
-          target.classList.add("is-revealed");
-        }, delay);
-
+        target.style.setProperty("--reveal-delay", `${delay}ms`);
+        target.classList.add("is-revealed");
         obs.unobserve(target); // Una sola vez por elemento
       }
     });
-  }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
+  }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
 
-  const targetCards = document.querySelectorAll(".service-row, .timeline-step-card, .guarantee-item-card, .factor-card, .review-card, .where-card, .reveal-on-scroll, .how-it-works-section, .section-header, .hero-section");
-  targetCards.forEach(card => {
-    card.classList.add("stagger-card");
-    observer.observe(card);
+  // Selección de elementos a revelar: secciones, encabezados, tarjetas, fotos, cifras y botones
+  const targets = document.querySelectorAll(
+    ".section-header, .service-info-card, .where-info-card, .bento-card-large, .bento-card-small, " +
+    ".timeline-step-card, .guarantee-item-card, .factor-card, .review-card, .faq-item, " +
+    ".gallery-photo-card, .quote-wizard-card, .quick-quote-card, .additional-services-strip, " +
+    ".hero-stats-grid > *, .valle-zones-strip, .route-steps-horizontal"
+  );
+
+  targets.forEach((el, idx) => {
+    if (!el.hasAttribute("data-reveal")) {
+      // Variantes: izquierda/derecha para elementos alternos en bentos/guarantees, 'up' por defecto
+      if (el.classList.contains("bento-card-small") || el.classList.contains("factor-card")) {
+        el.setAttribute("data-reveal", idx % 2 === 0 ? "left" : "right");
+      } else {
+        el.setAttribute("data-reveal", "up");
+      }
+    }
+    observer.observe(el);
   });
 }
 
@@ -234,41 +263,43 @@ function initVideoLazyLoad() {
   video.addEventListener("play", loadVideoSource, { once: true });
 }
 
-/* --- 6. Contador Animado para Cifras de Portada (Bloque F) --- */
+/* --- 6. Contador Animado para Cifras de Portada (FASE 5) --- */
 function initHeroCounters() {
-  const trustRow = document.querySelector(".hero-trust-row");
-  if (!trustRow) return;
+  const statsBar = document.querySelector(".hero-bottom-stats-bar") || document.querySelector(".hero-stats-grid");
+  if (!statsBar) return;
 
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     return;
   }
 
   let animated = false;
+  const numElem = statsBar.querySelector(".stat-pill-item:first-child .stat-pill-num");
+  if (!numElem) return;
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting && !animated) {
         animated = true;
-        animateNumber(document.getElementById("statAnos"), 6, "+", " Años");
-        animateNumber(document.getElementById("statGratis"), 100, "", "% Gratis");
+        animateHeroStat(numElem, 6, "+", " AÑOS");
         observer.disconnect();
       }
     });
-  }, { threshold: 0.3 });
+  }, { threshold: 0.15 });
 
-  observer.observe(trustRow);
+  observer.observe(statsBar);
 }
 
-function animateNumber(element, target, prefix = "", suffix = "") {
+function animateHeroStat(element, target, prefix = "+", suffix = " AÑOS") {
   if (!element) return;
-  let start = 0;
-  const duration = 1200;
+  const duration = 800; // Máximo 800ms
   const startTime = performance.now();
 
   function update(now) {
     const elapsed = now - startTime;
     const progress = Math.min(elapsed / duration, 1);
-    const easeOutProgress = 1 - Math.pow(1 - progress, 3);
-    const current = Math.floor(easeOutProgress * target);
+    // Curva ease-out personalizada (1 - (1-p)^3)
+    const easeOut = 1 - Math.pow(1 - progress, 3);
+    const current = Math.max(1, Math.floor(easeOut * target));
     element.textContent = `${prefix}${current}${suffix}`;
     if (progress < 1) {
       requestAnimationFrame(update);
@@ -945,18 +976,19 @@ function initSpecializedQuoteWizard() {
       progressFill.style.width = `${percentage}%`;
     }
 
-    btnPrev.style.display = currentStep > 1 ? "inline-flex" : "none";
-
+    // Botones que no corresponden al paso: hidden (no ocupan espacio ni reciben foco)
+    btnPrev.hidden = currentStep === 1;
+    btnNext.hidden = currentStep === totalSteps;
+    btnSubmit.hidden = currentStep !== totalSteps;
+    const actionsBar = wizardContainer.querySelector(".quote-actions");
+    if (actionsBar) actionsBar.dataset.step = String(currentStep);
     if (currentStep === totalSteps) {
-      btnNext.style.display = "none";
-      btnSubmit.style.display = "inline-flex";
       renderWizardSummary();
-    } else {
-      btnNext.style.display = "inline-flex";
-      btnSubmit.style.display = "none";
+      syncConsentState();
     }
 
-    wizardContainer.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    wizardContainer.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "nearest" });
   }
 
   function renderWizardSummary() {
@@ -1022,7 +1054,7 @@ function initSpecializedQuoteWizard() {
       </div>
       <div style="margin-top: 0.85rem; text-align: right;">
         <button type="button" class="btn btn--sm btn--secondary" id="btnEditQuoteData">
-          ✏️ Modificar datos
+          <span>Modificar datos</span>
         </button>
       </div>
     `;
@@ -1033,8 +1065,26 @@ function initSpecializedQuoteWizard() {
     });
   }
 
+  // Consentimiento: el único botón de envío se habilita solo al marcarlo
+  const consentBox = document.getElementById("wizConsent");
+  const consentHint = document.getElementById("quoteConsentHint");
+  function syncConsentState() {
+    const ok = !!consentBox?.checked;
+    btnSubmit.disabled = !ok;
+    btnSubmit.setAttribute("aria-disabled", String(!ok));
+    if (consentHint) {
+      consentHint.textContent = ok
+        ? "Listo: se abrirá WhatsApp con tu solicitud."
+        : "Marca la casilla de tratamiento de datos para habilitar el envío.";
+      consentHint.classList.toggle("is-ok", ok);
+    }
+  }
+  consentBox?.addEventListener("change", syncConsentState);
+  syncConsentState();
+
   // Envío: Abre WhatsApp + Guarda en Google Sheets
   btnSubmit.addEventListener("click", () => {
+    if (btnSubmit.classList.contains("is-loading")) return;
     // Validar paso 4
     const fechaInput = document.getElementById("wizFecha");
     const errFecha = document.getElementById("errFecha");
@@ -1071,6 +1121,8 @@ function initSpecializedQuoteWizard() {
     quoteData.consent = true;
 
     btnSubmit.classList.add("is-loading");
+    btnSubmit.setAttribute("aria-busy", "true");
+    if (consentHint) consentHint.textContent = "Abriendo WhatsApp…";
 
     // 1. Mensaje en texto plano UTF-8 exacto según Bloque G
     const messageText = generateBloqueGWhatsAppText(quoteData, isNacional);
@@ -1117,7 +1169,7 @@ function initSpecializedQuoteWizard() {
         </div>
         <h3 style="font-size: 1.4rem; color: var(--blue-footer); margin-bottom: 0.5rem;">¡Solicitud enviada con éxito!</h3>
         <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 500px; margin: 0 auto 1.5rem auto;">
-          Se ha abierto la conversación oficial de WhatsApp con tu cotización detallada. Nuestro equipo te responderá de inmediato con la tarifa exacta y disponibilidad.
+          Se ha abierto la conversación oficial de WhatsApp con tu cotización detallada. Nuestro equipo te responderá pronto con la tarifa exacta y disponibilidad.
         </p>
         <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
           <a href="${isNacional ? 'nacional.html' : 'valle-del-cauca.html'}" class="btn btn--secondary btn--sm">
@@ -1363,7 +1415,7 @@ window.testWhatsAppFormat = function(scenario = "local_hogar") {
       ascensorOrigenLocal: "Sí cuenta con ascensor",
       origenLat: "3.3762",
       origenLng: "-76.5358",
-      destinoLocal: "Carrera 12 # 5-40, Alfaguara, Jamundí",
+      destinoLocal: "Carrera 12 # 5-40, Cali",
       tipoDestinoLocal: "Casa dos pisos",
       pisoDestinoLocal: 1,
       ascensorDestinoLocal: "No aplica",
@@ -1392,7 +1444,7 @@ window.testWhatsAppFormat = function(scenario = "local_hogar") {
       ascensorOrigenLocal: "No aplica",
       origenLat: "3.4485",
       origenLng: "-76.5298",
-      destinoLocal: "Carrera 35 # 10-20, Acopi, Yumbo",
+      destinoLocal: "Carrera 35 # 10-20, Cali",
       tipoDestinoLocal: "Bodega",
       pisoDestinoLocal: 1,
       ascensorDestinoLocal: "No aplica",
@@ -1446,7 +1498,7 @@ window.testWhatsAppFormat = function(scenario = "local_hogar") {
       ayudantes: "2 ayudantes + conductor",
       extras: ["Protección con papel vitafilm", "Desarme y armado de muebles"],
       inventario: { "Escritorios": 4, "Sillas oficina": 4, "Computadores y pantallas": 4, "Archivadores": 2 },
-      notas: "Coordinar ingreso con administración del edificio en Bogotá."
+      notas: "Coordinar ingreso con administración del edificio."
     };
     const text = generateBloqueGWhatsAppText(sample, true);
     return {
