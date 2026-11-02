@@ -1,11 +1,11 @@
 /* ==========================================================================
-   Trasteos y Mudanzas San Miguel - Motor Principal v6.5 (MotionSites / Vercel)
+   Trasteos y Mudanzas San Miguel - Motor Principal Definitivo (scripts.js)
    Incluye:
-   - Restauración automática de textos y limpieza de estilos inline conflictivos
-   - Chip de estado en tiempo real ("Operando hoy en Cali y Valle")
-   - Micro-interacciones 3D en tarjetas (initCardTilt) y revelado al scroll
-   - Estimador de camión en vivo + Autoguardado en sessionStorage
-   - Botón flotante de WhatsApp inteligente (nunca tapa el cotizador)
+   - Limpieza automática de estilos rotos y textos ocultos al iniciar
+   - Ocultamiento estricto de errores hasta que el usuario interactúe
+   - Menú móvil sólido con bloqueo de fondo y cierre automático
+   - Estimador de camión furgonado en tiempo real (Paso 3)
+   - Autoguardado en sessionStorage y envío directo a WhatsApp / Google Sheets
    ========================================================================== */
 
 if ('scrollRestoration' in history) {
@@ -37,7 +37,7 @@ if (document.readyState === 'loading') {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  fixLegacyInlineStyles();
+  fixVisualAndLegacyBugs();
   initStatusChip();
   initFloatingButtonObserver();
   initPendingNotices();
@@ -56,8 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
   initCotizadorViewportWatcher();
 });
 
-/* --- 0. Limpieza automática de estilos inline antiguos que ocultaban textos --- */
-function fixLegacyInlineStyles() {
+/* --- 0. Reparación automática de textos invisibles, checks e indicadores --- */
+function fixVisualAndLegacyBugs() {
+  // 1. Quitar estilos blancos en línea de la sección "Cómo funciona" en Valle y Nacional
   document.querySelectorAll('.timeline-step-card, .timeline-step-card h3, .timeline-step-card p').forEach(el => {
     el.style.removeProperty('color');
     el.style.removeProperty('background');
@@ -66,6 +67,27 @@ function fixLegacyInlineStyles() {
   document.querySelectorAll('.how-it-works-section').forEach(sec => {
     sec.style.removeProperty('background-color');
     sec.style.removeProperty('color');
+  });
+
+  // 2. Ocultar todos los mensajes de error rojos al cargar la página
+  document.querySelectorAll('.field-error-msg').forEach(err => {
+    err.style.display = 'none';
+  });
+  document.querySelectorAll('.input-error').forEach(inp => {
+    inp.classList.remove('input-error');
+  });
+
+  // 3. Asegurar que los checks amarillos de la portada tengan su icono SVG visible
+  document.querySelectorAll('.hero-v5-check-icon svg').forEach(svg => {
+    svg.style.stroke = '#0B1F3A';
+    svg.style.strokeWidth = '3.2px';
+    svg.style.width = '13px';
+    svg.style.height = '13px';
+  });
+
+  // 4. Asegurar que las respuestas de Preguntas Frecuentes tengan color legible
+  document.querySelectorAll('.faq-answer, .faq-answer p').forEach(ans => {
+    ans.style.color = '#33475F';
   });
 }
 
@@ -77,7 +99,7 @@ function initPendingNotices() {
   }
 }
 
-/* --- 1. Header con reducción suave al hacer scroll --- */
+/* --- 1. Header fijo con sombra al hacer scroll --- */
 function initHeader() {
   const header = document.querySelector(".site-header");
   if (!header) return;
@@ -90,7 +112,7 @@ function initHeader() {
   onScroll();
 }
 
-/* --- 2. Indicador Deslizante de Sección Activa --- */
+/* --- 2. Indicador Deslizante de Sección Activa en Desktop --- */
 function initActiveNavSpy() {
   const navContainer = document.querySelector(".nav-links");
   const navLinks = document.querySelectorAll(".nav-link");
@@ -145,7 +167,7 @@ function initActiveNavSpy() {
   }, 100);
 }
 
-/* --- 3. Menú Móvil --- */
+/* --- 3. Menú Móvil de las Tres Rayas (Sólido y sin transparencias) --- */
 function initMobileDrawer() {
   const btn = document.querySelector(".hamburger-btn");
   const drawer = document.querySelector(".mobile-nav-drawer");
@@ -154,6 +176,7 @@ function initMobileDrawer() {
 
   const openDrawer = () => {
     btn.setAttribute("aria-expanded", "true");
+    drawer.style.backgroundColor = "#0B1F3A";
     drawer.classList.add("is-open");
     if (backdrop) backdrop.classList.add("is-active");
     document.body.style.overflow = "hidden";
@@ -168,12 +191,14 @@ function initMobileDrawer() {
     document.body.classList.remove("menu-abierto");
   };
 
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
     btn.getAttribute("aria-expanded") === "true" ? closeDrawer() : openDrawer();
   });
 
   if (backdrop) backdrop.addEventListener("click", closeDrawer);
   drawer.querySelectorAll("a").forEach(link => link.addEventListener("click", closeDrawer));
+
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && drawer.classList.contains("is-open")) {
       closeDrawer();
@@ -182,7 +207,7 @@ function initMobileDrawer() {
   });
 }
 
-/* --- 4. Revelado Escalonado al Scroll --- */
+/* --- 4. Revelado Escalonado al Hacer Scroll --- */
 function initScrollReveal() {
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!prefersReduced) {
@@ -225,7 +250,7 @@ function initScrollReveal() {
   });
 }
 
-/* --- 5. Microinteracción 3D en Tarjetas (Estilo MotionSites) --- */
+/* --- 5. Efecto de Inclinación Suave en Tarjetas (Desktop) --- */
 function initCardTilt() {
   const isFinePointer = window.matchMedia('(pointer: fine)').matches;
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -275,7 +300,7 @@ function initVideoLazyLoad() {
   video.addEventListener("play", loadVideoSource, { once: true });
 }
 
-/* --- 7. Contador Animado en Portada --- */
+/* --- 7. Contador Animado (+6 AÑOS) --- */
 function initHeroCounters() {
   const statsBar = document.querySelector(".hero-bottom-stats-bar");
   if (!statsBar || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -316,7 +341,7 @@ function animateHeroStat(element, target, prefix = "+", suffix = " AÑOS") {
   requestAnimationFrame(update);
 }
 
-/* --- 8. Animación de Línea de Tiempo --- */
+/* --- 8. Animación de Línea Conectora en "Cómo funciona" --- */
 function initTimelineAnimation() {
   const timeline = document.querySelector(".timeline-steps-grid");
   if (!timeline || !("IntersectionObserver" in window)) return;
@@ -333,7 +358,7 @@ function initTimelineAnimation() {
   observer.observe(timeline);
 }
 
-/* --- 9. Lightbox Modal para Galería --- */
+/* --- 9. Visor Lightbox para Fotos de la Galería --- */
 function initGalleryLightbox() {
   const photoCards = document.querySelectorAll(".gallery-photo-card");
   const modal = document.getElementById("imageLightboxModal");
@@ -376,7 +401,7 @@ function initGalleryLightbox() {
   });
 }
 
-/* --- 10. Enlaces Directos y Scroll Suave --- */
+/* --- 10. Enlaces Directos de Servicios y Scroll Suave --- */
 function initServiceDirectLinks() {
   document.querySelectorAll('a[data-select-service], .btn-cotizar-service').forEach(btn => {
     btn.addEventListener("click", () => {
@@ -421,7 +446,7 @@ function initCotizadorViewportWatcher() {
 }
 
 /* ==========================================================================
-   VALIDACIONES DE ENTRADA
+   VALIDACIONES DE FORMULARIO
    ========================================================================== */
 function validateName(name) {
   const val = String(name || "").trim();
@@ -477,11 +502,15 @@ function setFieldError(input, errorElement, isError) {
 }
 
 /* ==========================================================================
-   MOTOR DEL COTIZADOR EN 4 PASOS (Con Autoguardado y Estimador de Camión)
+   MOTOR DEL COTIZADOR EN 4 PASOS
    ========================================================================== */
 function initSpecializedQuoteWizard() {
   const wizardContainer = document.getElementById("quoteWizard");
   if (!wizardContainer) return;
+
+  // Asegurar fondo blanco sólido en la tarjeta del cotizador
+  wizardContainer.style.backgroundColor = "#FFFFFF";
+  wizardContainer.style.color = "#0B1F3A";
 
   const wizardType = wizardContainer.getAttribute("data-wizard-type") ||
     (window.location.pathname.includes("nacional") ? "nacional" : "local");
@@ -558,10 +587,24 @@ function initSpecializedQuoteWizard() {
   const btnPrev = document.getElementById("wizardBtnPrev");
   const btnNext = document.getElementById("wizardBtnNext");
   const btnSubmit = document.getElementById("wizardBtnSubmit");
+  const consentHint = document.getElementById("quoteConsentHint");
 
   const inputFecha = document.getElementById("wizFecha");
   if (inputFecha) inputFecha.min = new Date().toISOString().split("T")[0];
 
+  // Limpiar errores al escribir en cualquier campo
+  wizardContainer.querySelectorAll("input, select, textarea").forEach(field => {
+    field.addEventListener("input", () => {
+      field.classList.remove("input-error");
+      const errId = field.getAttribute("aria-describedby");
+      if (errId) {
+        const errEl = document.getElementById(errId);
+        if (errEl) errEl.style.display = "none";
+      }
+    });
+  });
+
+  // Insertar barra estimadora de camión en el Paso 3
   const step3Header = document.querySelector("#stepPane3 .step-pane-header");
   let truckEstimatorEl = document.getElementById("truckEstimatorBadge");
   if (step3Header && !truckEstimatorEl) {
@@ -1062,8 +1105,14 @@ function initSpecializedQuoteWizard() {
     btnPrev.hidden = (currentStep === 1);
     btnNext.hidden = (currentStep === totalSteps);
     btnSubmit.hidden = (currentStep !== totalSteps);
+
     const actionsBar = wizardContainer.querySelector(".quote-actions");
     if (actionsBar) actionsBar.dataset.step = String(currentStep);
+
+    // Mostrar el aviso de consentimiento únicamente en el Paso 4
+    if (consentHint) {
+      consentHint.style.display = (currentStep === totalSteps) ? "block" : "none";
+    }
 
     updateTruckEstimatorUI();
     renderWizardSummary();
@@ -1125,7 +1174,6 @@ function initSpecializedQuoteWizard() {
   }
 
   const consentBox = document.getElementById("wizConsent");
-  const consentHint = document.getElementById("quoteConsentHint");
   function syncConsentState() {
     const ok = !!consentBox?.checked;
     btnSubmit.disabled = !ok;
@@ -1137,7 +1185,11 @@ function initSpecializedQuoteWizard() {
       consentHint.classList.toggle("is-ok", ok);
     }
   }
-  consentBox?.addEventListener("change", syncConsentState);
+  consentBox?.addEventListener("change", () => {
+    const errConsent = document.getElementById("errConsent");
+    if (consentBox.checked && errConsent) errConsent.style.display = "none";
+    syncConsentState();
+  });
 
   btnSubmit.addEventListener("click", () => {
     if (btnSubmit.classList.contains("is-loading")) return;
@@ -1147,7 +1199,8 @@ function initSpecializedQuoteWizard() {
     if (!isFechaValid) { fechaInput?.focus(); return; }
 
     if (!consentBox?.checked) {
-      document.getElementById("errConsent").style.display = "block";
+      const errConsent = document.getElementById("errConsent");
+      if (errConsent) errConsent.style.display = "block";
       consentBox?.focus();
       return;
     }
@@ -1242,14 +1295,14 @@ function initCoberturaDropdown() {
   });
 }
 
-/* --- 11. Chip de Estado en Vivo ("Operando hoy en Cali y Valle") --- */
+/* --- 11. Chip de Estado en Vivo en Portada --- */
 function initStatusChip() {
   const chipTexts = document.querySelectorAll('.status-chip-text');
   if (!chipTexts.length) return;
 
   const isNacionalPage = window.location.pathname.includes('nacional');
   const defaultStatus = isNacionalPage
-    ? 'Operando hoy · Salidas desde Cali a toda Colombia'
+    ? 'Cobertura Nacional · Salidas desde Cali'
     : 'Operando hoy en Cali y Valle · Cotización gratis';
 
   chipTexts.forEach(el => {
@@ -1257,7 +1310,7 @@ function initStatusChip() {
   });
 }
 
-/* --- 12. Observador Inteligente de Botón Flotante --- */
+/* --- 12. Ocultamiento Inteligente del Botón Flotante --- */
 function initFloatingButtonObserver() {
   const fabContainer = document.querySelector('.floating-actions-container');
   if (!fabContainer) return;

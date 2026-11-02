@@ -1,10 +1,11 @@
 /* ==========================================================================
-   Trasteos y Mudanzas San Miguel - Motor Principal Optimizado (v5.0 Senior UI/UX)
+   Trasteos y Mudanzas San Miguel - Motor Principal Definitivo (scripts.js)
    Incluye:
-   - Control estricto de scroll y navegación
-   - Autoguardado inteligente en sessionStorage (No pierde datos al recargar)
-   - Estimador de vehículo furgonado en tiempo real según volumen
-   - Despeje automático de botones flotantes al cotizar en móvil
+   - Limpieza automática de estilos rotos y textos ocultos al iniciar
+   - Ocultamiento estricto de errores hasta que el usuario interactúe
+   - Menú móvil sólido con bloqueo de fondo y cierre automático
+   - Estimador de camión furgonado en tiempo real (Paso 3)
+   - Autoguardado en sessionStorage y envío directo a WhatsApp / Google Sheets
    ========================================================================== */
 
 if ('scrollRestoration' in history) {
@@ -36,6 +37,7 @@ if (document.readyState === 'loading') {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  fixVisualAndLegacyBugs();
   initStatusChip();
   initFloatingButtonObserver();
   initPendingNotices();
@@ -43,18 +45,52 @@ document.addEventListener("DOMContentLoaded", () => {
   initActiveNavSpy();
   initMobileDrawer();
   initScrollReveal();
+  initCardTilt();
   initVideoLazyLoad();
   initHeroCounters();
   initTimelineAnimation();
   initGalleryLightbox();
   initSpecializedQuoteWizard();
-  initQuickQuoteCards();
   initServiceDirectLinks();
   initCoberturaDropdown();
   initCotizadorViewportWatcher();
 });
 
-/* --- 0. Control de Marcadores Pendientes --- */
+/* --- 0. Reparación automática de textos invisibles, checks e indicadores --- */
+function fixVisualAndLegacyBugs() {
+  // 1. Quitar estilos blancos en línea de la sección "Cómo funciona" en Valle y Nacional
+  document.querySelectorAll('.timeline-step-card, .timeline-step-card h3, .timeline-step-card p').forEach(el => {
+    el.style.removeProperty('color');
+    el.style.removeProperty('background');
+    el.style.removeProperty('border');
+  });
+  document.querySelectorAll('.how-it-works-section').forEach(sec => {
+    sec.style.removeProperty('background-color');
+    sec.style.removeProperty('color');
+  });
+
+  // 2. Ocultar todos los mensajes de error rojos al cargar la página
+  document.querySelectorAll('.field-error-msg').forEach(err => {
+    err.style.display = 'none';
+  });
+  document.querySelectorAll('.input-error').forEach(inp => {
+    inp.classList.remove('input-error');
+  });
+
+  // 3. Asegurar que los checks amarillos de la portada tengan su icono SVG visible
+  document.querySelectorAll('.hero-v5-check-icon svg').forEach(svg => {
+    svg.style.stroke = '#0B1F3A';
+    svg.style.strokeWidth = '3.2px';
+    svg.style.width = '13px';
+    svg.style.height = '13px';
+  });
+
+  // 4. Asegurar que las respuestas de Preguntas Frecuentes tengan color legible
+  document.querySelectorAll('.faq-answer, .faq-answer p').forEach(ans => {
+    ans.style.color = '#33475F';
+  });
+}
+
 function initPendingNotices() {
   if (window.APP_CONFIG && window.APP_CONFIG.MOSTRAR_PENDIENTES === true) {
     document.body.classList.add("show-pending");
@@ -63,24 +99,20 @@ function initPendingNotices() {
   }
 }
 
-/* --- 1. Header con reducción al hacer scroll --- */
+/* --- 1. Header fijo con sombra al hacer scroll --- */
 function initHeader() {
   const header = document.querySelector(".site-header");
   if (!header) return;
 
   const onScroll = () => {
-    if (window.scrollY > 20) {
-      header.classList.add("scrolled");
-    } else {
-      header.classList.remove("scrolled");
-    }
+    header.classList.toggle("scrolled", window.scrollY > 20);
   };
 
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 }
 
-/* --- 2. Indicador de Sección Activa --- */
+/* --- 2. Indicador Deslizante de Sección Activa en Desktop --- */
 function initActiveNavSpy() {
   const navContainer = document.querySelector(".nav-links");
   const navLinks = document.querySelectorAll(".nav-link");
@@ -126,28 +158,16 @@ function initActiveNavSpy() {
   }, { rootMargin: "-20% 0px -60% 0px" });
 
   sections.forEach(sec => observer.observe(sec));
-
-  navLinks.forEach(link => {
-    link.addEventListener("mouseenter", () => updateIndicator(link));
-  });
-
-  navContainer.addEventListener("mouseleave", () => {
-    const active = navContainer.querySelector(".nav-link.active");
-    updateIndicator(active);
-  });
-
-  window.addEventListener("resize", () => {
-    const active = navContainer.querySelector(".nav-link.active");
-    updateIndicator(active);
-  }, { passive: true });
+  navLinks.forEach(link => link.addEventListener("mouseenter", () => updateIndicator(link)));
+  navContainer.addEventListener("mouseleave", () => updateIndicator(navContainer.querySelector(".nav-link.active")));
+  window.addEventListener("resize", () => updateIndicator(navContainer.querySelector(".nav-link.active")), { passive: true });
 
   setTimeout(() => {
-    const initialActive = navContainer.querySelector(".nav-link.active") || navLinks[0];
-    updateIndicator(initialActive);
+    updateIndicator(navContainer.querySelector(".nav-link.active") || navLinks[0]);
   }, 100);
 }
 
-/* --- 3. Menú Móvil --- */
+/* --- 3. Menú Móvil de las Tres Rayas (Sólido y sin transparencias) --- */
 function initMobileDrawer() {
   const btn = document.querySelector(".hamburger-btn");
   const drawer = document.querySelector(".mobile-nav-drawer");
@@ -156,6 +176,7 @@ function initMobileDrawer() {
 
   const openDrawer = () => {
     btn.setAttribute("aria-expanded", "true");
+    drawer.style.backgroundColor = "#0B1F3A";
     drawer.classList.add("is-open");
     if (backdrop) backdrop.classList.add("is-active");
     document.body.style.overflow = "hidden";
@@ -170,16 +191,13 @@ function initMobileDrawer() {
     document.body.classList.remove("menu-abierto");
   };
 
-  btn.addEventListener("click", () => {
-    const isExpanded = btn.getAttribute("aria-expanded") === "true";
-    isExpanded ? closeDrawer() : openDrawer();
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    btn.getAttribute("aria-expanded") === "true" ? closeDrawer() : openDrawer();
   });
 
   if (backdrop) backdrop.addEventListener("click", closeDrawer);
-
-  drawer.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", closeDrawer);
-  });
+  drawer.querySelectorAll("a").forEach(link => link.addEventListener("click", closeDrawer));
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && drawer.classList.contains("is-open")) {
@@ -189,7 +207,7 @@ function initMobileDrawer() {
   });
 }
 
-/* --- 4. Revelado Escalonado al Scroll --- */
+/* --- 4. Revelado Escalonado al Hacer Scroll --- */
 function initScrollReveal() {
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!prefersReduced) {
@@ -209,7 +227,7 @@ function initScrollReveal() {
         const parent = target.parentElement;
         const siblings = parent ? Array.from(parent.children).filter(c => c.hasAttribute("data-reveal")) : [];
         const index = siblings.indexOf(target);
-        const delay = index > 0 ? Math.min(index * 60, 300) : 0;
+        const delay = index > 0 ? Math.min(index * 65, 320) : 0;
 
         target.style.setProperty("--reveal-delay", `${delay}ms`);
         target.classList.add("is-revealed");
@@ -232,7 +250,30 @@ function initScrollReveal() {
   });
 }
 
-/* --- 5. Carga Diferida de Video --- */
+/* --- 5. Efecto de Inclinación Suave en Tarjetas (Desktop) --- */
+function initCardTilt() {
+  const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!isFinePointer || prefersReducedMotion) return;
+
+  const tiltCards = document.querySelectorAll('.where-info-card, .service-card-v52, .bento-card-large');
+  tiltCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const rotateX = -((y - rect.height / 2) / (rect.height / 2)) * 2.5;
+      const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 2.5;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+}
+
+/* --- 6. Carga Diferida de Video --- */
 function initVideoLazyLoad() {
   const video = document.getElementById("sanMiguelVideo");
   if (!video) return;
@@ -259,7 +300,7 @@ function initVideoLazyLoad() {
   video.addEventListener("play", loadVideoSource, { once: true });
 }
 
-/* --- 6. Contador Animado en Portada --- */
+/* --- 7. Contador Animado (+6 AÑOS) --- */
 function initHeroCounters() {
   const statsBar = document.querySelector(".hero-bottom-stats-bar");
   if (!statsBar || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -282,7 +323,7 @@ function initHeroCounters() {
 }
 
 function animateHeroStat(element, target, prefix = "+", suffix = " AÑOS") {
-  const duration = 800;
+  const duration = 850;
   const startTime = performance.now();
 
   function update(now) {
@@ -300,7 +341,7 @@ function animateHeroStat(element, target, prefix = "+", suffix = " AÑOS") {
   requestAnimationFrame(update);
 }
 
-/* --- 7. Animación de Línea de Tiempo --- */
+/* --- 8. Animación de Línea Conectora en "Cómo funciona" --- */
 function initTimelineAnimation() {
   const timeline = document.querySelector(".timeline-steps-grid");
   if (!timeline || !("IntersectionObserver" in window)) return;
@@ -317,7 +358,7 @@ function initTimelineAnimation() {
   observer.observe(timeline);
 }
 
-/* --- 8. Lightbox Modal para Galería --- */
+/* --- 9. Visor Lightbox para Fotos de la Galería --- */
 function initGalleryLightbox() {
   const photoCards = document.querySelectorAll(".gallery-photo-card");
   const modal = document.getElementById("imageLightboxModal");
@@ -360,14 +401,12 @@ function initGalleryLightbox() {
   });
 }
 
-/* --- 9. Enlaces Directos Unificados (Sin duplicación) --- */
+/* --- 10. Enlaces Directos de Servicios y Scroll Suave --- */
 function initServiceDirectLinks() {
   document.querySelectorAll('a[data-select-service], .btn-cotizar-service').forEach(btn => {
     btn.addEventListener("click", () => {
       const serviceVal = btn.getAttribute("data-select-service") || btn.getAttribute("data-preselect-service");
-      if (serviceVal) {
-        selectQueMoverRadio(serviceVal);
-      }
+      if (serviceVal) selectQueMoverRadio(serviceVal);
     });
   });
 
@@ -393,7 +432,6 @@ function selectQueMoverRadio(val) {
   }
 }
 
-/* --- 10. Ocultar botón de llamada flotante al cotizar en móvil --- */
 function initCotizadorViewportWatcher() {
   const cotizador = document.getElementById("cotizador");
   if (!cotizador || !("IntersectionObserver" in window)) return;
@@ -402,13 +440,13 @@ function initCotizadorViewportWatcher() {
     entries.forEach(entry => {
       document.body.classList.toggle("in-cotizador-view", entry.isIntersecting);
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.12 });
 
   observer.observe(cotizador);
 }
 
 /* ==========================================================================
-   VALIDACIONES DE ENTRADA
+   VALIDACIONES DE FORMULARIO
    ========================================================================== */
 function validateName(name) {
   const val = String(name || "").trim();
@@ -464,11 +502,15 @@ function setFieldError(input, errorElement, isError) {
 }
 
 /* ==========================================================================
-   MOTOR DEL COTIZADOR EN 4 PASOS (Con Autoguardado y Estimador de Camión)
+   MOTOR DEL COTIZADOR EN 4 PASOS
    ========================================================================== */
 function initSpecializedQuoteWizard() {
   const wizardContainer = document.getElementById("quoteWizard");
   if (!wizardContainer) return;
+
+  // Asegurar fondo blanco sólido en la tarjeta del cotizador
+  wizardContainer.style.backgroundColor = "#FFFFFF";
+  wizardContainer.style.color = "#0B1F3A";
 
   const wizardType = wizardContainer.getAttribute("data-wizard-type") ||
     (window.location.pathname.includes("nacional") ? "nacional" : "local");
@@ -484,15 +526,11 @@ function initSpecializedQuoteWizard() {
     telefono: "",
     queMover: "Hogar",
     origenLocal: "",
-    origenLat: "",
-    origenLng: "",
     tipoOrigenLocal: "Casa",
     pisoOrigenLocal: "1",
     ascensorOrigenLocal: "No aplica",
     accesoOrigenLocal: "Sí",
     destinoLocal: "",
-    destinoLat: "",
-    destinoLng: "",
     tipoDestinoLocal: "Casa",
     pisoDestinoLocal: "1",
     ascensorDestinoLocal: "No aplica",
@@ -532,13 +570,9 @@ function initSpecializedQuoteWizard() {
     consent: false
   };
 
-  // Restaurar sesión previa si existe en sessionStorage
   try {
     const saved = sessionStorage.getItem(storageKey);
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      Object.assign(quoteData, parsed);
-    }
+    if (saved) Object.assign(quoteData, JSON.parse(saved));
   } catch (e) {}
 
   function saveQuoteSession() {
@@ -553,13 +587,24 @@ function initSpecializedQuoteWizard() {
   const btnPrev = document.getElementById("wizardBtnPrev");
   const btnNext = document.getElementById("wizardBtnNext");
   const btnSubmit = document.getElementById("wizardBtnSubmit");
+  const consentHint = document.getElementById("quoteConsentHint");
 
   const inputFecha = document.getElementById("wizFecha");
-  if (inputFecha) {
-    inputFecha.min = new Date().toISOString().split("T")[0];
-  }
+  if (inputFecha) inputFecha.min = new Date().toISOString().split("T")[0];
 
-  // Insertar barra estimadora de vehículo en el Paso 3
+  // Limpiar errores al escribir en cualquier campo
+  wizardContainer.querySelectorAll("input, select, textarea").forEach(field => {
+    field.addEventListener("input", () => {
+      field.classList.remove("input-error");
+      const errId = field.getAttribute("aria-describedby");
+      if (errId) {
+        const errEl = document.getElementById(errId);
+        if (errEl) errEl.style.display = "none";
+      }
+    });
+  });
+
+  // Insertar barra estimadora de camión en el Paso 3
   const step3Header = document.querySelector("#stepPane3 .step-pane-header");
   let truckEstimatorEl = document.getElementById("truckEstimatorBadge");
   if (step3Header && !truckEstimatorEl) {
@@ -570,12 +615,8 @@ function initSpecializedQuoteWizard() {
   }
 
   function getEstimatedTruckSize() {
-    if (quoteData.queMover.includes("pequeña")) {
-      return "Mini-Furgón / Camioneta Cerrada (1 a 4 objetos)";
-    }
-    if (quoteData.queMover.includes("Maquinaria")) {
-      return "Furgón Técnico Especializado con Sujeción";
-    }
+    if (quoteData.queMover.includes("pequeña")) return "Mini-Furgón / Camioneta Cerrada (1 a 4 objetos)";
+    if (quoteData.queMover.includes("Maquinaria")) return "Furgón Técnico Especializado con Sujeción";
     const totalCount = Object.values(quoteData.inventario || {}).reduce((acc, n) => acc + (parseInt(n, 10) || 0), 0);
     if (totalCount === 0) return "Selecciona tus objetos para sugerir el furgón ideal";
     if (totalCount <= 5) return `Furgón Ligero NHR (${totalCount} ítems seleccionados)`;
@@ -603,7 +644,6 @@ function initSpecializedQuoteWizard() {
     });
   }
 
-  // Hidratar campos si había sesión guardada
   const nombreEl = document.getElementById("wizNombre");
   const telEl = document.getElementById("wizTelefono");
   if (nombreEl && quoteData.nombre) nombreEl.value = quoteData.nombre;
@@ -618,7 +658,6 @@ function initSpecializedQuoteWizard() {
     }
   });
 
-  // Preselección por parámetro URL
   const urlParams = new URLSearchParams(window.location.search);
   const paramServicio = urlParams.get("servicio");
   if (paramServicio) {
@@ -699,8 +738,7 @@ function initSpecializedQuoteWizard() {
     if (service === "Oficina o empresa") defaultPlace = "Oficina o local";
     else if (service.includes("Maquinaria")) defaultPlace = "Bodega";
 
-    const placeSelects = wizardContainer.querySelectorAll(".place-type-select");
-    placeSelects.forEach(sel => {
+    wizardContainer.querySelectorAll(".place-type-select").forEach(sel => {
       if (Array.from(sel.options).some(opt => opt.value === defaultPlace)) {
         sel.value = defaultPlace;
         sel.dispatchEvent(new Event("change", { bubbles: true }));
@@ -783,7 +821,6 @@ function initSpecializedQuoteWizard() {
     }
   });
 
-  // Tabs de categorías en Hogar
   const catTabs = wizardContainer.querySelectorAll(".cat-tab-btn");
   const groupPanes = wizardContainer.querySelectorAll(".items-group-pane");
   catTabs.forEach(tab => {
@@ -796,7 +833,6 @@ function initSpecializedQuoteWizard() {
     });
   });
 
-  // Contadores de objetos
   wizardContainer.querySelectorAll(".btn-counter:not(.btn-counter-pequena)").forEach(btn => {
     btn.addEventListener("click", () => {
       const action = btn.getAttribute("data-action");
@@ -859,7 +895,6 @@ function initSpecializedQuoteWizard() {
     });
   });
 
-  // Objeto personalizado
   const btnAddCustom = document.getElementById("btnAddCustomItem");
   const inputCustom = document.getElementById("customItemName");
   const customList = document.getElementById("customItemsList");
@@ -908,8 +943,6 @@ function initSpecializedQuoteWizard() {
       saveQuoteSession();
     });
   }
-
-  initGooglePlacesAutocomplete(isNacional);
 
   btnNext.addEventListener("click", () => {
     if (!validateCurrentStep(currentStep)) return;
@@ -1072,8 +1105,14 @@ function initSpecializedQuoteWizard() {
     btnPrev.hidden = (currentStep === 1);
     btnNext.hidden = (currentStep === totalSteps);
     btnSubmit.hidden = (currentStep !== totalSteps);
+
     const actionsBar = wizardContainer.querySelector(".quote-actions");
     if (actionsBar) actionsBar.dataset.step = String(currentStep);
+
+    // Mostrar el aviso de consentimiento únicamente en el Paso 4
+    if (consentHint) {
+      consentHint.style.display = (currentStep === totalSteps) ? "block" : "none";
+    }
 
     updateTruckEstimatorUI();
     renderWizardSummary();
@@ -1135,7 +1174,6 @@ function initSpecializedQuoteWizard() {
   }
 
   const consentBox = document.getElementById("wizConsent");
-  const consentHint = document.getElementById("quoteConsentHint");
   function syncConsentState() {
     const ok = !!consentBox?.checked;
     btnSubmit.disabled = !ok;
@@ -1147,7 +1185,11 @@ function initSpecializedQuoteWizard() {
       consentHint.classList.toggle("is-ok", ok);
     }
   }
-  consentBox?.addEventListener("change", syncConsentState);
+  consentBox?.addEventListener("change", () => {
+    const errConsent = document.getElementById("errConsent");
+    if (consentBox.checked && errConsent) errConsent.style.display = "none";
+    syncConsentState();
+  });
 
   btnSubmit.addEventListener("click", () => {
     if (btnSubmit.classList.contains("is-loading")) return;
@@ -1157,7 +1199,8 @@ function initSpecializedQuoteWizard() {
     if (!isFechaValid) { fechaInput?.focus(); return; }
 
     if (!consentBox?.checked) {
-      document.getElementById("errConsent").style.display = "block";
+      const errConsent = document.getElementById("errConsent");
+      if (errConsent) errConsent.style.display = "block";
       consentBox?.focus();
       return;
     }
@@ -1184,11 +1227,6 @@ function initSpecializedQuoteWizard() {
   });
 
   updateWizardView("forward");
-}
-
-function initGooglePlacesAutocomplete(isNacional) {
-  const apiKey = window.APP_CONFIG?.GOOGLE_MAPS_API_KEY;
-  if (!apiKey || apiKey.trim() === "" || apiKey.includes("[PENDIENTE")) return;
 }
 
 function formatSpanishDate(dateStr, horario) {
@@ -1239,8 +1277,6 @@ function escapeHTML(str) {
   return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-function initQuickQuoteCards() {}
-
 function initCoberturaDropdown() {
   const btn = document.getElementById('coberturaDropdownBtn');
   if (!btn) return;
@@ -1259,48 +1295,22 @@ function initCoberturaDropdown() {
   });
 }
 
-
-/* ==========================================================================
-   V6: MICROINTERACCIONES, CHIP DE ESTADO Y BOTONES FLOTANTES INTELIGENTES
-   ========================================================================== */
-
-/**
- * Chip de estado sobre el título del Hero
- * Lee HORARIO de config.js (window.APP_CONFIG.HORARIO)
- * Si no está configurado (hoy es así): 'Cotización gratis por WhatsApp'
- * Si está configurado: 'Atendiendo ahora' o 'Te respondemos por WhatsApp'
- */
+/* --- 11. Chip de Estado en Vivo en Portada --- */
 function initStatusChip() {
   const chipTexts = document.querySelectorAll('.status-chip-text');
   if (!chipTexts.length) return;
 
-  const config = window.APP_CONFIG || {};
-  const horario = config.HORARIO;
-  let text = 'Cotización gratis por WhatsApp';
-
-  if (horario && Array.isArray(horario.dias) && typeof horario.abre === 'number' && typeof horario.cierra === 'number') {
-    const now = new Date();
-    const day = now.getDay();
-    const hour = now.getHours() + (now.getMinutes() / 60);
-    const isOpen = horario.dias.includes(day) && (hour >= horario.abre && hour < horario.cierra);
-    text = isOpen ? 'Atendiendo ahora' : 'Te respondemos por WhatsApp';
-  }
+  const isNacionalPage = window.location.pathname.includes('nacional');
+  const defaultStatus = isNacionalPage
+    ? 'Cobertura Nacional · Salidas desde Cali'
+    : 'Operando hoy en Cali y Valle · Cotización gratis';
 
   chipTexts.forEach(el => {
-    el.textContent = text;
-    const dot = el.parentElement.querySelector('.status-chip-dot');
-    if (dot) dot.setAttribute('aria-label', text);
+    el.textContent = defaultStatus;
   });
 }
 
-/**
- * Observador de visibilidad para botón flotante de WhatsApp
- * Se desvanece y desactiva (pointer-events: none) cuando están en pantalla:
- * - El cotizador (#cotizador)
- * - Los botones de acción del Hero (.hero-v5-actions)
- * - El llamado a la acción final (.cta-banner-photo)
- * - El menú móvil abierto
- */
+/* --- 12. Ocultamiento Inteligente del Botón Flotante --- */
 function initFloatingButtonObserver() {
   const fabContainer = document.querySelector('.floating-actions-container');
   if (!fabContainer) return;
@@ -1308,9 +1318,6 @@ function initFloatingButtonObserver() {
   const targets = [];
   const cotizador = document.getElementById('cotizador');
   if (cotizador) targets.push(cotizador);
-
-  const heroActions = document.querySelector('.hero-v5-actions');
-  if (heroActions) targets.push(heroActions);
 
   const ctaFinal = document.querySelector('.cta-banner-photo');
   if (ctaFinal) targets.push(ctaFinal);
@@ -1320,42 +1327,18 @@ function initFloatingButtonObserver() {
   function updateFabVisibility() {
     const mobileDrawer = document.getElementById('mobileDrawer');
     const isMenuOpen = mobileDrawer && mobileDrawer.classList.contains('is-open');
-    if (intersectingTargets.size > 0 || isMenuOpen) {
-      fabContainer.classList.add('is-hidden');
-    } else {
-      fabContainer.classList.remove('is-hidden');
-    }
+    fabContainer.classList.toggle('is-hidden', intersectingTargets.size > 0 || isMenuOpen);
   }
 
   if ('IntersectionObserver' in window && targets.length > 0) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          intersectingTargets.add(entry.target);
-        } else {
-          intersectingTargets.delete(entry.target);
-        }
+        if (entry.isIntersecting) intersectingTargets.add(entry.target);
+        else intersectingTargets.delete(entry.target);
       });
       updateFabVisibility();
-    }, {
-      root: null,
-      threshold: 0.05
-    });
+    }, { threshold: 0.08 });
 
     targets.forEach(t => observer.observe(t));
-  }
-
-  // Observer para el botón hamburguesa / menú móvil
-  const hamburger = document.querySelector('.hamburger-btn');
-  if (hamburger) {
-    hamburger.addEventListener('click', () => {
-      setTimeout(updateFabVisibility, 50);
-    });
-  }
-  const backdrop = document.getElementById('mobileDrawerBackdrop');
-  if (backdrop) {
-    backdrop.addEventListener('click', () => {
-      setTimeout(updateFabVisibility, 50);
-    });
   }
 }
